@@ -40,11 +40,12 @@ Status key: `[ ]` pending · `[~]` in progress · `[x]` done · `[-]` cancelled
 
 | ID | Task | Owner | Status |
 |----|------|-------|--------|
-| S2-01 | Pydantic models (`ResearchBrief`, `BookOutline`, …) | Alon | [ ] |
-| S2-02 | Port Gatekeeper from Ex02 | Renat | [ ] |
-| S2-03 | LLM SDK facade | Alon | [ ] |
-| S2-04 | LaTeX writer + escaping tests | Renat | [ ] |
-| S2-05 | LaTeX compiler wrapper + log parser | Alon | [ ] |
+| S2-01 | Pydantic models (`ResearchBrief`, `BookOutline`, …) | Alon | [x] |
+| S2-02 | Port Gatekeeper from Ex02 | Renat | [x] |
+| S2-03 | LLM SDK facade | Alon | [x] |
+| S2-04 | LaTeX writer + escaping tests | Renat | [x] |
+| S2-05 | LaTeX compiler wrapper + log parser | Alon | [x] |
+| S2-06 | User commit + push Stage 2 | Both | [ ] |
 
 ---
 
