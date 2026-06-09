@@ -53,11 +53,12 @@ Status key: `[ ]` pending · `[~]` in progress · `[x]` done · `[-]` cancelled
 
 | ID | Task | Owner | Status |
 |----|------|-------|--------|
-| S3-01 | Prompt YAML files in `config/prompts/` | Both | [ ] |
-| S3-02 | Agent definitions (`crew/agents.py`) | Alon | [ ] |
-| S3-03 | Task definitions + sequential Crew | Renat | [ ] |
-| S3-04 | CrewAI tools (write_tex, latex_compile, …) | Both | [ ] |
-| S3-05 | `--dry-run` / `--demo` CLI modes | Renat | [ ] |
+| S3-01 | Prompt YAML files in `config/prompts/` | Both | [x] |
+| S3-02 | Agent definitions (`crew/agents.py`) | Alon | [x] |
+| S3-03 | Task definitions + sequential Crew | Renat | [x] |
+| S3-04 | CrewAI tools (write_tex, latex_compile, …) | Both | [x] |
+| S3-05 | `--demo` pipeline + live crew kickoff path | Renat | [x] |
+| S3-06 | User commit + push Stage 3 | Both | [ ] |
 
 ---
 
