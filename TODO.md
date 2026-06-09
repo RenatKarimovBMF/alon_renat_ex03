@@ -66,10 +66,11 @@ Status key: `[ ]` pending · `[~]` in progress · `[x]` done · `[-]` cancelled
 
 | ID | Task | Owner | Status |
 |----|------|-------|--------|
-| S4-01 | End-to-end demo run (2 chapters) | Both | [ ] |
-| S4-02 | Full 15-page production run | Both | [ ] |
-| S4-03 | Cost log + README cost table | Renat | [ ] |
-| S4-04 | PDF screenshots + TOC in README | Alon | [ ] |
+| S4-01 | End-to-end demo run (2 chapters) | Both | [x] |
+| S4-02 | Full 15-page production run | Both | [x] |
+| S4-03 | Cost log + README cost table | Renat | [x] |
+| S4-04 | PDF screenshots + TOC in README | Alon | [x] |
+| S4-05 | User commit + push Stage 4 | Both | [ ] |
 
 ---
 
