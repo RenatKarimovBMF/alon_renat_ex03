@@ -12,10 +12,10 @@
 
 Build a **CrewAI multi-agent publishing pipeline** in Python that collaboratively produces a **~15-page LaTeX document** (article or short book), compiles it to PDF, and ships a professional GitHub repository that satisfies **Software Submission Guidelines V3**.
 
-**Default deliverable topic (proposed):**  
-*AI Agent Architectures in 2026: From Prompt Chains to Production Crews*
+**Default deliverable topic:**  
+*The Moon Race: USSR vs US*
 
-This topic aligns with the course materials (CrewAI, LangChain/LangGraph, agent runtime layers) and gives each agent a natural role. The team may change the topic in Lecture 06 if the professor specified something else — update §2.1 before implementation.
+The team chose this topic for the ~15-page LaTeX book produced by the CrewAI publishing crew.
 
 | Layer | Technology | Role |
 |-------|------------|------|

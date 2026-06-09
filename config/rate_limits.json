@@ -1,0 +1,20 @@
+{
+  "version": "1.00",
+  "enabled": true,
+  "services": {
+    "default": {
+      "requests_per_minute": 30,
+      "requests_per_hour": 500,
+      "concurrent_max": 5,
+      "retry_after_seconds": 30,
+      "max_retries": 3
+    }
+  },
+  "agents": {
+    "research_director": { "max_requests_per_session": 5 },
+    "outline_architect": { "max_requests_per_session": 5 },
+    "chapter_writer": { "max_requests_per_session": 20 },
+    "latex_editor": { "max_requests_per_session": 10 },
+    "build_engineer": { "max_requests_per_session": 10 }
+  }
+}

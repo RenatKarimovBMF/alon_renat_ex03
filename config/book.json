@@ -1,0 +1,21 @@
+{
+  "version": "1.00",
+  "topic": "The Moon Race: USSR vs US",
+  "target_pages": 15,
+  "page_tolerance": 1,
+  "words_per_page": 450,
+  "demo_mode": {
+    "enabled": false,
+    "chapters": 2,
+    "max_sections_per_chapter": 2
+  },
+  "latex": {
+    "main_file": "latex/main.tex",
+    "build_dir": "latex/build",
+    "max_compile_attempts": 3
+  },
+  "crew": {
+    "process": "sequential",
+    "verbose": true
+  }
+}

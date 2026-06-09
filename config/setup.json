@@ -1,0 +1,7 @@
+{
+  "version": "1.00",
+  "project_name": "crewai-latex-book",
+  "log_level": "INFO",
+  "session_dir": "data/sessions",
+  "logs_dir": "logs"
+}
