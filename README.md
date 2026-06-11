@@ -15,7 +15,7 @@ CrewAI multi-agent pipeline that produces a **~15-page LaTeX book** for Exercise
 
 1. **CrewAI agents** (research → outline → chapters → review → build) produce structured JSON artifacts.
 2. Python **assembles LaTeX** chapter files deterministically (no hallucinated `.tex`).
-3. **MiKTeX / TeX Live** compiles the book to a single PDF.
+3. **MiKTeX / TeX Live** compiles the book to **`latex/build/book.pdf`** (~15 pages).
 
 The default run uses **offline production fixtures** ($0, no API keys). Use `--live` when you want the crew to write a custom topic via LLM.
 
@@ -59,18 +59,18 @@ This will:
 **The only output PDF is:**
 
 ```
-latex/build/main.pdf
+latex/build/book.pdf
 ```
 
 Open it with:
 
 ```powershell
-start latex\build\main.pdf
+start latex\build\book.pdf
 ```
 
-> **Do not open `latex/main.pdf`.** That file is not produced by the pipeline. If it exists from an old manual compile, it will have an empty table of contents, broken `[?]` citations, and stale content.
+> **There is no `main.pdf`.** The pipeline never writes that name. If you see `main.pdf` under `latex/` or `latex/build/`, it is from an old manual compile — delete it and use `book.pdf` instead.
 
-> **Close `latex/build/main.pdf` in your PDF viewer before recompiling**, or the build will fail with a “close the file” message.
+> **Close `latex/build/book.pdf` in your PDF viewer before recompiling**, or the build will fail with a “close the file” message.
 
 ### Other useful commands
 
@@ -87,7 +87,7 @@ start latex\build\main.pdf
 
 | Path | Contents |
 |------|----------|
-| **`latex/build/main.pdf`** | **Final compiled book (~15 pages)** |
+| **`latex/build/book.pdf`** | **Final compiled book (~15 pages)** |
 | `latex/chapters/*.tex` | Generated chapter content |
 | `latex/figures/*.jpg` | Downloaded NASA images (one per chapter) |
 | `latex/figures/mission_timeline.pdf` | Python/matplotlib chart (chapter 4) |
@@ -163,7 +163,8 @@ crewai-latex-book-ex03/
 ├── config/prompts/         # CrewAI agent YAML prompts
 ├── docs/                   # PRD, PLAN, TODO, COST.md
 ├── latex/                  # LaTeX sources
-│   ├── build/main.pdf      # ← compiled output (only PDF location)
+│   ├── build/book.pdf      # ← compiled output (only book PDF)
+│   ├── build/README.md     # points graders to book.pdf
 │   ├── chapters/
 │   └── figures/
 ├── src/bookgen/            # Python package (crew, sdk, reporting)
@@ -198,5 +199,5 @@ Gatekeeper wraps every LLM call. Prompts live in `config/prompts/`.
 - [ ] GitHub shared with `rmisegal@gmail.com`
 - [ ] `latex/` folder committed (including `latex/figures/` images)
 - [ ] `docs/PRD.md`, `PLAN.md`, `TODO.md`, root `README.md`
-- [ ] Moodle PDF: `anrbj666-ex03.pdf` from Word template (separate from `latex/build/main.pdf`)
+- [ ] Moodle PDF: `anrbj666-ex03.pdf` from Word template (separate from `latex/build/book.pdf`)
 - [ ] Self-grade on Moodle

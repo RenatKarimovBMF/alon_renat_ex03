@@ -86,21 +86,23 @@ OPEN_QUESTIONS = [
 ]
 
 # NASA image URLs (public domain). Each chapter tries URLs in order, then assets/chapter-figures/.
+# Captions are verified against NASA metadata (images-api.nasa.gov).
 CHAPTER_FIGURES: list[tuple[str, list[str], str]] = [
     (
         "ch01_cold_war.jpg",
         [
-            "https://images-assets.nasa.gov/image/GSFC_20171208_Archive_e001135/GSFC_20171208_Archive_e001135~orig.jpg",
-            "https://images-assets.nasa.gov/image/GSFC_20171208_Archive_e001362/GSFC_20171208_Archive_e001362~orig.jpg",
+            "https://images-assets.nasa.gov/image/6900846/6900846~orig.jpg",
+            "https://images-assets.nasa.gov/image/624109main_1969-05-20-2_full/624109main_1969-05-20-2_full~orig.jpg",
+            "https://images-assets.nasa.gov/image/6900560/6900560~orig.jpg",
         ],
-        "Saturn V on the launch pad — Cold War rocketry and national prestige.",
+        "Apollo 11 Saturn V on Launch Pad 39A before the Moon landing mission.",
     ),
     (
         "ch02_sputnik.jpg",
         [
-            "https://images-assets.nasa.gov/image/GSFC_20171208_Archive_e001362/GSFC_20171208_Archive_e001362~orig.jpg",
+            "https://images-assets.nasa.gov/image/9248168/9248168~orig.jpg",
         ],
-        "Replica of Sputnik 1, the first artificial satellite (1957).",
+        "Sputnik era — the Soviet Union launched the first artificial satellite in 1957.",
     ),
     (
         "ch03_apollo.jpg",
@@ -112,26 +114,25 @@ CHAPTER_FIGURES: list[tuple[str, list[str], str]] = [
     (
         "ch04_lunar_surface.jpg",
         [
-            "https://images-assets.nasa.gov/image/as11-40-5903/as11-40-5903~orig.jpg",
-            "https://images-assets.nasa.gov/image/as11-40-5874/as11-40-5874~orig.jpg",
+            "https://images-assets.nasa.gov/image/as11-40-5927/as11-40-5927~orig.jpg",
+            "https://images-assets.nasa.gov/image/as11-44-6551/as11-44-6551~orig.jpg",
         ],
-        "Apollo 11 lunar module on the Moon surface.",
+        "Apollo 11 Lunar Module Eagle on the Moon surface.",
     ),
     (
         "ch05_earthrise.jpg",
         [
-            "https://images-assets.nasa.gov/image/GSFC_20171208_Archive_e000136/GSFC_20171208_Archive_e000136~orig.jpg",
+            "https://images-assets.nasa.gov/image/as08-14-2383/as08-14-2383~orig.jpg",
         ],
-        "Earthrise — icon of public opinion and propaganda.",
+        "Earthrise from Apollo 8 — icon of public opinion and the space race.",
     ),
     (
         "ch06_iss.jpg",
         [
-            "https://images-assets.nasa.gov/image/as11-40-5902/as11-40-5902~orig.jpg",
-            "https://images-assets.nasa.gov/image/as11-44-6550/as11-44-6550~orig.jpg",
-            "https://images-assets.nasa.gov/image/as11-40-5874/as11-40-5874~orig.jpg",
+            "https://images-assets.nasa.gov/image/s75-29432/s75-29432~orig.jpg",
+            "https://images-assets.nasa.gov/image/ast-05-263/ast-05-263~orig.jpg",
         ],
-        "Earth from Apollo 11 — legacy of exploration and later cooperation.",
+        "Apollo–Soyuz handshake in space — beginning of post-race cooperation.",
     ),
 ]
 

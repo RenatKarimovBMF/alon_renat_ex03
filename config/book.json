@@ -12,6 +12,7 @@
   "latex": {
     "main_file": "latex/main.tex",
     "build_dir": "latex/build",
+    "output_pdf": "book.pdf",
     "max_compile_attempts": 3
   },
   "crew": {

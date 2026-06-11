@@ -45,8 +45,14 @@ class BookGenSdk:
         latex_cfg = self._book.latex
         main_file = self._project_root / str(latex_cfg.get("main_file", "latex/main.tex"))
         build_dir = self._project_root / str(latex_cfg.get("build_dir", "latex/build"))
+        output_pdf = str(latex_cfg.get("output_pdf", "book.pdf"))
         attempts = int(latex_cfg.get("max_compile_attempts", 3))
-        return compile_latex(main_file, build_dir=build_dir, max_attempts=attempts)
+        return compile_latex(
+            main_file,
+            build_dir=build_dir,
+            output_pdf=output_pdf,
+            max_attempts=attempts,
+        )
 
     def run_pipeline(
         self,

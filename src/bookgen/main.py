@@ -94,8 +94,6 @@ def main() -> int:
             print(f"PDF built: {report.pdf_path}")
             if pages is not None:
                 print(f"Pages:     {pages}")
-            if report.pdf_path and report.pdf_path.endswith("main_compile.pdf"):
-                print("Note:     close latex/build/main.pdf in your viewer, then re-run to refresh main.pdf")
             return 0
         print("LaTeX build failed:")
         for err in report.errors:

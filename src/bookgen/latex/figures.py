@@ -9,6 +9,18 @@ import httpx
 
 _USER_AGENT = "Mozilla/5.0 (compatible; bookgen-ex03/1.0; Haifa University educational project)"
 _MIN_IMAGE_BYTES = 80_000
+# Bump when chapter URLs/captions change so stale JPEGs are replaced.
+_FIGURE_MANIFEST_VERSION = "moon-race-figures-v2"
+
+
+def _sync_manifest(figures_dir: Path) -> None:
+    """Drop cached chapter JPEGs when the figure manifest version changes."""
+    manifest = figures_dir / ".figure_manifest"
+    if manifest.exists() and manifest.read_text(encoding="utf-8").strip() == _FIGURE_MANIFEST_VERSION:
+        return
+    for path in figures_dir.glob("ch*.jpg"):
+        path.unlink(missing_ok=True)
+    manifest.write_text(f"{_FIGURE_MANIFEST_VERSION}\n", encoding="utf-8")
 
 
 def _bundled_dir(latex_root: Path) -> Path:
@@ -40,6 +52,7 @@ def ensure_figures(latex_root: Path) -> list[Path]:
 
     figures_dir = latex_root / "figures"
     figures_dir.mkdir(parents=True, exist_ok=True)
+    _sync_manifest(figures_dir)
     bundled = _bundled_dir(latex_root)
     saved: list[Path] = []
     headers = {"User-Agent": _USER_AGENT}
