@@ -85,6 +85,68 @@ OPEN_QUESTIONS = [
     "How much of Apollo's success depended on political deadline pressure?",
 ]
 
+# NASA / Wikimedia URLs (public domain). Downloaded during assemble.
+CHAPTER_FIGURES: list[tuple[str, str, str]] = [
+    (
+        "ch01_cold_war.jpg",
+        "https://images-assets.nasa.gov/image/61-hc-869/61-hc-869~orig.jpg",
+        "Atlas missile launch — Cold War rocketry and prestige.",
+    ),
+    (
+        "ch02_sputnik.jpg",
+        "https://images-assets.nasa.gov/image/GSFC_20171208_Archive_e001362/GSFC_20171208_Archive_e001362~orig.jpg",
+        "Replica of Sputnik 1, the first artificial satellite (1957).",
+    ),
+    (
+        "ch03_apollo.jpg",
+        "https://images-assets.nasa.gov/image/as11-40-5874/as11-40-5874~orig.jpg",
+        "Buzz Aldrin on the Moon during Apollo 11.",
+    ),
+    (
+        "ch04_lunar_surface.jpg",
+        "https://images-assets.nasa.gov/image/as11-40-5886/as11-40-5886~orig.jpg",
+        "Apollo 11 lunar module on the Moon surface.",
+    ),
+    (
+        "ch05_earthrise.jpg",
+        "https://images-assets.nasa.gov/image/GSFC_20171208_Archive_e000136/GSFC_20171208_Archive_e000136~orig.jpg",
+        "Earthrise — icon of public opinion and propaganda.",
+    ),
+    (
+        "ch06_iss.jpg",
+        "https://images-assets.nasa.gov/image/iss070e025131/iss070e025131~orig.jpg",
+        "International Space Station — legacy of post-race cooperation.",
+    ),
+]
+
+# Hebrew summaries — each chapter ends in its own RTL block (no mixed lines).
+HEBREW_SUMMARIES: list[str] = [
+    (
+        "פרק זה מציג את רקע המלחמה הקרה ואת תחילת מרוץ החלל. "
+        "שני העל-יוצקים הפכו טילים בליסטיים להישגים שמיועדים לתעמולה ולפרסטיז'."
+    ),
+    (
+        "פרק זה עוסק ביתרון הסובייטי המוקדם עם השקת לוויין ראשון "
+        "והטסת האדם הראשון לחלל. הישגים אלו הזעזעו את ארצות הברית והאיצו את תגובתה."
+    ),
+    (
+        "פרק זה מתאר את תוכניות החלל האמריקאיות לכיבוש מסלול סביב כדור הארץ "
+        "ולנחיתה על הירח. ארצות הברית ריכזה משאבים לאומיים כדי להגיע ליעד לפני היריבה."
+    ),
+    (
+        "פרק זה סוקר משימות מפתח: גשושיות, מיפוי ונחיתה ראשונה של בני אדם על הירח. "
+        "משימות אלו הפחיתו סיכון והביאו לדגימות מהירח."
+    ),
+    (
+        "פרק זה בוחן תעמולה, פוליטיקה ודעת קהל. "
+        "שני הצדדים הציגו הצלחות חלל כהוכחה לעליונות מערכתית."
+    ),
+    (
+        "פרק זה מסכם את המורשת: סיום תוכניות הנחיתה ושיתוף פעולה בינלאומי. "
+        "המרוץ הסתיים בייצור ידע ובשיתוף מדעי לאחר שנים של תחרות."
+    ),
+]
+
 
 def paragraph_templates(chapter_title: str, section_title: str) -> list[str]:
     """Return rotating Moon Race paragraphs for a section."""

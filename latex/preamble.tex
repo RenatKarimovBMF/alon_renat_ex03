@@ -1,14 +1,32 @@
 \usepackage[utf8]{inputenc}
-\usepackage[T1]{fontenc}
-\usepackage[margin=2.5cm]{geometry}
+\usepackage[LGR,T1]{fontenc}
+\usepackage[main=english,hebrew]{babel}
+\usepackage[margin=2.5cm, headheight=14pt]{geometry}
 \usepackage{hyperref}
 \usepackage{graphicx}
 \usepackage{amsmath}
+\usepackage{amssymb}
 \usepackage{booktabs}
+\usepackage{fancyhdr}
+\usepackage{float}
 
 \hypersetup{
     colorlinks=true,
     linkcolor=blue,
     urlcolor=blue,
     citecolor=blue
+}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\textit{The Moon Race: USSR vs US}}
+\fancyhead[R]{\small\textit{Intelligent Agents --- Ex03}}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+\fancypagestyle{plain}{
+  \fancyhf{}
+  \fancyfoot[C]{\thepage}
+  \renewcommand{\headrulewidth}{0pt}
 }
