@@ -85,37 +85,53 @@ OPEN_QUESTIONS = [
     "How much of Apollo's success depended on political deadline pressure?",
 ]
 
-# NASA / Wikimedia URLs (public domain). Downloaded during assemble.
-CHAPTER_FIGURES: list[tuple[str, str, str]] = [
+# NASA image URLs (public domain). Each chapter tries URLs in order, then assets/chapter-figures/.
+CHAPTER_FIGURES: list[tuple[str, list[str], str]] = [
     (
         "ch01_cold_war.jpg",
-        "https://images-assets.nasa.gov/image/61-hc-869/61-hc-869~orig.jpg",
-        "Atlas missile launch — Cold War rocketry and prestige.",
+        [
+            "https://images-assets.nasa.gov/image/GSFC_20171208_Archive_e001135/GSFC_20171208_Archive_e001135~orig.jpg",
+            "https://images-assets.nasa.gov/image/GSFC_20171208_Archive_e001362/GSFC_20171208_Archive_e001362~orig.jpg",
+        ],
+        "Saturn V on the launch pad — Cold War rocketry and national prestige.",
     ),
     (
         "ch02_sputnik.jpg",
-        "https://images-assets.nasa.gov/image/GSFC_20171208_Archive_e001362/GSFC_20171208_Archive_e001362~orig.jpg",
+        [
+            "https://images-assets.nasa.gov/image/GSFC_20171208_Archive_e001362/GSFC_20171208_Archive_e001362~orig.jpg",
+        ],
         "Replica of Sputnik 1, the first artificial satellite (1957).",
     ),
     (
         "ch03_apollo.jpg",
-        "https://images-assets.nasa.gov/image/as11-40-5874/as11-40-5874~orig.jpg",
+        [
+            "https://images-assets.nasa.gov/image/as11-40-5874/as11-40-5874~orig.jpg",
+        ],
         "Buzz Aldrin on the Moon during Apollo 11.",
     ),
     (
         "ch04_lunar_surface.jpg",
-        "https://images-assets.nasa.gov/image/as11-40-5886/as11-40-5886~orig.jpg",
+        [
+            "https://images-assets.nasa.gov/image/as11-40-5903/as11-40-5903~orig.jpg",
+            "https://images-assets.nasa.gov/image/as11-40-5874/as11-40-5874~orig.jpg",
+        ],
         "Apollo 11 lunar module on the Moon surface.",
     ),
     (
         "ch05_earthrise.jpg",
-        "https://images-assets.nasa.gov/image/GSFC_20171208_Archive_e000136/GSFC_20171208_Archive_e000136~orig.jpg",
+        [
+            "https://images-assets.nasa.gov/image/GSFC_20171208_Archive_e000136/GSFC_20171208_Archive_e000136~orig.jpg",
+        ],
         "Earthrise — icon of public opinion and propaganda.",
     ),
     (
         "ch06_iss.jpg",
-        "https://images-assets.nasa.gov/image/iss070e025131/iss070e025131~orig.jpg",
-        "International Space Station — legacy of post-race cooperation.",
+        [
+            "https://images-assets.nasa.gov/image/as11-40-5902/as11-40-5902~orig.jpg",
+            "https://images-assets.nasa.gov/image/as11-44-6550/as11-44-6550~orig.jpg",
+            "https://images-assets.nasa.gov/image/as11-40-5874/as11-40-5874~orig.jpg",
+        ],
+        "Earth from Apollo 11 — legacy of exploration and later cooperation.",
     ),
 ]
 

@@ -2,11 +2,36 @@
 
 from __future__ import annotations
 
+import shutil
 from pathlib import Path
 
 import httpx
 
-_USER_AGENT = "bookgen-ex03/1.0 (Haifa University; educational project)"
+_USER_AGENT = "Mozilla/5.0 (compatible; bookgen-ex03/1.0; Haifa University educational project)"
+_MIN_IMAGE_BYTES = 80_000
+
+
+def _bundled_dir(latex_root: Path) -> Path:
+    return latex_root.parent / "assets" / "chapter-figures"
+
+
+def _is_valid_image(path: Path) -> bool:
+    if not path.exists() or path.stat().st_size < _MIN_IMAGE_BYTES:
+        return False
+    header = path.read_bytes()[:4]
+    return header[:2] == b"\xff\xd8" or header == b"\x89PNG"
+
+
+def _download_image(client: httpx.Client, urls: list[str], target: Path) -> bool:
+    for url in urls:
+        try:
+            response = client.get(url)
+            if response.status_code == 200 and len(response.content) >= _MIN_IMAGE_BYTES:
+                target.write_bytes(response.content)
+                return True
+        except httpx.HTTPError:
+            continue
+    return False
 
 
 def ensure_figures(latex_root: Path) -> list[Path]:
@@ -15,58 +40,35 @@ def ensure_figures(latex_root: Path) -> list[Path]:
 
     figures_dir = latex_root / "figures"
     figures_dir.mkdir(parents=True, exist_ok=True)
+    bundled = _bundled_dir(latex_root)
     saved: list[Path] = []
     headers = {"User-Agent": _USER_AGENT}
-    with httpx.Client(follow_redirects=True, timeout=10.0, headers=headers) as client:
-        for filename, url, caption in CHAPTER_FIGURES:
+
+    with httpx.Client(follow_redirects=True, timeout=60.0, headers=headers) as client:
+        for filename, urls, caption in CHAPTER_FIGURES:
             target = figures_dir / filename
-            if target.exists() and target.stat().st_size > 0:
+            if _is_valid_image(target):
                 saved.append(target)
                 continue
-            try:
-                response = client.get(url)
-                response.raise_for_status()
-                target.write_bytes(response.content)
-            except httpx.HTTPError:
-                saved.append(_write_placeholder(figures_dir, filename, caption))
+
+            if target.exists():
+                target.unlink()
+
+            if _download_image(client, urls, target):
+                saved.append(target)
                 continue
-            saved.append(target)
+
+            bundled_file = bundled / filename
+            if _is_valid_image(bundled_file):
+                shutil.copy2(bundled_file, target)
+                saved.append(target)
+                continue
+
+            msg = f"Could not download chapter figure {filename!r} ({caption})"
+            raise RuntimeError(msg)
+
     saved.append(_write_timeline_plot(figures_dir))
     return saved
-
-
-def _write_placeholder(figures_dir: Path, filename: str, caption: str) -> Path:
-    """Create a simple placeholder PNG when remote download fails."""
-    target = figures_dir / filename
-    if target.exists() and target.stat().st_size > 0:
-        return target
-
-    import matplotlib
-
-    matplotlib.use("Agg")
-    import matplotlib.pyplot as plt
-
-    fig, ax = plt.subplots(figsize=(6, 3.5))
-    ax.set_facecolor("#1a1a2e")
-    fig.patch.set_facecolor("#1a1a2e")
-    ax.text(
-        0.5,
-        0.55,
-        caption,
-        ha="center",
-        va="center",
-        color="white",
-        wrap=True,
-        fontsize=10,
-    )
-    ax.text(0.5, 0.15, "Moon Race illustration (offline placeholder)", ha="center", color="#cccccc")
-    ax.set_xlim(0, 1)
-    ax.set_ylim(0, 1)
-    ax.axis("off")
-    fig.tight_layout()
-    fig.savefig(target, dpi=120)
-    plt.close(fig)
-    return target
 
 
 def _write_timeline_plot(figures_dir: Path) -> Path:

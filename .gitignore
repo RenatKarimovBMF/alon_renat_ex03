@@ -18,6 +18,7 @@ credentials.json
 
 # LaTeX build artifacts
 latex/build/
+latex/main.pdf
 latex/**/*.aux
 latex/**/*.log
 latex/**/*.out
