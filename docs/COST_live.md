@@ -26,6 +26,28 @@ attempt failed from a figure-cache bug that purged the freshly fetched web
 images; after the one-line fix the book was rebuilt **for free** from the
 saved session JSON — no LLM re-run, demonstrating session reproducibility.)
 
+## Generic-topic run — World War II via `--topic` ($0.5690)
+
+**Session:** `bb403ead` ·
+`examples/world_war_ii_causes_turning_points_and_legacy-20260613-003230/`
+· 20-sheet PDF, **16 subject pages**, 5,267 words, 0 unresolved citations.
+Proves full genericity with **zero config edits**: agent-researched
+bibliography (8 real WW2 works — Weinberg, Beevor, Overy, Kershaw, Hastings,
+Browning, Tooze, Taylor — every one cited), web-fetched period photographs
+(Versailles Hall of Mirrors, Chamberlain at Munich), agent table→ch2,
+chart→ch5, equation→ch6, Hebrew summaries about WW2, dynamic cover/header.
+The first build leaked Moon pool images into failed-fetch chapters; the
+off-topic fallback gate (`plan_is_topical`) now disables subject-bound pool
+fallbacks under `--topic`, and the book was rebuilt free from session JSON.
+
+| Agent | Model | Calls | Input tokens | Output tokens | Est. USD |
+|-------|-------|------:|-------------:|--------------:|---------:|
+| chapter_writer | claude-opus-4-8 | 1 | 7,396 | 13,141 | $0.3655 |
+| outline_architect | claude-opus-4-8 | 2 | 5,789 | 3,608 | $0.1191 |
+| research_director | claude-opus-4-8 | 2 | 4,313 | 2,512 | $0.0844 |
+
+**Total: $0.5690** · 17,498 input · 19,261 output tokens.
+
 ## Kept run — Claude Opus 4.8, curated-injection mode ($0.5019)
 
 **Session:** `6b331193` · `examples/the_moon_race_ussr_vs_us-20260612-233248/`
@@ -50,7 +72,7 @@ agent-media run to show both modes.
 | Opus 4.8 #4 (`b49e9a58`) | 14 subject pages (~339 words/section, one source uncited) | $0.7628 | per-paragraph word contract (5 × 80–95) finally sticks |
 | max_tokens probe | confirmed `claude-opus-4-8` accepts a 64,000-token output ceiling | $0.0002 | ceiling ≠ purchase; only generated tokens bill |
 
-**Total real Anthropic spend for this exercise: ≈ $3.5** (well inside the $20
+**Total real Anthropic spend for this exercise: ≈ $4.1** (well inside the $20
 test budget).
 
 ## Free-tier run — Gemini 3.1 Flash Lite ($0.00 actual)

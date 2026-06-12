@@ -145,3 +145,8 @@ Status key: `[ ]` pending · `[~]` in progress · `[x]` done · `[-]` cancelled
 | S8-05 | Fix figure-cache purge deleting fetched web images (`_sync_manifest` scoped to bundled names) | Both | [x] |
 | S8-06 | Live Opus run with agent media: 22 sheets, 18 subject pages, table→ch2 eq→ch4 chart→ch6, $0.6508 | Both | [x] |
 | S8-07 | Keep both examples in `examples/`: agent-media run + curated-injection run | Both | [x] |
+| S8-08 | LLM-backed gap-fill: missing table/equation/chart regenerated via the same LLM API; failed image queries retried with LLM-suggested alternatives, then pool, then none | Both | [x] |
+| S8-09 | `--topic` CLI flag: fully dynamic per-run subject (config stays default) | Both | [x] |
+| S8-10 | Agent-researched bibliography: ResearchBrief.sources → generated references.bib + citation filtering | Both | [x] |
+| S8-11 | Off-topic leak gate (`plan_is_topical`): no subject-bound pool media under `--topic`; dynamic cover/header via `\BookTitle` | Both | [x] |
+| S8-12 | End-to-end WW2 proof run: 20 sheets / 16 subject pages, 8 real WW2 sources all cited, $0.5690 | Both | [x] |

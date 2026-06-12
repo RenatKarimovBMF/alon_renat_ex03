@@ -1,0 +1,200 @@
+{
+  "title": "World War II: Causes, Turning Points, and Legacy",
+  "target_total_pages": 15,
+  "chapters": [
+    {
+      "number": 1,
+      "title": "The Fragile Peace: Versailles and the Roots of Conflict",
+      "page_budget": 3.0,
+      "learning_objectives": [
+        "Explain how the punitive terms of the Treaty of Versailles created lasting German grievances.",
+        "Analyze how economic dislocation and revanchist nationalism fed the rise of the Nazi movement."
+      ],
+      "section_titles": [
+        "The 1919 Settlement: Reparations, Territory, and War Guilt",
+        "Hyperinflation, Depression, and the Mobilization of Grievance"
+      ],
+      "hebrew_summary": "הסכם ורסאי הטיל על גרמניה פיצויים כבדים, אובדן שטחים וסעיף אשמת המלחמה, וכך נוצרו טרוניות עמוקות. המשבר הכלכלי והאינפלציה ההיפרינפלציה הזינו את הלאומנות הנקמנית שהנאצים ניצלו לעלייתם לשלטון.",
+      "figure": {
+        "image_query": "Treaty of Versailles signing 1919 Hall of Mirrors",
+        "caption": "The signing of the Treaty of Versailles in the Hall of Mirrors in 1919 imposed terms that fueled German resentment for two decades."
+      },
+      "table": null,
+      "equation": null,
+      "chart": null
+    },
+    {
+      "number": 2,
+      "title": "The Road to War: Appeasement and the Pacts of 1938-1939",
+      "page_budget": 3.0,
+      "learning_objectives": [
+        "Assess why the policy of appeasement failed to prevent war.",
+        "Explain how the Nazi-Soviet Pact removed the threat of a two-front war."
+      ],
+      "section_titles": [
+        "Munich 1938: Concession and Collapse",
+        "The Molotov-Ribbentrop Pact and the Invasion of Poland"
+      ],
+      "hebrew_summary": "מדיניות הפיוס שהגיעה לשיאה בהסכם מינכן ב-1938 לא מנעה את המלחמה, אלא רק עיכבה אותה. הסכם ריבנטרופ-מולוטוב הסיר את איום החזית הכפולה ואיפשר את פלישת גרמניה לפולין בספטמבר 1939.",
+      "figure": {
+        "image_query": "Neville Chamberlain Munich Agreement 1938 paper",
+        "caption": "Neville Chamberlain returns from the 1938 Munich Agreement proclaiming peace, a hope shattered within a year by the invasion of Poland."
+      },
+      "table": {
+        "caption": "Key diplomatic steps on the road to war, 1938-1939.",
+        "columns": [
+          "Date",
+          "Event",
+          "Outcome"
+        ],
+        "rows": [
+          [
+            "Sep 1938",
+            "Munich Agreement",
+            "Sudetenland ceded to Germany"
+          ],
+          [
+            "Mar 1939",
+            "Seizure of Czechoslovakia",
+            "Collapse of appeasement"
+          ],
+          [
+            "Aug 1939",
+            "Molotov-Ribbentrop Pact",
+            "Eastern Europe divided into spheres"
+          ],
+          [
+            "1 Sep 1939",
+            "Invasion of Poland",
+            "Germany attacks without Soviet opposition"
+          ],
+          [
+            "3 Sep 1939",
+            "British and French declarations",
+            "Outbreak of general war"
+          ]
+        ]
+      },
+      "equation": null,
+      "chart": null
+    },
+    {
+      "number": 3,
+      "title": "Turning Points: Stalingrad and the Global War",
+      "page_budget": 3.0,
+      "learning_objectives": [
+        "Explain why the Battle of Stalingrad marked the decisive turn on the Eastern Front.",
+        "Analyze how the US entry after Pearl Harbor transformed the conflict into a global war."
+      ],
+      "section_titles": [
+        "Stalingrad 1942-1943: The Encirclement of the Sixth Army",
+        "Pearl Harbor and the Globalization of the War"
+      ],
+      "hebrew_summary": "כיתור וכניעת הארמייה השישית הגרמנית בסטלינגרד בתחילת 1943 העבירו את היוזמה האסטרטגית לידי ברית המועצות. התקפת יפן על פרל הארבור בדצמבר 1941 הביאה את העוצמה האמריקנית למלחמה והפכה אותה לעימות עולמי.",
+      "figure": {
+        "image_query": "Battle of Stalingrad 1943 German surrender ruins",
+        "caption": "Soviet forces amid the ruins of Stalingrad, where the surrender of the German Sixth Army in 1943 shifted the war's momentum eastward."
+      },
+      "table": null,
+      "equation": null,
+      "chart": null
+    },
+    {
+      "number": 4,
+      "title": "The Machinery of Genocide: The Holocaust",
+      "page_budget": 2.0,
+      "learning_objectives": [
+        "Describe how the Holocaust integrated racial ideology with the machinery of the German state.",
+        "Identify the methods and scale of the Nazi genocide."
+      ],
+      "section_titles": [
+        "From Ghettos to Mass Shootings",
+        "The Extermination Camps and the Final Solution"
+      ],
+      "hebrew_summary": "השואה הייתה רצח עם שיטתי ומאורגן על ידי המדינה, שבו נרצחו כשישה מיליון יהודים לצד קבוצות נוספות. ההשמדה שילבה אידאולוגיה גזענית עם מנגנוני המדינה הגרמנית, מהגטאות ועד מחנות ההשמדה.",
+      "figure": {
+        "image_query": "Auschwitz Birkenau memorial railway gate",
+        "caption": "The railway entrance to Auschwitz-Birkenau, emblem of the industrialized murder that defined the Holocaust."
+      },
+      "table": null,
+      "equation": null,
+      "chart": null
+    },
+    {
+      "number": 5,
+      "title": "Industry, Logistics, and the Ethics of Total War",
+      "page_budget": 2.0,
+      "learning_objectives": [
+        "Explain how Allied production capacity and logistics determined victory.",
+        "Evaluate the ethical debates surrounding strategic and atomic bombing."
+      ],
+      "section_titles": [
+        "Out-Producing the Axis: The Material Imbalance",
+        "Hiroshima, Nagasaki, and the Ethics of Total War"
+      ],
+      "hebrew_summary": "תפוקת התעשייה והלוגיסטיקה של בעלות הברית, ובמיוחד הייצור ההמוני האמריקני, הכריעו את המלחמה לא פחות מהקרבות עצמם. השימוש בנשק האטומי על הירושימה ונגסקי קירב את כניעת יפן אך עורר ויכוח מתמשך על מוסר המלחמה הטוטלית.",
+      "figure": {
+        "image_query": "American World War II factory aircraft mass production 1943",
+        "caption": "American assembly lines mass-producing aircraft, illustrating the material superiority that proved decisive for the Allies by 1944-45."
+      },
+      "table": null,
+      "equation": null,
+      "chart": {
+        "title": "Aircraft Production by Selected Powers, 1939-1945 (thousands)",
+        "y_label": "Aircraft produced (thousands)",
+        "points": [
+          {
+            "label": "United States",
+            "value": 295.0
+          },
+          {
+            "label": "Soviet Union",
+            "value": 158.0
+          },
+          {
+            "label": "United Kingdom",
+            "value": 131.0
+          },
+          {
+            "label": "Germany",
+            "value": 119.0
+          },
+          {
+            "label": "Japan",
+            "value": 76.0
+          },
+          {
+            "label": "Italy",
+            "value": 11.0
+          }
+        ]
+      }
+    },
+    {
+      "number": 6,
+      "title": "Legacy: Decolonization, Superpowers, and New Institutions",
+      "page_budget": 2.0,
+      "learning_objectives": [
+        "Explain how the war accelerated decolonization and the emergence of a bipolar order.",
+        "Assess the role of new international institutions such as the United Nations."
+      ],
+      "section_titles": [
+        "The Decline of Empire and the Rise of Two Superpowers",
+        "The United Nations and the Postwar International System"
+      ],
+      "hebrew_summary": "המלחמה החלישה את האימפריות האירופיות והאיצה תהליכי דה-קולוניזציה באסיה ובאפריקה. ארצות הברית וברית המועצות צמחו כמעצמות יריבות שעיצבו את הסדר העולמי החדש ואת מוסדות כמו האומות המאוחדות.",
+      "figure": {
+        "image_query": "United Nations founding conference San Francisco 1945",
+        "caption": "Delegates at the 1945 San Francisco conference founding the United Nations, a centerpiece of the postwar international order."
+      },
+      "table": null,
+      "equation": {
+        "intro": "A simple way to express the disproportionate weight of material output in Allied victory is to model combat power as a product of force quality and the sustainable rate of resource and equipment supply.",
+        "latex": "P = Q \\times \\frac{dR}{dt}",
+        "explanation": "Here P is effective combat power, Q is force quality, and dR/dt is the rate at which resources and equipment are produced and delivered; overwhelming Allied output drove P decisively higher despite Axis tactical skill."
+      },
+      "chart": null
+    }
+  ],
+  "version": "1.0"
+}

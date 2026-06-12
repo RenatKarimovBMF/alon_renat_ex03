@@ -162,6 +162,13 @@ fixtures plan used 1/3/4 — proof the placement is genuinely the agent's).
 remaining weak spot (a "Sputnik 1" query can return a museum fragment), which
 the caption still describes correctly.
 
+**Follow-up — LLM-backed gap-fill:** to stay subject-generic, the *fallback*
+is also the LLM: a missing table/equation/chart spec triggers one extra call
+("Pick the best-fitting chapter and return real, factual content as JSON:
+{schema}"), and failed image queries trigger one call asking for "ONE simpler,
+more generic query likely to match stock/archive photos" per failed chapter.
+Both degrade gracefully (warn + proceed) so a bad reply never breaks the run.
+
 ---
 
 ## 10. Calibrating words-per-page

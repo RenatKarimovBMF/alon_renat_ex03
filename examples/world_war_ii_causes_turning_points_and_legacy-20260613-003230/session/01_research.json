@@ -1,0 +1,117 @@
+{
+  "topic": "World War II: Causes, Turning Points, and Legacy",
+  "thesis": "World War II emerged from unresolved tensions of the post-1918 settlement, aggressive expansionism by Germany, Italy, and Japan, and the failure of collective security; its outcome was decided by a handful of strategic turning points and reshaped the global order through decolonization, superpower rivalry, and new international institutions.",
+  "findings": [
+    {
+      "claim": "The punitive terms and economic dislocation following the Treaty of Versailles created grievances that the Nazi movement exploited.",
+      "evidence_summary": "The 1919 settlement imposed reparations, territorial losses, and the 'war guilt' clause on Germany; scholars argue these conditions, combined with hyperinflation and later depression, fed revanchist nationalism that Hitler mobilized after 1933.",
+      "source_tag": "external"
+    },
+    {
+      "claim": "Appeasement of Hitler in the 1930s, culminating in the 1938 Munich Agreement, failed to prevent war.",
+      "evidence_summary": "Britain and France conceded the Sudetenland to Germany at Munich in September 1938 in hopes of avoiding conflict; within a year Germany seized the rest of Czechoslovakia and invaded Poland, demonstrating the policy's collapse.",
+      "source_tag": "external"
+    },
+    {
+      "claim": "The Nazi-Soviet Pact of August 1939 removed the threat of a two-front war and enabled the invasion of Poland.",
+      "evidence_summary": "The Molotov-Ribbentrop Pact, with its secret protocol dividing Eastern Europe into spheres of influence, allowed Germany to attack Poland on 1 September 1939 without immediate Soviet opposition, triggering British and French declarations of war.",
+      "source_tag": "external"
+    },
+    {
+      "claim": "The Battle of Stalingrad (1942-1943) marked the decisive turning point on the Eastern Front.",
+      "evidence_summary": "The encirclement and surrender of the German Sixth Army in early 1943 cost the Wehrmacht roughly a quarter-million casualties and shifted strategic initiative permanently to the Soviet Union.",
+      "source_tag": "external"
+    },
+    {
+      "claim": "The entry of the United States after Pearl Harbor in December 1941 transformed the conflict into a truly global war.",
+      "evidence_summary": "Japan's attack on the US Pacific Fleet on 7 December 1941, followed by Germany's declaration of war on the US, brought American industrial and military power decisively into both the European and Pacific theaters.",
+      "source_tag": "external"
+    },
+    {
+      "claim": "The Holocaust represented a systematic, state-organized genocide central to Nazi war aims.",
+      "evidence_summary": "Approximately six million Jews, alongside Roma, disabled people, and other targeted groups, were murdered through ghettos, mass shootings, and extermination camps, integrating racial ideology with the machinery of the German state.",
+      "source_tag": "external"
+    },
+    {
+      "claim": "Aerial bombing and the atomic bombings of Hiroshima and Nagasaki raised enduring debates about the ethics of total war.",
+      "evidence_summary": "The 1945 use of atomic weapons hastened Japan's surrender but caused mass civilian casualties; historians continue to debate military necessity versus diplomatic and political motives in the emerging Cold War context.",
+      "source_tag": "team_analysis"
+    },
+    {
+      "claim": "The war accelerated decolonization and the emergence of a bipolar superpower order.",
+      "evidence_summary": "Weakened European empires faced rising independence movements in Asia and Africa after 1945, while the United States and Soviet Union emerged as dominant rivals, framing the postwar international system and the United Nations.",
+      "source_tag": "team_analysis"
+    },
+    {
+      "claim": "Production capacity and logistics, as much as battlefield tactics, determined the Allied victory.",
+      "evidence_summary": "Allied economies, especially American mass production and Soviet relocation of industry east of the Urals, vastly outproduced the Axis in tanks, aircraft, and ships, a material imbalance that proved decisive by 1944-45.",
+      "source_tag": "team_analysis"
+    }
+  ],
+  "open_questions": [
+    "To what extent was World War II an inevitable consequence of unresolved tensions from World War I versus the product of specific leaders' decisions?",
+    "How should the relative contributions of the Soviet, American, and British war efforts be weighed in explaining Allied victory?",
+    "Was the use of atomic weapons against Japan militarily necessary, or primarily driven by postwar geopolitical considerations?",
+    "How did the war's legacy of institutions like the United Nations succeed or fail in preventing comparable global conflicts?",
+    "In what ways did the experience of total war reshape civilian society, gender roles, and the relationship between states and their populations?"
+  ],
+  "sources": [
+    {
+      "key": "weinberg1994",
+      "title": "A World at Arms: A Global History of World War II",
+      "author": "Gerhard L. Weinberg",
+      "year": 1994,
+      "publisher": "Cambridge University Press"
+    },
+    {
+      "key": "beevor2012",
+      "title": "The Second World War",
+      "author": "Antony Beevor",
+      "year": 2012,
+      "publisher": "Little, Brown and Company"
+    },
+    {
+      "key": "overy1995",
+      "title": "Why the Allies Won",
+      "author": "Richard Overy",
+      "year": 1995,
+      "publisher": "W. W. Norton"
+    },
+    {
+      "key": "kershaw2000",
+      "title": "Hitler 1936-1945: Nemesis",
+      "author": "Ian Kershaw",
+      "year": 2000,
+      "publisher": "W. W. Norton"
+    },
+    {
+      "key": "hastings2011",
+      "title": "Inferno: The World at War, 1939-1945",
+      "author": "Max Hastings",
+      "year": 2011,
+      "publisher": "Alfred A. Knopf"
+    },
+    {
+      "key": "browning2004",
+      "title": "The Origins of the Final Solution: The Evolution of Nazi Jewish Policy, September 1939-March 1942",
+      "author": "Christopher R. Browning",
+      "year": 2004,
+      "publisher": "University of Nebraska Press"
+    },
+    {
+      "key": "tooze2006",
+      "title": "The Wages of Destruction: The Making and Breaking of the Nazi Economy",
+      "author": "Adam Tooze",
+      "year": 2006,
+      "publisher": "Allen Lane"
+    },
+    {
+      "key": "taylor1961",
+      "title": "The Origins of the Second World War",
+      "author": "A. J. P. Taylor",
+      "year": 1961,
+      "publisher": "Hamish Hamilton"
+    }
+  ],
+  "version": "1.0"
+}

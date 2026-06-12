@@ -99,7 +99,15 @@ The Chapter Writer task is **one CrewAI task** whose Python callback loops over 
   web image (search query + caption) and chooses which chapter carries the
   data table, display equation, and chart data; Python fetches images from
   the public web (Wikimedia/NASA, keyless) and renders everything
-  deterministically, with the configured plan as a per-element safety net
-  (ADR-007).
+  deterministically (ADR-007).
+- **LLM-backed gap-fill (subject-generic):** if a spec is missing, one extra
+  call to the same LLM API regenerates it (validated + budgeted); failed
+  image fetches get one LLM-suggested alternative query each, then the
+  configured minimum image pool, then "no image for this chapter"
+  (`crew/media_gapfill.py`).
+- **Dynamic topic:** `--topic` overrides the subject per run; the research
+  agent supplies the bibliography (`sources[]` → generated `references.bib`,
+  citations filtered), and the off-topic gate (`plan_is_topical`) blocks
+  subject-bound pool fallbacks so no Moon media can leak into another topic.
 - **Live isolation:** live runs execute in `examples/<topic>-<stamp>/`
   workspaces (ADR-006).
