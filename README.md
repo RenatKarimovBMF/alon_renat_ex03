@@ -198,6 +198,29 @@ Hebrew summary block (BiDi):
 
 ---
 
+## Contributing
+
+Coding standards for this repository (the same checks a grader runs):
+
+- **Lint:** `uv run ruff check .` must report zero violations (ruleset `E,F,W,I,N,UP,B,C4,SIM`; `E501` is handled by the formatter).
+- **Tests first (TDD):** every module has a matching test under `tests/`; keep coverage ≥85% (`uv run --extra dev pytest --cov=src/bookgen`).
+- **File size:** ≤150 code lines per file — split helpers or data into new modules instead of padding.
+- **Architecture:** all business logic behind `BookGenSdk`; every LLM call through `ApiGatekeeper`; no hard-coded values (read `config/*.json`); no secrets in code (`.env` only).
+- **Versioning:** bump `src/bookgen/shared/version.py` and the `version` key in each config together.
+- **Git:** small, descriptive commits; everything runs through `uv` (never `pip`/`venv` directly).
+
+---
+
+## License & credits
+
+Released under the [MIT License](LICENSE) — © 2026 Renat Karimov & Alon Engel.
+
+**Built with:** [CrewAI](https://github.com/crewAIInc/crewAI) (agent orchestration), [Pydantic](https://docs.pydantic.dev/) (schemas), [httpx](https://www.python-httpx.org/) (HTTP), [structlog](https://www.structlog.org/) (logging), [matplotlib](https://matplotlib.org/) (the Python-generated figure), [pypdf](https://pypdf.readthedocs.io/) (page counting), and the [LaTeX](https://www.latex-project.org/) toolchain via **MiKTeX / TeX Live** (TikZ, `babel`-hebrew).
+
+**Images:** chapter photographs are NASA imagery (public domain). **Course:** Intelligent Agents, University of Haifa — Dr. Yoram Segal.
+
+---
+
 ## Submission checklist
 
 - [x] `latex/` committed (sources + `figures/` + `build/book.pdf`)
