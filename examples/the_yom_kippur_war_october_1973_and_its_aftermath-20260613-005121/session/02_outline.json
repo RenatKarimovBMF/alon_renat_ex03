@@ -1,0 +1,196 @@
+{
+  "title": "The Yom Kippur War: October 1973 and Its Aftermath",
+  "target_total_pages": 15,
+  "chapters": [
+    {
+      "number": 1,
+      "title": "The Road to October: Stalemate After 1967",
+      "page_budget": 2.0,
+      "learning_objectives": [
+        "Explain the diplomatic and military stalemate that followed the 1967 Six-Day War",
+        "Describe Sadat's limited political objectives in choosing war as a path to negotiation"
+      ],
+      "section_titles": [
+        "From the Six-Day War to the War of Attrition",
+        "Sadat's Strategic Calculus and Limited War Aims"
+      ],
+      "hebrew_summary": "לאחר מלחמת ששת הימים נוצר קיפאון מדיני וצבאי בין ישראל למצרים. סאדאת תכנן מלחמה מוגבלת שמטרתה לשבור את הקיפאון ולכפות משא ומתן מחדש על סיני.",
+      "figure": {
+        "image_query": "Anwar Sadat Egyptian president 1973",
+        "caption": "Egyptian President Anwar Sadat, who pursued a limited war in 1973 to break the diplomatic stalemate and reopen negotiations over the Sinai."
+      },
+      "table": null,
+      "equation": null,
+      "chart": null
+    },
+    {
+      "number": 2,
+      "title": "The Concept and the Failure of Warning",
+      "page_budget": 3.0,
+      "learning_objectives": [
+        "Analyze the role of 'ha-Konseptzia' in Israeli intelligence assessments",
+        "Evaluate the warning indicators dismissed before 6 October 1973"
+      ],
+      "section_titles": [
+        "Aman, 'the Concept', and Fixed Assessments",
+        "Missed Indicators and the Agranat Commission"
+      ],
+      "hebrew_summary": "המודיעין הישראלי נצמד לקונספציה שמצרים לא תתקוף ללא עליונות אווירית ומפציצים ארוכי טווח. תפיסה קבועה זו גרמה לדחיית סימני האזהרה שהצטברו לפני המתקפה, וועדת אגרנט בחנה כישלון זה.",
+      "figure": {
+        "image_query": "Agranat Commission Israel 1974",
+        "caption": "The Agranat Commission investigated the intelligence and command failures that left Israel unprepared on the morning of 6 October 1973."
+      },
+      "table": null,
+      "equation": null,
+      "chart": null
+    },
+    {
+      "number": 3,
+      "title": "The Surprise Attack and the Crossing of the Suez Canal",
+      "page_budget": 3.0,
+      "learning_objectives": [
+        "Describe the coordinated Egyptian-Syrian assault on 6 October 1973",
+        "Explain how Egyptian engineering and anti-tank weapons overcame the Bar-Lev Line"
+      ],
+      "section_titles": [
+        "Two Fronts: The Suez Canal and the Golan Heights",
+        "Breaching the Bar-Lev Line: Water Cannons, Saggers, and SA-6"
+      ],
+      "hebrew_summary": "ב-6 באוקטובר 1973 פתחו מצרים וסוריה במתקפת פתע מתואמת לאורך תעלת סואץ ורמת הגולן. מהנדסים מצריים פרצו את סוללות החול של קו בר-לב באמצעות תותחי מים, וטילי סאגר ומטריות נ\"מ בלמו את ההתקפות הנגדיות הישראליות.",
+      "figure": {
+        "image_query": "Egyptian forces crossing Suez Canal October 1973",
+        "caption": "Egyptian forces crossing the Suez Canal on 6 October 1973, using pontoon bridges after breaching the sand ramparts of the Bar-Lev Line."
+      },
+      "table": {
+        "caption": "Key forces and weapons in the opening phase of the October 1973 war",
+        "columns": [
+          "Front",
+          "Attacking Force",
+          "Key Weapon System",
+          "Israeli Defense"
+        ],
+        "rows": [
+          [
+            "Suez Canal",
+            "Egyptian Second and Third Armies",
+            "Sagger anti-tank missiles",
+            "Bar-Lev Line fortifications"
+          ],
+          [
+            "Suez Canal",
+            "Egyptian engineers",
+            "High-pressure water cannons",
+            "Sand rampart barriers"
+          ],
+          [
+            "Sinai air",
+            "Egyptian air defense",
+            "SA-6 mobile SAM batteries",
+            "Israeli Air Force jets"
+          ],
+          [
+            "Golan Heights",
+            "Syrian armored divisions",
+            "T-62 main battle tanks",
+            "Thinly manned Israeli lines"
+          ]
+        ]
+      },
+      "equation": null,
+      "chart": null
+    },
+    {
+      "number": 4,
+      "title": "Recovery, Encirclement, and the Superpower Crisis",
+      "page_budget": 3.0,
+      "learning_objectives": [
+        "Trace Israel's military recovery and Sharon's crossing to the west bank of the canal",
+        "Assess the U.S.-Soviet confrontation and the DEFCON 3 nuclear alert"
+      ],
+      "section_titles": [
+        "Sharon's Crossing and the Encirclement of the Third Army",
+        "Détente Under Strain: DEFCON 3 and Cease-Fire"
+      ],
+      "hebrew_summary": "לאחר ספיגת המכות הראשונות פתחה ישראל במתקפת נגד, ודיוויזיית שרון חצתה את התעלה וכיתרה את הארמיה השלישית המצרית. המשבר הסלים לעימות בין המעצמות והביא להעלאת כוננות הגרעין האמריקנית לדרגת DEFCON 3 לפני הפסקת האש.",
+      "figure": {
+        "image_query": "Ariel Sharon Suez Canal crossing 1973",
+        "caption": "Ariel Sharon's division crossed to the west bank of the Suez Canal near the Great Bitter Lake, encircling the Egyptian Third Army by the 24 October cease-fire."
+      },
+      "table": null,
+      "equation": {
+        "intro": "The strategic balance at the cease-fire can be modeled as a comparison of relative combat power across both fronts, where outcomes depend on force ratios and defensive advantage.",
+        "latex": "R = \\frac{F_{att} \\cdot Q_{att}}{F_{def} \\cdot Q_{def} \\cdot D}",
+        "explanation": "R is the force-ratio outcome, F denotes force size, Q denotes quality of weapons, and D is the defensive multiplier; values near or below one indicate that defensive advantage and weapon quality offset numerical superiority."
+      },
+      "chart": null
+    },
+    {
+      "number": 5,
+      "title": "The Oil Embargo and the Global Energy Shock",
+      "page_budget": 2.0,
+      "learning_objectives": [
+        "Explain how OAPEC's embargo triggered a global energy and economic crisis",
+        "Assess the long-term reorientation of Western energy policy"
+      ],
+      "section_titles": [
+        "OAPEC Production Cuts and the Embargo",
+        "Recession and the Reorientation of Western Energy Strategy"
+      ],
+      "hebrew_summary": "מדינות הנפט הערביות הטילו אמברגו וקיצצו בתפוקה נגד תומכות ישראל, מה שהביא להכפלה מרובעת של מחירי הנפט ולמיתון עולמי. המשבר חולל שינוי מתמשך במדיניות האנרגיה של המערב.",
+      "figure": {
+        "image_query": "1973 oil crisis gas station lines",
+        "caption": "Long lines at gasoline stations during the 1973 oil crisis, when the OAPEC embargo quadrupled oil prices and triggered a global recession."
+      },
+      "table": null,
+      "equation": null,
+      "chart": {
+        "title": "Approximate Crude Oil Price During the 1973-1974 Embargo",
+        "y_label": "Price per barrel (USD)",
+        "points": [
+          {
+            "label": "Sep 1973",
+            "value": 3.0
+          },
+          {
+            "label": "Oct 1973",
+            "value": 5.1
+          },
+          {
+            "label": "Dec 1973",
+            "value": 11.6
+          },
+          {
+            "label": "Jan 1974",
+            "value": 11.65
+          },
+          {
+            "label": "Mar 1974",
+            "value": 10.4
+          }
+        ]
+      }
+    },
+    {
+      "number": 6,
+      "title": "Aftermath: Disengagement and the Road to Peace",
+      "page_budget": 2.0,
+      "learning_objectives": [
+        "Describe Kissinger's shuttle diplomacy and the disengagement agreements",
+        "Evaluate how the war catalyzed the path to the 1979 Egyptian-Israeli peace treaty"
+      ],
+      "section_titles": [
+        "Shuttle Diplomacy, Sinai I and Sinai II",
+        "From Sadat's Jerusalem Visit to Camp David and 1979"
+      ],
+      "hebrew_summary": "המשא ומתן שלאחר המלחמה הוליד את הסכמי ההפרדה סיני א' וסיני ב' באמצעות הדיפלומטיה המעבורתית של קיסינג'ר. תהליך זה הוביל לביקור סאדאת בירושלים, להסכמי קמפ דייוויד ולחוזה השלום משנת 1979.",
+      "figure": {
+        "image_query": "Camp David Accords 1978 Sadat Begin Carter",
+        "caption": "The Camp David Accords of 1978, with Sadat, Begin, and Carter, grew out of the diplomatic momentum unleashed by the 1973 war and led to the 1979 peace treaty."
+      },
+      "table": null,
+      "equation": null,
+      "chart": null
+    }
+  ],
+  "version": "1.0"
+}
