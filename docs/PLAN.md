@@ -242,7 +242,11 @@ latex/
 └── build/                # gitignored PDF + aux files
 ```
 
-**Document class:** `article` 11pt A4, `geometry` margin 2.5cm → ~450 words/page → 15 pages ≈ 6,000–6,750 words.
+**Document class:** `article` 11pt A4, `geometry` margin 2.5cm. Measured
+density for this figure-rich layout is **~280 prose words per subject page**
+(see `notebooks/words_per_page_calibration.ipynb`), so the hard rule of
+**≥15 subject pages** needs ≈4,200–5,100 words; the compiled book is ~20
+sheets with cover, TOC, appendix, and references.
 
 ---
 
@@ -375,6 +379,32 @@ sequenceDiagram
   (no drops under rate pressure, bounded cost) with far less complexity.
 - **Consequence:** `get_queue_status()` exposes counters for observability; a
   future version could add an explicit FIFO queue and depth metric.
+
+### ADR-006 — Live runs execute in isolated example workspaces
+- **Decision:** `--live` stages a copy of the LaTeX sources into
+  `examples/<topic>-<timestamp>/` and writes every artifact there (chapters,
+  build, session JSON, JSONL log, COST.md, convenience `book.pdf`).
+  Fixtures/demo runs keep using the canonical `latex/` tree.
+- **Reason:** a live crew rewrites chapter files and the compiled PDF; staging
+  protects the graded canonical book from being overwritten or locked by a
+  viewer, and turns each live run into self-contained, reviewable evidence.
+- **Consequence:** `PipelineContext.create(workspace=...)` redirects all paths;
+  `stage_latex_workspace()` copies static sources; heavy duplicates
+  (`figures/`, aux files) are gitignored inside examples.
+
+### ADR-007 — Required PDF elements are injected deterministically, not prompted
+- **Decision:** agents produce prose, Hebrew chapter summaries, and citation
+  keys only; Python injects the exercise-mandated elements (chapter figure,
+  milestones table, rocket equation, matplotlib chart) per chapter via the
+  config-driven extras plan (`crew/extras.py`, `extras` block in `book.json`).
+  Latin/digit runs inside RTL Hebrew are wrapped in TeX--XeT `\beginL…\endL`
+  islands at render time.
+- **Reason:** the grading is technical (elements present, links resolve, BiDi
+  correct); an LLM can forget instructions, code cannot. The BiDi islands fix
+  digits printing reversed (1961 → 1691) without disturbing RTL word order.
+- **Consequence:** swapping the subject means editing config (figures,
+  summaries), not prompts; a 7-chapter live outline leaves chapter 7 without a
+  figure (the ≥1-image requirement still holds).
 
 ---
 

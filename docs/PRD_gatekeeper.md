@@ -72,3 +72,16 @@ gatekeeper.record(agent_key)
 - Token-dollar budgets (requests only)
 - Cross-session persistence
 - Distributed rate limiting
+
+---
+
+## 7. Implemented updates (v1.1)
+
+- **Rate-limit waiting:** `requests_per_minute` → inter-call spacing
+  (`min_interval_ms`), so rate-pressured calls queue instead of failing (ADR-005).
+- **Transient-failure retry:** `retry_after_seconds` / `max_retries` from
+  `rate_limits.json` retry HTTP 429/5xx **and** network timeouts/drops;
+  permanent 4xx errors are not retried (unit-tested).
+- **Config-driven HTTP timeout:** `timeout_seconds` (default 600) — long-form
+  book writes on large models take minutes; the old hard-coded 120 s aborted a
+  real Opus run mid-response.

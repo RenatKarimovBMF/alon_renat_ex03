@@ -52,9 +52,9 @@ latex/
 
 | Setting | Default |
 |---------|---------|
-| `target_pages` | 15 |
-| `page_tolerance` | ±1 |
-| `words_per_page` | 450 |
+| `target_pages` | 15 (**subject** pages — hard floor) |
+| `page_tolerance` | ±2 |
+| `words_per_page` | 280 (measured; see `notebooks/words_per_page_calibration.ipynb`) |
 
 LaTeX Editor `ReviewReport.estimated_pages` must be within tolerance before compile task runs.
 
@@ -62,10 +62,12 @@ LaTeX Editor `ReviewReport.estimated_pages` must be within tolerance before comp
 
 ## 6. Acceptance criteria
 
-- [ ] `latex/build/main.pdf` exists after successful run
-- [ ] PDF page count 13–17 (verify with `pdfinfo` or pypdf)
-- [ ] `references.bib` keys match all `\cite{}` commands
-- [ ] `--compile-only` flag compiles existing sources without LLM calls
+- [x] `latex/build/book.pdf` exists after successful run
+- [x] Subject chapters alone fill ≥15 pages (appendix start via pypdf − front matter); total ≈19–21
+- [x] `references.bib` keys match all `\cite{}` commands (0 unresolved `[?]`)
+- [x] Latin/digit runs inside RTL Hebrew render LTR (`\beginL…\endL` islands in `latex/hebrew.py`)
+- [x] `--compile-only` flag compiles existing sources without LLM calls
+- [x] `--live` compiles into an isolated `examples/<topic>-<stamp>/` workspace (canonical tree untouched)
 
 ---
 

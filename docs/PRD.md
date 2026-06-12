@@ -23,13 +23,13 @@ The team chose this topic for the ~15-page LaTeX book produced by the CrewAI pub
 | Agent orchestration | **CrewAI** | Role-based crew (research → outline → write → review → compile) |
 | Document output | **LaTeX** | Structured `.tex` sources + BibTeX |
 | Runtime | Python 3.11+ / **uv** | SDK entry, gatekeeper, tests, CLI |
-| Graded artifact | **PDF (~15 pages)** | Primary grading focus per `ex03.txt` |
+| Graded artifact | **PDF (≥15 subject pages; ≈20 sheets total)** | Primary grading focus |
 
 ---
 
 ## 2. Goals
 
-1. Satisfy Exercise 03 requirements: CrewAI + LaTeX, ~15 pages, modular agent design, GitHub with `PRD` / `PLAN` / `TODO` / `README`, plus the LaTeX project folder.
+1. Satisfy Exercise 03 requirements: CrewAI + LaTeX, **≥15 subject pages** (hard rule), modular agent design, GitHub with `PRD` / `PLAN` / `TODO` / `README`, plus the LaTeX project folder.
 2. Meet Guidelines V3: SDK layer, Gatekeeper, TDD, ≥85% coverage, Ruff clean, ≤150 lines/file, cost logging, version keys in config.
 3. Demonstrate **agent instruction design** — each role has explicit goals, constraints, output schema, and handoff rules.
 4. Produce a PDF that reads like a coherent academic/technical article, not a dump of raw LLM text.
@@ -80,7 +80,7 @@ The team chose this topic for the ~15-page LaTeX book produced by the CrewAI pub
 - **FR-06:** LaTeX project lives in `latex/` with at minimum: `main.tex`, `preamble.tex`, `chapters/*.tex`, `references.bib`, `figures/` (optional).
 - **FR-07:** Build Engineer (agent + tool) writes/updates `.tex` files deterministically from approved JSON payloads.
 - **FR-08:** Compilation uses `latexmk` or `pdflatex` + `bibtex` via a sandboxed tool; logs saved to `logs/latex/`.
-- **FR-09:** Target length enforced: **~4,000–5,500 words** or **~15 pages** at 11pt A4 (configurable in `config/book.json`).
+- **FR-09:** Target length enforced: **≈4,200–5,100 words → ≥15 subject pages** at 11pt A4, ~280 words per subject page (configurable in `config/book.json`; measured in `notebooks/`).
 
 ### 4.3 SDK, Gatekeeper, observability
 

@@ -202,9 +202,10 @@ Hebrew summary block (BiDi):
 
 ## Documentation
 
-- [PRD](docs/PRD.md) · [PLAN](docs/PLAN.md) (C4 + ADRs) · [TODO](docs/TODO.md)
-- [PROMPTS](docs/PROMPTS.md) (prompt-engineering log) · [COST](docs/COST.md)
+- [PRD](docs/PRD.md) · [PLAN](docs/PLAN.md) (C4 + ADR-001…007) · [TODO](docs/TODO.md)
+- [PROMPTS](docs/PROMPTS.md) (prompt-engineering log) · [COST](docs/COST.md) (auto-generated) · [COST_live](docs/COST_live.md) (real live-run evidence incl. failed tests)
 - Mechanism PRDs: [crew](docs/PRD_crew_orchestrator.md), [latex](docs/PRD_latex_pipeline.md), [gatekeeper](docs/PRD_gatekeeper.md), [llm sdk](docs/PRD_llm_sdk.md)
+- **Live-run example:** [`examples/the_moon_race_ussr_vs_us-20260612-233248/`](examples/the_moon_race_ussr_vs_us-20260612-233248/) — Claude Opus 4.8, 20-sheet book with 16 subject pages, all sources cited, $0.5019 (own `book.pdf`, chapters, session JSON, log, cost report)
 
 ---
 

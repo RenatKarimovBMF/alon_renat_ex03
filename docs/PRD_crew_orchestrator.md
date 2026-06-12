@@ -82,3 +82,19 @@ The Chapter Writer task is **one CrewAI task** whose Python callback loops over 
 
 - Hierarchical manager agent (stretch / ADR optional)
 - Real-time human approval gates
+
+---
+
+## 9. Implemented updates (v1.1)
+
+- **Length contract:** the writer task demands exactly 5 paragraphs of 80–95
+  words per section with a recount-before-returning step, and a total ~15%
+  above target (LLMs systematically undershoot ranges — see `PROMPTS.md` §7).
+- **Citations:** the task embeds the real `references.bib` keys
+  (`latex/bib.py`); every key must be cited; tags like `team_analysis` are
+  forbidden as citations.
+- **Hebrew:** the outline task requires a 1–2 sentence `hebrew_summary` per
+  chapter, rendered as the RTL block (digits kept LTR via `\beginL` islands).
+- **Live isolation:** live runs execute in `examples/<topic>-<stamp>/`
+  workspaces (ADR-006); required PDF elements are injected deterministically
+  from the extras plan, not prompted (ADR-007).

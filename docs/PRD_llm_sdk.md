@@ -89,3 +89,17 @@ README must include a rollup cost table after full run (Guidelines §11).
 - Load secrets via `os.environ` / `python-dotenv`
 - Never log full API keys
 - `.gitignore` includes `.env`
+
+---
+
+## 8. Implemented updates (v1.1)
+
+- **Output ceiling:** `ANTHROPIC_MAX_TOKENS` (default 32,000; probe-verified up
+  to 64,000 on `claude-opus-4-8`) — a per-response output *cap*, billed only
+  for generated tokens; too low silently truncates book-length JSON.
+- **Model selection:** `ANTHROPIC_MODEL` / `OPENAI_MODEL` / `GEMINI_MODEL` env
+  vars; pricing table covers Opus 4.5–4.8, Sonnet, Haiku, Fable/Mythos, Gemini,
+  with longest-prefix matching for dated ids (`claude-opus-4-8-2026…`).
+- **Retry & timeout:** delegated to the gatekeeper config (see
+  `PRD_gatekeeper.md` §7); `GatekeeperLLM` implements CrewAI's
+  `supports_function_calling()` probe for the converter fallback path.
