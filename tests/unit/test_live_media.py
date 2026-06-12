@@ -48,6 +48,8 @@ def test_render_table_and_equation_specs() -> None:
     )
     rendered = render_table_spec(table)
     assert "\\toprule" in rendered and "1969 & 9" in rendered
+    # Must fit the page: tabularx with wrapping X columns.
+    assert "\\begin{tabularx}{\\linewidth}" in rendered
     equation = EquationSpec(intro="Orbital velocity:", latex=r"v = \sqrt{GM/r}")
     assert "\\begin{equation}" in render_equation_spec(equation)
 

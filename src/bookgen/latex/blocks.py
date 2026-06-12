@@ -56,11 +56,16 @@ def render_section(section: SectionDraft) -> str:
 
 
 def render_figure(filename: str, caption: str) -> str:
-    """Render a centered figure from latex/figures/."""
+    """Render a centered figure from latex/figures/.
+
+    The height cap keeps tall portrait photos (common in web fetches) inside
+    the text block instead of bleeding over the footer.
+    """
+    options = "width=0.88\\linewidth,height=0.58\\textheight,keepaspectratio"
     return (
         "\\begin{figure}[htbp]\n"
         "\\centering\n"
-        f"\\includegraphics[width=0.88\\linewidth]{{figures/{filename}}}\n"
+        f"\\includegraphics[{options}]{{figures/{filename}}}\n"
         f"\\caption{{{escape_latex(caption)}}}\n"
         f"\\label{{fig:ch_{slugify(caption)[:32]}}}\n"
         "\\end{figure}\n"

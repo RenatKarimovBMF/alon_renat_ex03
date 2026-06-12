@@ -15,23 +15,29 @@ from bookgen.models import EquationSpec, TableSpec
 
 
 def render_table_spec(spec: TableSpec) -> str:
-    """Render an agent-provided table with booktabs (all cells escaped)."""
-    column_format = "@{}" + "l" * len(spec.columns) + "@{}"
+    """Render an agent-provided table that always fits the page width.
+
+    Agent tables routinely have several prose columns; ``tabularx`` with
+    wrapping ``X`` columns (and ``\\small``) keeps the table inside
+    ``\\linewidth`` instead of running off the right edge.
+    """
+    wrap_col = ">{\\raggedright\\arraybackslash}X"
+    column_format = "@{}l" + wrap_col * (len(spec.columns) - 1) + "@{}"
     header = " & ".join(escape_latex(col) for col in spec.columns)
     body = "".join(
         " & ".join(escape_latex(cell) for cell in row) + " \\\\\n" for row in spec.rows
     )
     return (
         "\\begin{table}[htbp]\n"
-        "\\centering\n"
+        "\\centering\\small\n"
         f"\\caption{{{escape_latex(spec.caption)}}}\n"
-        f"\\begin{{tabular}}{{{column_format}}}\n"
+        f"\\begin{{tabularx}}{{\\linewidth}}{{{column_format}}}\n"
         "\\toprule\n"
         f"{header} \\\\\n"
         "\\midrule\n"
         f"{body}"
         "\\bottomrule\n"
-        "\\end{tabular}\n"
+        "\\end{tabularx}\n"
         "\\end{table}\n"
     )
 

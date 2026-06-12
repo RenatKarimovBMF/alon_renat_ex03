@@ -95,10 +95,14 @@ def run_book_pipeline(
     save_json(ctx.session_dir / "03_sections.json", bundle)
 
     plan = load_extras_plan(book)
+    # The configured pool is subject-bound; with a --topic override it must
+    # not be staged or used at all (no off-topic media can reach the book).
+    topical = not book.topic_overridden or bool(book.extras.get("figures"))
     figures_fn = partial(
         ensure_figures,
-        figures=plan.figure_tuples(),
+        figures=plan.figure_tuples() if topical else [],
         bundled_dir=project_root / "assets" / "chapter-figures",
+        make_plot=topical,
     )
     live_media = None
     if mode is PipelineMode.LIVE:
@@ -115,7 +119,7 @@ def run_book_pipeline(
         ensure_figures_fn=figures_fn,
         extras_plan=plan,
         live_media=live_media,
-        plan_is_topical=not book.topic_overridden or bool(book.extras.get("figures")),
+        plan_is_topical=topical,
     )
     review = build_review(
         outline,

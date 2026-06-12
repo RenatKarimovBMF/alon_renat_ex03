@@ -150,3 +150,9 @@ Status key: `[ ]` pending · `[~]` in progress · `[x]` done · `[-]` cancelled
 | S8-10 | Agent-researched bibliography: ResearchBrief.sources → generated references.bib + citation filtering | Both | [x] |
 | S8-11 | Off-topic leak gate (`plan_is_topical`): no subject-bound pool media under `--topic`; dynamic cover/header via `\BookTitle` | Both | [x] |
 | S8-12 | End-to-end WW2 proof run: 20 sheets / 16 subject pages, 8 real WW2 sources all cited, $0.5690 | Both | [x] |
+| S8-13 | Second `--topic` proof: Yom Kippur War run (16 subject pages, 8 real sources, $0.8609) | Both | [x] |
+| S8-14 | Height-cap web figures (`keepaspectratio`) — tall portraits no longer overflow the page | Both | [x] |
+| S8-15 | Header BiDi/font fix: headers/footers forced to English context (no mirrored titles or Hebrew-font digits at RTL page breaks) | Both | [x] |
+| S8-16 | Don't stage subject-bound pool files at all on `--topic` runs | Both | [x] |
+| S8-17 | Agent tables fit the page: `tabularx` wrapping X columns (Table 1 was clipped at the right edge) | Both | [x] |
+| S8-18 | Faithful PDF text layer: `cmap` + `lmodern` + glyphtounicode — ligatures copy/extract as real letters ("fortifications", not "forti?cations") for automated/AI grading | Both | [x] |
