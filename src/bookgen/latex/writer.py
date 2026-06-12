@@ -5,13 +5,9 @@ from __future__ import annotations
 import re
 from pathlib import Path
 
-from bookgen.latex.blocks import (
-    ChapterExtras,
-    render_chapter_extras,
-    render_section,
-    slugify,
-)
+from bookgen.latex.blocks import ChapterExtras, render_section, slugify
 from bookgen.latex.escape import escape_latex
+from bookgen.latex.media_render import render_chapter_extras
 from bookgen.models import SectionDraft
 
 # Re-exported so existing imports (assemble, tests) keep working.

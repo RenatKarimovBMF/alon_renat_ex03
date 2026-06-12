@@ -6,13 +6,17 @@ import re
 from dataclasses import dataclass
 
 from bookgen.latex.escape import escape_latex
-from bookgen.latex.hebrew import render_hebrew_summary
 from bookgen.models import SectionDraft
 
 
 @dataclass(frozen=True)
 class ChapterExtras:
-    """Optional per-chapter LaTeX blocks (figure, Hebrew summary, table, plot)."""
+    """Optional per-chapter LaTeX blocks (figure, Hebrew summary, table, plot).
+
+    The boolean flags select the built-in Moon Race blocks (fixtures mode);
+    the ``*_spec`` fields carry agent-provided content (live mode) and win
+    over the corresponding built-ins.
+    """
 
     figure_file: str | None = None
     figure_caption: str | None = None
@@ -20,6 +24,10 @@ class ChapterExtras:
     include_milestones_table: bool = False
     include_rocket_equation: bool = False
     include_timeline_plot: bool = False
+    table_spec: object | None = None  # models.TableSpec
+    equation_spec: object | None = None  # models.EquationSpec
+    chart_file: str | None = None
+    chart_caption: str | None = None
 
 
 def slugify(title: str) -> str:
@@ -107,19 +115,5 @@ def render_timeline_plot() -> str:
 
 
 
-def render_chapter_extras(extras: ChapterExtras | None) -> str:
-    """Render optional blocks appended after English sections."""
-    if extras is None:
-        return ""
-    blocks: list[str] = []
-    if extras.include_milestones_table:
-        blocks.append(render_milestones_table().rstrip())
-    if extras.include_rocket_equation:
-        blocks.append(render_rocket_equation().rstrip())
-    if extras.figure_file and extras.figure_caption:
-        blocks.append(render_figure(extras.figure_file, extras.figure_caption).rstrip())
-    if extras.include_timeline_plot:
-        blocks.append(render_timeline_plot().rstrip())
-    if extras.hebrew_summary:
-        blocks.append(render_hebrew_summary(extras.hebrew_summary).rstrip())
-    return "\n\n".join(blocks)
+# render_chapter_extras (the dispatch over built-in and agent-provided blocks)
+# lives in latex/media_render.py to keep this file under the line cap.

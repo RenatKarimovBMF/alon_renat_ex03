@@ -20,13 +20,17 @@ _FIGURE_MANIFEST_VERSION = "moon-race-figures-v2"
 FetchFn = Callable[[list[str], Path], bool]
 
 
-def _sync_manifest(figures_dir: Path) -> None:
-    """Drop cached chapter JPEGs when the figure manifest version changes."""
+def _sync_manifest(figures_dir: Path, managed: list[str]) -> None:
+    """Drop cached bundled JPEGs when the figure manifest version changes.
+
+    Only the names this module manages are purged — agent-fetched web images
+    (``ch*_web.jpg``) belong to the live-media flow and must survive.
+    """
     manifest = figures_dir / ".figure_manifest"
     if manifest.exists() and manifest.read_text(encoding="utf-8").strip() == _FIGURE_MANIFEST_VERSION:
         return
-    for path in figures_dir.glob("ch*.jpg"):
-        path.unlink(missing_ok=True)
+    for name in managed:
+        (figures_dir / name).unlink(missing_ok=True)
     manifest.write_text(f"{_FIGURE_MANIFEST_VERSION}\n", encoding="utf-8")
 
 
@@ -82,7 +86,7 @@ def ensure_figures(
     fetch = fetch or _http_fetch
     figures_dir = latex_root / "figures"
     figures_dir.mkdir(parents=True, exist_ok=True)
-    _sync_manifest(figures_dir)
+    _sync_manifest(figures_dir, [name for name, _, _ in figures])
     bundled = bundled_dir or _bundled_dir(latex_root)
     saved: list[Path] = []
 

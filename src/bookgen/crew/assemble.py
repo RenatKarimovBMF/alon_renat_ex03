@@ -30,28 +30,48 @@ def assemble_latex(
     *,
     ensure_figures_fn: FiguresFn | None = None,
     extras_plan: ExtrasPlan | None = None,
+    live_media: object | None = None,
 ) -> list[Path]:
     """Write chapter files and refresh main.tex inputs.
 
     ``extras_plan`` carries the subject's figures/Hebrew/table/equation/plot
-    assignments (Moon Race plan by default). ``ensure_figures_fn`` is
-    injectable so unit tests can run offline without downloads or matplotlib.
+    assignments (Moon Race plan by default). With ``live_media`` set (live
+    runs), the outline's agent-specified media wins and the plan is only a
+    per-element safety net. ``ensure_figures_fn`` is injectable so unit tests
+    run offline without downloads or matplotlib.
     """
     plan = extras_plan or moon_extras_plan()
     if ensure_figures_fn is None:
         ensure_figures_fn = partial(ensure_figures, figures=plan.figure_tuples())
     ensure_figures_fn(latex_root)
+    fallbacks = (
+        not any(ch.table for ch in outline.chapters),
+        not any(ch.equation for ch in outline.chapters),
+        not any(ch.chart for ch in outline.chapters),
+    )
     chapter_paths: list[Path] = []
     grouped = group_sections(bundle.sections)
     for chapter in outline.chapters:
         sections = grouped.get(chapter.number, [])
         if not sections:
             continue
-        extras = build_chapter_extras(
-            plan,
-            chapter.number,
-            hebrew_override=chapter.hebrew_summary,
-        )
+        if live_media is not None:
+            from bookgen.crew.live_media import compose_live_extras
+
+            extras = compose_live_extras(
+                plan,
+                chapter,
+                live_media,
+                fallback_table=fallbacks[0],
+                fallback_equation=fallbacks[1],
+                fallback_chart=fallbacks[2],
+            )
+        else:
+            extras = build_chapter_extras(
+                plan,
+                chapter.number,
+                hebrew_override=chapter.hebrew_summary,
+            )
         chapter_paths.append(
             write_chapter_file(
                 latex_root,

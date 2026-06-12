@@ -32,7 +32,11 @@ def build_tasks(
         description=(
             f"Build a BookOutline with target_total_pages={target_pages}. "
             "Use the research brief context. Every chapter must include "
-            "hebrew_summary: 1-2 complete Hebrew sentences summarizing it."
+            "hebrew_summary (1-2 Hebrew sentences) and figure "
+            "{image_query, caption}. Exactly one chapter of your choice gets "
+            "table {caption, columns, rows}, one gets equation "
+            "{intro, latex, explanation}, and one gets chart "
+            "{title, y_label, points} — you decide content and placement."
         ),
         expected_output="Valid BookOutline JSON",
         agent=agents["outline_architect"],

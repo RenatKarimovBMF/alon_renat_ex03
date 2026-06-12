@@ -14,6 +14,7 @@ from bookgen.crew.assemble import assemble_latex, build_review
 from bookgen.crew.content_loader import load_content
 from bookgen.crew.context import PipelineContext
 from bookgen.crew.extras import load_extras_plan
+from bookgen.crew.live_media import ensure_live_media
 from bookgen.latex.figures import ensure_figures
 from bookgen.latex.workspace import stage_latex_workspace
 from bookgen.models import BuildReport, ReviewReport
@@ -85,6 +86,10 @@ def run_book_pipeline(
         figures=plan.figure_tuples(),
         bundled_dir=project_root / "assets" / "chapter-figures",
     )
+    live_media = None
+    if mode is PipelineMode.LIVE:
+        # Agent-driven media: fetch the outline's web images, render its chart.
+        live_media = ensure_live_media(outline, ctx.latex_root / "figures")
     assemble_latex(
         ctx.latex_root,
         ctx.main_tex,
@@ -92,6 +97,7 @@ def run_book_pipeline(
         bundle,
         ensure_figures_fn=figures_fn,
         extras_plan=plan,
+        live_media=live_media,
     )
     review = build_review(
         outline,

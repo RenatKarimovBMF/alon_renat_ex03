@@ -4,8 +4,8 @@ from pathlib import Path
 
 import pytest
 
-from bookgen.latex.blocks import render_hebrew_summary
 from bookgen.latex.escape import escape_latex
+from bookgen.latex.hebrew import render_hebrew_summary
 from bookgen.latex.writer import guard_latex_path, render_section, write_chapter_file
 from bookgen.models import SectionDraft
 

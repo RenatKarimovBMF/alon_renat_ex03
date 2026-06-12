@@ -4,6 +4,8 @@ from __future__ import annotations
 
 from pydantic import BaseModel, Field, model_validator
 
+from bookgen.models.media import ChartSpec, EquationSpec, FigureRequest, TableSpec
+
 
 class ChapterPlan(BaseModel):
     """One chapter in the book outline."""
@@ -16,6 +18,12 @@ class ChapterPlan(BaseModel):
     # 1-2 sentence Hebrew chapter summary (RTL block in the PDF). Live runs
     # generate it per topic; when omitted the configured plan supplies one.
     hebrew_summary: str | None = None
+    # Agent-chosen media and placement (live runs): every chapter should carry
+    # a figure; exactly one chapter each carries the table/equation/chart.
+    figure: FigureRequest | None = None
+    table: TableSpec | None = None
+    equation: EquationSpec | None = None
+    chart: ChartSpec | None = None
 
 
 class BookOutline(BaseModel):
