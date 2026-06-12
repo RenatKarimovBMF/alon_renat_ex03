@@ -21,6 +21,7 @@ class GatekeeperConfig:
     log_denials: bool = True
     retry_after_seconds: int = 0
     max_retries: int = 0
+    timeout_seconds: int = 120
 
 
 @dataclass
@@ -64,6 +65,10 @@ class ApiGatekeeper:
     @property
     def retry_after_seconds(self) -> int:
         return self._config.retry_after_seconds
+
+    @property
+    def timeout_seconds(self) -> int:
+        return self._config.timeout_seconds
 
     def check(self, agent_key: str) -> None:
         """Admit one call: wait for the rate window, reject only if over budget.

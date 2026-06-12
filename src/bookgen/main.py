@@ -8,6 +8,7 @@ from pathlib import Path
 from dotenv import load_dotenv
 
 from bookgen.crew.runner import PipelineMode
+from bookgen.latex.workspace import example_workspace
 from bookgen.reporting.page_metrics import count_pdf_pages
 from bookgen.sdk.sdk import BookGenSdk
 from bookgen.shared.config import load_book_config, load_rate_limits_config, load_setup_config
@@ -105,7 +106,13 @@ def main() -> int:
 
     mode = _resolve_mode(args)
     print(f"Mode:    {mode.value}")
-    result = sdk.run_pipeline(setup, mode=mode)
+    workspace = None
+    if mode is PipelineMode.LIVE:
+        # Each live run becomes a self-contained example folder; the canonical
+        # latex/ tree (the graded artifact) is never touched or locked.
+        workspace = example_workspace(args.project_root, book.topic)
+        print(f"Example: {workspace}")
+    result = sdk.run_pipeline(setup, mode=mode, workspace=workspace)
 
     print(f"Session:  {result.session_id}")
     print(f"Artifacts: {result.session_dir}")

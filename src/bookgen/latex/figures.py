@@ -67,9 +67,17 @@ def ensure_figures(
     fetch: FetchFn | None = None,
     bundled_dir: Path | None = None,
     make_plot: bool = True,
+    figures: list[tuple[str, list[str], str]] | None = None,
 ) -> list[Path]:
-    """Ensure every chapter image exists (bundled-first) and build the plot."""
-    from bookgen.crew.moon_content import CHAPTER_FIGURES
+    """Ensure every chapter image exists (bundled-first) and build the plot.
+
+    ``figures`` is the subject's (file, urls, caption) list; defaults to the
+    Moon Race set so existing callers keep working.
+    """
+    if figures is None:
+        from bookgen.crew.moon_content import CHAPTER_FIGURES
+
+        figures = CHAPTER_FIGURES
 
     fetch = fetch or _http_fetch
     figures_dir = latex_root / "figures"
@@ -78,7 +86,7 @@ def ensure_figures(
     bundled = bundled_dir or _bundled_dir(latex_root)
     saved: list[Path] = []
 
-    for filename, urls, caption in CHAPTER_FIGURES:
+    for filename, urls, caption in figures:
         target = figures_dir / filename
         if _is_valid_image(target):
             saved.append(target)

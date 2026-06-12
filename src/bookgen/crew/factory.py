@@ -7,6 +7,7 @@ from crewai import Crew, Process
 from bookgen.crew.agents import build_agents
 from bookgen.crew.context import PipelineContext
 from bookgen.crew.tasks import build_tasks
+from bookgen.latex.bib import read_bib_keys
 from bookgen.sdk.llm_client import LlmClient
 
 
@@ -22,6 +23,8 @@ def build_crew(
         agents,
         topic=ctx.book.topic,
         target_pages=ctx.book.target_pages,
+        words_per_page=ctx.book.words_per_page,
+        bib_keys=read_bib_keys(ctx.latex_root / "references.bib"),
     )
     if llm_tasks_only:
         tasks = tasks[:3]

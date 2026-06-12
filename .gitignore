@@ -37,6 +37,13 @@ data/sessions/*
 !data/sessions/sample/**
 logs/
 
+# Live-run example folders: keep the PDF, chapters, session JSON, and cost
+# evidence; skip the staged figure copies (duplicates of assets/) and aux files
+examples/*/latex/figures/
+examples/*/latex/build/*
+!examples/*/latex/build/book.pdf
+examples/*/logs/
+
 # OS / IDE
 .DS_Store
 Thumbs.db

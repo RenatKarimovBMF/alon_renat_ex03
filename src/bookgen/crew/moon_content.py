@@ -37,8 +37,18 @@ CHAPTERS: list[tuple[str, list[str]]] = [
     ),
 ]
 
-# All bibliography keys, used for fallbacks and validation that each is cited.
-CITATIONS = ["siddiqi2010", "logsdon2010", "nasa2019", "harford1997", "cadbury2006"]
+# All bibliography keys cited from chapter prose (appendix adds team2026 and
+# crewai2026); used for fallbacks and validation that each source is cited.
+CITATIONS = [
+    "siddiqi2010",
+    "logsdon2010",
+    "nasa2019",
+    "harford1997",
+    "cadbury2006",
+    "mcdougall1985",
+    "chaikin1994",
+    "nasaimages",
+]
 
 FINDINGS: list[tuple[str, str, str]] = [
     (

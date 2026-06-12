@@ -4,6 +4,7 @@ from pathlib import Path
 
 import pytest
 
+from bookgen.latex.blocks import render_hebrew_summary
 from bookgen.latex.escape import escape_latex
 from bookgen.latex.writer import guard_latex_path, render_section, write_chapter_file
 from bookgen.models import SectionDraft
@@ -11,6 +12,19 @@ from bookgen.models import SectionDraft
 
 def test_escape_latex_special_chars() -> None:
     assert escape_latex("100% & _") == r"100\% \& \_"
+
+
+def test_hebrew_summary_keeps_digits_ltr() -> None:
+    # Years inside RTL Hebrew must stay LTR or 1961 renders as 1691.
+    rendered = render_hebrew_summary("בשנת 1961 שוגר אפולו 11.")
+    assert r"{\beginL 1961\endL}" in rendered
+    assert r"{\beginL 11\endL}" in rendered
+
+
+def test_hebrew_summary_keeps_latin_runs_ltr() -> None:
+    # Latin compounds like the N1 rocket must stay LTR inside Hebrew.
+    rendered = render_hebrew_summary("כישלונות הטיל N1 בשנת 1969.")
+    assert r"{\beginL N1\endL}" in rendered
 
 
 def test_render_section_adds_citations() -> None:

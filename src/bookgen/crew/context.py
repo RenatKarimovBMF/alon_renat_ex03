@@ -31,14 +31,25 @@ class PipelineContext:
         setup: SetupConfig,
         book: BookConfig,
         project_root: Path,
+        workspace: Path | None = None,
     ) -> PipelineContext:
-        session_dir = project_root / setup.session_dir / session_id
+        """Build the session context; ``workspace`` redirects every artifact
+        (LaTeX tree, session JSON, logs) into an isolated example folder so the
+        canonical ``latex/`` tree stays untouched."""
+        if workspace is not None:
+            latex_root = workspace / "latex"
+            main_tex = latex_root / "main.tex"
+            build_dir = latex_root / "build"
+            session_dir = workspace / "session"
+            log_path = workspace / "logs" / f"crew_run_{session_id}.jsonl"
+        else:
+            latex_cfg = book.latex
+            latex_root = project_root / "latex"
+            main_tex = project_root / str(latex_cfg.get("main_file", "latex/main.tex"))
+            build_dir = project_root / str(latex_cfg.get("build_dir", "latex/build"))
+            session_dir = project_root / setup.session_dir / session_id
+            log_path = project_root / setup.logs_dir / f"crew_run_{session_id}.jsonl"
         session_dir.mkdir(parents=True, exist_ok=True)
-        latex_cfg = book.latex
-        latex_root = project_root / "latex"
-        main_tex = project_root / str(latex_cfg.get("main_file", "latex/main.tex"))
-        build_dir = project_root / str(latex_cfg.get("build_dir", "latex/build"))
-        log_path = project_root / setup.logs_dir / f"crew_run_{session_id}.jsonl"
         log_path.parent.mkdir(parents=True, exist_ok=True)
         return cls(
             session_id=session_id,

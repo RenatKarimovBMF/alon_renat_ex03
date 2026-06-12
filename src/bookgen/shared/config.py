@@ -29,6 +29,9 @@ class BookConfig(BaseModel):
     demo_mode: dict[str, Any] = Field(default_factory=dict)
     latex: dict[str, Any] = Field(default_factory=dict)
     crew: dict[str, Any] = Field(default_factory=dict)
+    # Optional subject-specific extras (figures, hebrew_summaries, table/equation/
+    # plot chapter numbers); absent -> built-in Moon Race plan (crew/extras.py).
+    extras: dict[str, Any] = Field(default_factory=dict)
 
 
 class AgentLimitRow(BaseModel):
@@ -87,4 +90,7 @@ def load_rate_limits_config(path: Path) -> GatekeeperConfig:
         log_denials=parsed.log_denials,
         retry_after_seconds=service.get("retry_after_seconds", 0),
         max_retries=service.get("max_retries", 0),
+        # Long-form writes (a whole book in one response) can take minutes on
+        # large models, so the HTTP read timeout is config-driven.
+        timeout_seconds=service.get("timeout_seconds", 120),
     )

@@ -60,6 +60,10 @@ class AnthropicProvider:
     def __init__(self, timeout: int) -> None:
         self._timeout = timeout
         self._model = os.environ.get("ANTHROPIC_MODEL", "claude-sonnet-4-20250514")
+        # Ceiling on OUTPUT tokens per response (billed only for what is
+        # generated). Book-length JSON needs far more than the old 4096 cap,
+        # which silently truncated and broke JSON parsing; keep it generous.
+        self._max_tokens = int(os.environ.get("ANTHROPIC_MAX_TOKENS", "32000"))
 
     def complete(self, system: str, user: str) -> ProviderResponse:
         key = env_key("ANTHROPIC_API_KEY")
@@ -67,7 +71,7 @@ class AnthropicProvider:
             raise RuntimeError("ANTHROPIC_API_KEY is missing")
         payload = {
             "model": self._model,
-            "max_tokens": 4096,
+            "max_tokens": self._max_tokens,
             "system": system,
             "messages": [{"role": "user", "content": user}],
         }

@@ -38,12 +38,13 @@ class LlmClient:
         *,
         provider: LlmProvider | None = None,
         log_fn: Callable[[dict[str, object]], None] | None = None,
-        timeout_seconds: int = 120,
+        timeout_seconds: int | None = None,
     ) -> None:
         self._gatekeeper = gatekeeper
         self._provider = provider
         self._log_fn = log_fn
-        self._timeout = timeout_seconds
+        # Config-driven (rate_limits.json); long-form book writes need minutes.
+        self._timeout = timeout_seconds or gatekeeper.timeout_seconds
 
     def complete(
         self,
@@ -89,13 +90,23 @@ class LlmClient:
                 transient = status == 429 or status >= 500
                 if not transient or attempt == attempts - 1:
                     raise
-                logger.warning(
-                    "llm_retry",
-                    extra={"extra_data": {"status": status, "attempt": attempt + 1}},
-                )
+                self._log_retry(str(status), attempt)
+                if delay > 0:
+                    time.sleep(delay)
+            except httpx.TransportError as exc:  # timeouts, dropped connections
+                if attempt == attempts - 1:
+                    raise
+                self._log_retry(type(exc).__name__, attempt)
                 if delay > 0:
                     time.sleep(delay)
         raise RuntimeError("unreachable retry state")  # pragma: no cover
+
+    @staticmethod
+    def _log_retry(reason: str, attempt: int) -> None:
+        logger.warning(
+            "llm_retry",
+            extra={"extra_data": {"reason": reason, "attempt": attempt + 1}},
+        )
 
     def _build_runtime_provider(self) -> LlmProvider:
         if env_key("ANTHROPIC_API_KEY"):

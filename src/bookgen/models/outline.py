@@ -13,6 +13,9 @@ class ChapterPlan(BaseModel):
     page_budget: float = Field(gt=0)
     learning_objectives: list[str] = Field(min_length=1)
     section_titles: list[str] = Field(min_length=1)
+    # 1-2 sentence Hebrew chapter summary (RTL block in the PDF). Live runs
+    # generate it per topic; when omitted the configured plan supplies one.
+    hebrew_summary: str | None = None
 
 
 class BookOutline(BaseModel):

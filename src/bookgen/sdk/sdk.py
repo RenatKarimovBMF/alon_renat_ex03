@@ -40,11 +40,17 @@ class BookGenSdk:
     def project_root(self) -> Path:
         return self._project_root
 
-    def compile_pdf(self) -> BuildReport:
-        """Compile the configured LaTeX main file."""
+    def compile_pdf(
+        self,
+        main_file: Path | None = None,
+        build_dir: Path | None = None,
+    ) -> BuildReport:
+        """Compile a LaTeX main file (configured paths unless overridden)."""
         latex_cfg = self._book.latex
-        main_file = self._project_root / str(latex_cfg.get("main_file", "latex/main.tex"))
-        build_dir = self._project_root / str(latex_cfg.get("build_dir", "latex/build"))
+        if main_file is None:
+            main_file = self._project_root / str(latex_cfg.get("main_file", "latex/main.tex"))
+        if build_dir is None:
+            build_dir = self._project_root / str(latex_cfg.get("build_dir", "latex/build"))
         output_pdf = str(latex_cfg.get("output_pdf", "book.pdf"))
         attempts = int(latex_cfg.get("max_compile_attempts", 3))
         return compile_latex(
@@ -59,8 +65,9 @@ class BookGenSdk:
         setup: SetupConfig,
         *,
         mode: PipelineMode = PipelineMode.PRODUCTION,
+        workspace: Path | None = None,
     ) -> PipelineResult:
-        """Run the full CrewAI book pipeline."""
+        """Run the full CrewAI book pipeline (optionally into a workspace)."""
         return run_book_pipeline(
             setup=setup,
             book=self._book,
@@ -68,4 +75,5 @@ class BookGenSdk:
             compile_pdf=self.compile_pdf,
             project_root=self._project_root,
             mode=mode,
+            workspace=workspace,
         )

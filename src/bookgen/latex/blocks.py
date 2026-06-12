@@ -6,6 +6,7 @@ import re
 from dataclasses import dataclass
 
 from bookgen.latex.escape import escape_latex
+from bookgen.latex.hebrew import render_hebrew_summary
 from bookgen.models import SectionDraft
 
 
@@ -104,19 +105,6 @@ def render_timeline_plot() -> str:
     )
 
 
-def render_hebrew_summary(text: str) -> str:
-    """Render Hebrew text in an isolated RTL block (no English on same lines).
-
-    No leading page break: the summary stays visually attached to its own
-    chapter. Chapter separation is a trailing break in ``write_chapter_file``.
-    """
-    return (
-        "\\bigskip\n"
-        "\\begin{otherlanguage}{hebrew}\n"
-        "\\subsection*{סיכום הפרק}\n\n"
-        f"{text.strip()}\n\n"
-        "\\end{otherlanguage}\n"
-    )
 
 
 def render_chapter_extras(extras: ChapterExtras | None) -> str:

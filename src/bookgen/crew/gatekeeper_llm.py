@@ -68,6 +68,10 @@ class GatekeeperLLM(BaseLLM):
             return text
         return response_model.model_validate_json(_extract_json(text))
 
+    def supports_function_calling(self) -> bool:
+        """CrewAI's converter fallback probes this; we parse JSON from text."""
+        return False
+
 
 def _split_messages(messages: str | list[LLMMessage]) -> tuple[str, str]:
     if isinstance(messages, str):

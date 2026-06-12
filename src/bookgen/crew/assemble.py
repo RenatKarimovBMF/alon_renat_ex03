@@ -3,12 +3,13 @@
 from __future__ import annotations
 
 from collections.abc import Callable
+from functools import partial
 from pathlib import Path
 
-from bookgen.crew.moon_content import CHAPTER_FIGURES, HEBREW_SUMMARIES
+from bookgen.crew.extras import ExtrasPlan, build_chapter_extras, moon_extras_plan
 from bookgen.latex.figures import ensure_figures
 from bookgen.latex.metadata import update_metadata
-from bookgen.latex.writer import ChapterExtras, update_main_inputs, write_chapter_file
+from bookgen.latex.writer import update_main_inputs, write_chapter_file
 from bookgen.models import BookOutline, ReviewReport, SectionDraft, SectionDraftBundle
 
 FiguresFn = Callable[[Path], object]
@@ -21,34 +22,24 @@ def group_sections(sections: list[SectionDraft]) -> dict[int, list[SectionDraft]
     return grouped
 
 
-def _chapter_extras(chapter_number: int) -> ChapterExtras | None:
-    """Build Moon Race extras when Hebrew summaries are defined."""
-    if chapter_number < 1 or chapter_number > len(HEBREW_SUMMARIES):
-        return None
-    figure = CHAPTER_FIGURES[chapter_number - 1]
-    return ChapterExtras(
-        figure_file=figure[0],
-        figure_caption=figure[2],
-        hebrew_summary=HEBREW_SUMMARIES[chapter_number - 1],
-        include_milestones_table=chapter_number == 1,
-        include_rocket_equation=chapter_number == 3,
-        include_timeline_plot=chapter_number == 4,
-    )
-
-
 def assemble_latex(
     latex_root: Path,
     main_tex: Path,
     outline: BookOutline,
     bundle: SectionDraftBundle,
     *,
-    ensure_figures_fn: FiguresFn = ensure_figures,
+    ensure_figures_fn: FiguresFn | None = None,
+    extras_plan: ExtrasPlan | None = None,
 ) -> list[Path]:
     """Write chapter files and refresh main.tex inputs.
 
-    ``ensure_figures_fn`` is injectable so unit tests can run offline without
-    downloading images or invoking matplotlib.
+    ``extras_plan`` carries the subject's figures/Hebrew/table/equation/plot
+    assignments (Moon Race plan by default). ``ensure_figures_fn`` is
+    injectable so unit tests can run offline without downloads or matplotlib.
     """
+    plan = extras_plan or moon_extras_plan()
+    if ensure_figures_fn is None:
+        ensure_figures_fn = partial(ensure_figures, figures=plan.figure_tuples())
     ensure_figures_fn(latex_root)
     chapter_paths: list[Path] = []
     grouped = group_sections(bundle.sections)
@@ -56,7 +47,11 @@ def assemble_latex(
         sections = grouped.get(chapter.number, [])
         if not sections:
             continue
-        extras = _chapter_extras(chapter.number)
+        extras = build_chapter_extras(
+            plan,
+            chapter.number,
+            hebrew_override=chapter.hebrew_summary,
+        )
         chapter_paths.append(
             write_chapter_file(
                 latex_root,
