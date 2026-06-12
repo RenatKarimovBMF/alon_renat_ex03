@@ -4,7 +4,7 @@
 **Renat Karimov** & **Alon Engel** · Group code `anrbj666`
 **Course instructor:** Dr. Yoram Segal
 
-A CrewAI multi-agent pipeline that produces a **~15-page LaTeX book** and compiles it to PDF.
+A CrewAI multi-agent pipeline that produces a LaTeX book whose **subject chapters alone fill ≥15 pages** (≈20 pages total with cover, TOC, appendix, and bibliography) and compiles it to PDF.
 
 **Book topic:** *The Moon Race: USSR vs US* — from Sputnik and Gagarin through Apollo 11 to the legacy of superpower competition in space.
 
@@ -14,7 +14,7 @@ A CrewAI multi-agent pipeline that produces a **~15-page LaTeX book** and compil
 
 1. A **CrewAI crew** (research → outline → chapters → review → build) maps each agent to a job title in a publishing house.
 2. Python **assembles LaTeX** chapter files deterministically from structured (Pydantic) data — no hallucinated `.tex`.
-3. **latexmk / pdflatex + bibtex** compiles the book to **`latex/build/book.pdf`** (~15 pages, multiple passes so the TOC and citations resolve).
+3. **latexmk / pdflatex + bibtex** compiles the book to **`latex/build/book.pdf`** (≥15 subject pages, multiple passes so the TOC and citations resolve).
 
 The default run uses **offline production fixtures** ($0, no API keys, bundled NASA images). Use `--live` when you want the crew to write the content via an LLM.
 
@@ -102,11 +102,14 @@ uv run python -m bookgen.main --compile-only   # recompile existing .tex (after 
 uv run python -m bookgen.main --live       # crew writes content via an LLM (needs API key, costs money)
 ```
 
-The output PDF is always **`latex/build/book.pdf`**.
+Fixtures/demo runs compile the canonical **`latex/build/book.pdf`**.
+**`--live` runs are isolated:** each one stages a copy of the LaTeX sources into
+**`examples/<topic>-<timestamp>/`** (own `book.pdf`, chapters, session JSON,
+JSONL log, `COST.md`), so the canonical tree is never overwritten or locked and
+every live run is preserved as a self-contained example.
 
-> Close `latex/build/book.pdf` in your PDF viewer before recompiling, or the build
-> reports "close the file" (Windows locks the open PDF). The build still produces a
-> fresh copy under the build folder.
+> Close `latex/build/book.pdf` in your PDF viewer before recompiling the
+> canonical book, or the build reports "close the file" (Windows locks open PDFs).
 
 ### Compiler choice
 
@@ -121,9 +124,14 @@ work for the Hebrew blocks; the toolchain is configurable in `config/book.json`.
 | File | Key settings |
 |------|--------------|
 | `config/setup.json` | `version`, project name, log/session dirs |
-| `config/book.json` | `topic`, `target_pages` (15), `page_tolerance` (2), `words_per_page` (110, calibrated — see `notebooks/`) |
-| `config/rate_limits.json` | `version`, per-agent budgets, `requests_per_minute` (→ inter-call wait) |
+| `config/book.json` | `topic`, `target_pages` (15 **subject** pages, hard floor), `page_tolerance` (2), `words_per_page` (280, calibrated — see `notebooks/`), optional `extras` block (figures / Hebrew summaries / table-equation-plot chapters) for a custom subject |
+| `config/rate_limits.json` | `version`, per-agent budgets, `requests_per_minute` (→ inter-call wait), `retry_after_seconds`/`max_retries` (transient-failure retry), `timeout_seconds` |
 | `config/prompts/*.yaml` | Agent role / goal / backstory / instructions |
+
+**Generic subjects:** change `topic` and (optionally) provide an `extras` block
+with your own figure files/URLs and Hebrew chapter summaries — the pipeline
+falls back to the built-in Moon Race plan when `extras` is absent. Live runs
+generate per-chapter Hebrew summaries from the outline automatically.
 
 All config files declare `"version": "1.00"`, validated at startup against `src/bookgen/shared/version.py`.
 
@@ -137,6 +145,7 @@ crewai-latex-book-ex03/
 ├── assets/screenshots/      # PDF + pipeline screenshots (submission evidence)
 ├── config/                  # setup/book/rate_limits + prompt YAMLs
 ├── docs/                    # PRD, PLAN, TODO, PROMPTS, COST, mechanism PRDs
+├── examples/                # one self-contained folder per --live run (pdf + session + cost)
 ├── latex/                   # LaTeX project (main, preamble, chapters, appendix, bib)
 │   └── build/book.pdf       # compiled output
 ├── notebooks/               # words-per-page calibration analysis
@@ -164,10 +173,11 @@ injected, and the pipeline runs in fixtures mode with the compile step swapped o
 Every LLM call is logged to `logs/crew_run_<id>.jsonl` and summarized in
 [`docs/COST.md`](docs/COST.md) (auto-written each run).
 
-| Run mode | Typical cost |
+| Run mode | Measured cost (see [`docs/COST_live.md`](docs/COST_live.md)) |
 |----------|--------------|
 | `--demo` / default production | **$0.00** (offline fixtures) |
-| `--live` | Depends on model; real token table written to `docs/COST.md` |
+| `--live`, Claude Opus 4.8 | **$0.5019** — 20-sheet book, 16 subject pages, all sources cited, in `examples/` |
+| `--live`, Gemini Flash Lite (free tier) | **$0.00** actual (≈$0.02 paid-tier equivalent) |
 
 ---
 

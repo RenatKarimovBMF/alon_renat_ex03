@@ -109,4 +109,25 @@ Status key: `[ ]` pending · `[~]` in progress · `[x]` done · `[-]` cancelled
 | S6-17 | Words-per-page calibration notebook | Both | [x] |
 | S6-18 | Commit run evidence (sample session, COST, PDF) | Both | [x] |
 | S6-19 | Capture screenshots into `assets/screenshots/` | Both | [x] |
-| S6-20 | One `--live` run for a real cost table (optional, needs API key) | Both | [ ] |
+| S6-20 | One `--live` run for a real cost table (gemini free tier, $0.00) | Both | [x] |
+| S6-21 | Wire up gatekeeper retry/back-off on transient 429/5xx (was unused) | Both | [x] |
+
+---
+
+## Stage 7 — Hard 15-page subject rule, examples, generic subjects
+
+| ID | Task | Owner | Status |
+|----|------|-------|--------|
+| S7-01 | Subject chapters alone ≥15 pages (hard rule): expand curated prose to ~4,000 words → 16 subject / 20 total | Both | [x] |
+| S7-02 | Broaden bibliography (McDougall, Chaikin, NASA image credits, CrewAI docs) and cite every source | Both | [x] |
+| S7-03 | Live prompts: per-section word floor, real bib keys only, Hebrew summaries from outline | Both | [x] |
+| S7-04 | Generic-subject seam: config `extras` block (figures/Hebrew/table/equation/plot), Moon defaults | Both | [x] |
+| S7-05 | Isolated `examples/<topic>-<stamp>/` workspace per live run (canonical latex/ untouched) | Both | [x] |
+| S7-06 | Config-driven HTTP timeout + retry on timeouts; Anthropic max_tokens configurable | Both | [x] |
+| S7-07 | Anthropic pricing table + prefix matching for dated model ids | Both | [x] |
+| S7-08 | Live Opus 4.8 run meeting the rule (20 sheets, 16 subject pages, $0.5019) | Both | [x] |
+| S7-09 | Rotate the API keys pasted in chat (Gemini + Anthropic) | Alon | [ ] |
+| S7-10 | Fix RTL BiDi: digits/Latin runs in Hebrew rendered reversed (1961→1691); wrap in `\beginL…\endL` | Both | [x] |
+| S7-11 | `GatekeeperLLM.supports_function_calling` for CrewAI converter fallback | Both | [x] |
+| S7-12 | Strict per-paragraph word contract in writer prompt (5×80–95) after two undershoots | Both | [x] |
+| S7-13 | Delete superseded/broken example folders; keep one verified Opus example | Both | [x] |

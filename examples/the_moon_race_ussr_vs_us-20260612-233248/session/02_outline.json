@@ -1,0 +1,91 @@
+{
+  "title": "The Moon Race: USSR vs US",
+  "target_total_pages": 15,
+  "chapters": [
+    {
+      "number": 1,
+      "title": "Sputnik and the Dawn of the Space Race",
+      "page_budget": 2.5,
+      "learning_objectives": [
+        "Explain how the launch of Sputnik 1 in 1957 opened the Cold War space race",
+        "Describe the Sputnik crisis and its impact on U.S. national confidence"
+      ],
+      "section_titles": [
+        "Sputnik 1 and the First Artificial Satellite",
+        "The Sputnik Crisis and Cold War Ideology"
+      ],
+      "hebrew_summary": "שיגור ספוטניק 1 בשנת 1957 פתח את מרוץ החלל וזעזע את ארצות הברית. האירוע הפך את הטכנולוגיה החללית לזירת יוקרה אידיאולוגית בין שתי המעצמות."
+    },
+    {
+      "number": 2,
+      "title": "America Responds: NASA and the Kennedy Commitment",
+      "page_budget": 2.5,
+      "learning_objectives": [
+        "Describe the creation of NASA in 1958 and the expansion of civilian space spending",
+        "Analyze Kennedy's 1961 commitment to a crewed lunar landing"
+      ],
+      "section_titles": [
+        "Founding NASA and Closing the Missile Gap",
+        "Kennedy's 1961 Lunar Pledge"
+      ],
+      "hebrew_summary": "בתגובה להישגים הסובייטיים הוקמה נאסא בשנת 1958 והוגדל המימון הציבורי לחלל. בנאומו ב-1961 התחייב הנשיא קנדי להנחית אדם על הירח לפני תום העשור."
+    },
+    {
+      "number": 3,
+      "title": "The Soviet Lead: Gagarin and the Early Firsts",
+      "page_budget": 2.5,
+      "learning_objectives": [
+        "Recount Yuri Gagarin's first human spaceflight aboard Vostok 1",
+        "Explain how Soviet firsts intensified U.S. determination"
+      ],
+      "section_titles": [
+        "Vostok 1 and the First Human in Space",
+        "How Soviet Firsts Shaped the Contest"
+      ],
+      "hebrew_summary": "יורי גגארין הפך לאדם הראשון בחלל באפריל 1961 וחיזק את ההובלה הסובייטית. שורת ההישגים הסובייטיים הראשונים הגבירה את נחישות ארצות הברית לעקוף את היריב."
+    },
+    {
+      "number": 4,
+      "title": "Soviet Disarray: Rival Bureaus and the N1 Failures",
+      "page_budget": 3.0,
+      "learning_objectives": [
+        "Analyze how competition between design bureaus weakened the Soviet lunar effort",
+        "Explain the repeated failures of the N1 heavy-lift rocket"
+      ],
+      "section_titles": [
+        "Korolev, Chelomei, and Divided Management",
+        "The Four Failed N1 Launches"
+      ],
+      "hebrew_summary": "התחרות בין לשכות התכנון של קורוליוב וצ'לומיי פיצלה את המשאבים ופגעה בתוכנית הירח הסובייטית המאוישת. רקטת ה-N1 הכבדה נכשלה בכל ארבעת שיגורי הניסוי שלה בין 1969 ל-1972."
+    },
+    {
+      "number": 5,
+      "title": "Apollo Triumphant: Management, Funding, and Apollo 11",
+      "page_budget": 3.0,
+      "learning_objectives": [
+        "Describe the Apollo 11 landing as fulfillment of Kennedy's goal",
+        "Explain how sustained funding and centralized management enabled Apollo's success"
+      ],
+      "section_titles": [
+        "Apollo 11 and the First Lunar Landing",
+        "Systems Engineering, Budget, and Centralized Management"
+      ],
+      "hebrew_summary": "בשנת 1969 הנחיתה תוכנית אפולו את האדם הראשון על הירח והגשימה את מטרת קנדי. ההצלחה התבססה על מימון עצום ומתמשך ועל ניהול הנדסי ריכוזי שאיחד אלפי תת-מערכות."
+    },
+    {
+      "number": 6,
+      "title": "Aftermath: Robotic Pioneers and Cold War Legacy",
+      "page_budget": 1.5,
+      "learning_objectives": [
+        "Describe the Soviet shift to robotic lunar exploration and space stations",
+        "Assess the Moon race as a proxy for Cold War superiority"
+      ],
+      "section_titles": [
+        "Luna, Lunokhod, and the Salyut Stations",
+        "The Race as Cold War Proxy and Its Legacy"
+      ],
+      "hebrew_summary": "לאחר הפסד המרוץ המאויש הפנתה ברית המועצות את מאמציה לחקר הירח הרובוטי ולתחנות החלל. מרוץ הירח שימש בעיקר כזירת תחרות אידיאולוגית וצבאית של המלחמה הקרה."
+    }
+  ],
+  "version": "1.0"
+}

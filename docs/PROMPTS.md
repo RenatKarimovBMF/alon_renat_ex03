@@ -102,7 +102,42 @@ needed `\resizebox`, which we dropped in favor of the cleaner vertical diagram.
 
 ---
 
-## 7. Calibrating words-per-page
+## 7. Making the live writer hit a hard length floor
+
+**Goal:** the live book must fill ≥15 subject pages, but Opus undershot every
+soft instruction.
+
+**Iterations:**
+> v1 "3-5 paragraphs, 320-400 words per section" → ~280 words/section (13 pages).
+> v2 "360-440 words; sections under 360 are rejected" → ~339 words/section (14 pages).
+> v3 "exactly 5 paragraphs of 80-95 words EACH; recount every section before
+> returning and expand any under 400" → 405-443 words/section (16 pages ✓).
+
+**Lesson:** models negotiate ranges but follow *per-paragraph contracts with a
+self-check step*. Asking ~15% above the real target also offsets systematic
+undershoot. (Each failed attempt cost ~$0.5-0.8 — see `COST_live.md`.)
+
+---
+
+## 8. Hebrew BiDi: years rendered reversed (1961 → 1691)
+
+**Goal:** digits and Latin runs (N1, NASA) inside the RTL Hebrew summaries
+printed backwards.
+
+**Prompts (summary):**
+> "Wrap digit runs in `\foreignlanguage{english}{...}`" — fixed the digits but
+> scrambled the surrounding Hebrew word order (verified by rendering the page
+> to PNG and reading it).
+> "Use the TeX--XeT primitives instead: wrap each Latin/digit run in
+> `{\beginL ... \endL}`."
+
+**Lesson:** for babel-hebrew on pdfTeX, an LTR *island* (`\beginL/\endL`) is
+the correct primitive; a language *switch* re-segments the line. Visual
+verification (render → read) caught what text extraction could not.
+
+---
+
+## 9. Calibrating words-per-page
 
 **Goal:** the review heuristic assumed 450 words/page, but a figure-rich book is
 much sparser.

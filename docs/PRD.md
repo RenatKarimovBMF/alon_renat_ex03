@@ -38,7 +38,7 @@ The team chose this topic for the ~15-page LaTeX book produced by the CrewAI pub
 
 | ID | Criterion | Verification |
 |----|-----------|--------------|
-| AC-01 | Final PDF is **13–17 pages** (target 15) | `pdfinfo` / page count in README |
+| AC-01 | **Subject chapters alone fill ≥15 pages** (hard rule; total ≈19–21 with cover, TOC, appendix, references) | appendix start page via `pypdf` − front matter |
 | AC-02 | PDF built from committed LaTeX under `latex/` | `uv run python -m bookgen.main --compile-only` |
 | AC-03 | CrewAI crew runs end-to-end without manual copy-paste between agents | CLI log + `logs/crew_run_<id>.jsonl` |
 | AC-04 | GitHub contains `docs/PRD.md`, `docs/PLAN.md`, `docs/TODO.md`, root `README.md` | Repo inspection |
