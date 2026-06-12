@@ -1,0 +1,70 @@
+# Continuous Integration: lint + line-cap + tests on every push and PR.
+#
+# Mirrors the gates from the submission guidelines:
+#   - ruff is clean (zero violations) on src/, tests/, scripts/
+#   - every .py under src/, tests/, scripts/ is <= 150 lines
+#   - pytest (unit + integration) passes with coverage >= 85%
+#   - the CLI --dry-run / --help smoke commands return zero without an LLM call
+#
+# The whole suite is offline: providers are mocked, image fetch is injected,
+# and the pipeline runs in fixtures mode with the compile step swapped out,
+# so no API key or LaTeX install is needed on the runner.
+
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  lint-and-test:
+    name: lint + test (Python ${{ matrix.python-version }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.11", "3.12", "3.13"]
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v3
+        with:
+          enable-cache: true
+
+      - name: Set up Python ${{ matrix.python-version }}
+        run: uv python install ${{ matrix.python-version }}
+
+      - name: Install dependencies
+        run: uv sync --extra dev
+
+      - name: Verify the 150-line cap
+        run: uv run python scripts/check_line_cap.py
+
+      - name: Lint (ruff)
+        run: uv run ruff check src/ tests/ scripts/
+
+      - name: Tests with coverage gate (fail_under = 85)
+        run: uv run pytest --cov=src/bookgen --cov-report=term --cov-report=xml
+
+      - name: Upload coverage XML
+        if: matrix.python-version == '3.12'
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-xml
+          path: coverage.xml
+          if-no-files-found: warn
+
+      - name: CLI smoke (no LLM call)
+        run: |
+          uv run python -m bookgen.main --help
+          uv run python -m bookgen.main --dry-run

@@ -1,0 +1,41 @@
+# Pre-commit hooks: run the cheap quality gates locally before CI does.
+#
+# Activate once (pre-commit is in the dev extra):
+#     uv run pre-commit install
+# After that, every `git commit` runs:
+#     - hygiene (trailing whitespace, EOF, valid YAML/TOML/JSON, merge markers)
+#     - the 150-line file cap
+#     - ruff with --fix so easy issues are auto-corrected
+#
+# pytest is intentionally NOT a per-commit hook (too slow per save); CI runs
+# the full suite with the coverage gate on every push.
+
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v5.0.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-yaml
+      - id: check-toml
+      - id: check-json
+      - id: check-merge-conflict
+      - id: check-added-large-files
+        args: [--maxkb=600]
+        # The committed book PDF and NASA chapter images are intentional large binaries.
+        exclude: '^(latex/build/.*|latex/figures/.*|assets/chapter-figures/.*)$'
+
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.8.0
+    hooks:
+      - id: ruff
+        args: [--fix]
+
+  - repo: local
+    hooks:
+      - id: line-cap-150
+        name: 150-line file cap
+        entry: python scripts/check_line_cap.py
+        language: system
+        pass_filenames: false
+        files: ^(src|tests|scripts)/.+\.py$
