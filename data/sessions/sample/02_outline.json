@@ -12,7 +12,8 @@
       "section_titles": [
         "Superpower rivalry after 1945",
         "Rockets, missiles, and prestige"
-      ]
+      ],
+      "hebrew_summary": null
     },
     {
       "number": 2,
@@ -24,7 +25,8 @@
       "section_titles": [
         "Sputnik and the shock in America",
         "First human in space: Yuri Gagarin"
-      ]
+      ],
+      "hebrew_summary": null
     },
     {
       "number": 3,
@@ -36,7 +38,8 @@
       "section_titles": [
         "NASA and the crash program",
         "From Earth orbit to the lunar landing goal"
-      ]
+      ],
+      "hebrew_summary": null
     },
     {
       "number": 4,
@@ -48,7 +51,8 @@
       "section_titles": [
         "Robotic Luna, Ranger, and Surveyor",
         "Apollo 11 and lunar samples"
-      ]
+      ],
+      "hebrew_summary": null
     },
     {
       "number": 5,
@@ -60,7 +64,8 @@
       "section_titles": [
         "Media and ideological messaging",
         "Cost, risk, and congressional support"
-      ]
+      ],
+      "hebrew_summary": null
     },
     {
       "number": 6,
@@ -72,7 +77,8 @@
       "section_titles": [
         "End of Apollo and later cooperation",
         "Lessons for science and exploration"
-      ]
+      ],
+      "hebrew_summary": null
     }
   ],
   "version": "1.0"

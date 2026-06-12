@@ -9,7 +9,7 @@ see the pipeline's artifacts without running it (`.gitignore` keeps only this
 | `01_research.json` | Research stage (`ResearchBrief`) |
 | `02_outline.json` | Outline stage (`BookOutline`) |
 | `03_sections.json` | Chapter Writer stage (`SectionDraftBundle`) |
-| `05_review.json` | Review stage (`ReviewReport`, `approved=true`, ~15 pages) |
+| `05_review.json` | Review stage (`ReviewReport`, `approved=true`, ~14–15 subject-page estimate) |
 | `06_build.json` | Compile stage (`BuildReport`, `success=true`) |
 | `COST.md` | Token/cost summary (offline fixtures run → $0) |
 

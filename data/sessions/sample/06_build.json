@@ -1,8 +1,8 @@
 {
   "success": true,
-  "pdf_path": "latex/build/book.pdf",
+  "pdf_path": "C:\\Users\\Alon\\Desktop\\alon_renat_ex03\\latex\\build\\book.pdf",
   "attempts": 4,
   "errors": [],
-  "log_path": "latex/build/_book_build.log",
+  "log_path": "C:\\Users\\Alon\\Desktop\\alon_renat_ex03\\latex\\build\\_book_build.log",
   "version": "1.0"
 }
