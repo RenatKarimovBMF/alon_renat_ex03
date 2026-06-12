@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-import re
 from typing import Any
 
 from crewai.llms.base_llm import BaseLLM
@@ -11,6 +10,7 @@ from pydantic import BaseModel, PrivateAttr
 from typing_extensions import override
 
 from bookgen.sdk.llm_client import LlmClient
+from bookgen.shared.json_io import extract_json_block
 
 _ROLE_TO_KEY = {
     "chief researcher": "research_director",
@@ -19,9 +19,6 @@ _ROLE_TO_KEY = {
     "latex copy editor": "latex_editor",
     "build engineer": "build_engineer",
 }
-
-_JSON_BLOCK = re.compile(r"\{.*\}", re.DOTALL)
-
 
 class GatekeeperLLM(BaseLLM):
     """Wrap LlmClient so CrewAI tasks honor gatekeeper limits."""
@@ -66,7 +63,7 @@ class GatekeeperLLM(BaseLLM):
         text = response.text.strip()
         if response_model is None:
             return text
-        return response_model.model_validate_json(_extract_json(text))
+        return response_model.model_validate_json(extract_json_block(text))
 
     def supports_function_calling(self) -> bool:
         """CrewAI's converter fallback probes this; we parse JSON from text."""
@@ -95,13 +92,3 @@ def _resolve_agent_key(from_agent: Any | None, default: str) -> str:
         return default
     role = str(getattr(from_agent, "role", "")).lower().strip()
     return _ROLE_TO_KEY.get(role, default)
-
-
-def _extract_json(text: str) -> str:
-    text = text.strip()
-    if text.startswith("{") or text.startswith("["):
-        return text
-    match = _JSON_BLOCK.search(text)
-    if match is None:
-        raise ValueError("LLM response did not contain JSON")
-    return match.group(0)

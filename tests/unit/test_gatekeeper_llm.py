@@ -8,13 +8,13 @@ from pydantic import BaseModel  # noqa: E402
 
 from bookgen.crew.gatekeeper_llm import (  # noqa: E402
     GatekeeperLLM,
-    _extract_json,
     _resolve_agent_key,
     _split_messages,
 )
 from bookgen.sdk.llm_client import LlmClient  # noqa: E402
 from bookgen.sdk.providers import MockProvider  # noqa: E402
 from bookgen.shared.gatekeeper import ApiGatekeeper, GatekeeperConfig  # noqa: E402
+from bookgen.shared.json_io import extract_json_block  # noqa: E402
 
 
 def _client(text: str) -> LlmClient:
@@ -43,10 +43,10 @@ def test_resolve_agent_key_maps_role() -> None:
 
 
 def test_extract_json_variants() -> None:
-    assert _extract_json('{"a": 1}') == '{"a": 1}'
-    assert _extract_json('noise {"a": 1} tail') == '{"a": 1}'
+    assert extract_json_block('{"a": 1}') == '{"a": 1}'
+    assert extract_json_block('noise {"a": 1} tail') == '{"a": 1}'
     with pytest.raises(ValueError):
-        _extract_json("no json here")
+        extract_json_block("no json here")
 
 
 def test_call_returns_text() -> None:

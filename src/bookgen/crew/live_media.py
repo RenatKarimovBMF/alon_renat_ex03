@@ -38,25 +38,44 @@ def ensure_live_media(
     *,
     fetch_image: FetchImageFn | None = None,
     chart_renderer: Callable[..., Path] = render_chart,
+    llm: object | None = None,
+    topic: str = "",
 ) -> LiveMedia:
-    """Fetch every agent-requested web image and render the agent chart."""
+    """Fetch every agent-requested web image and render the agent chart.
+
+    With ``llm`` provided, failed image queries get one LLM-suggested
+    alternative query each (same API, via the gatekeeper) before falling back.
+    """
     fetch_image = fetch_image or fetch_web_image
     figures_dir.mkdir(parents=True, exist_ok=True)
     media = LiveMedia()
+    failed: dict[int, str] = {}
     for chapter in outline.chapters:
         if chapter.figure is not None:
             filename = f"ch{chapter.number:02d}_web.jpg"
-            if fetch_image(chapter.figure.image_query, figures_dir / filename):
+            target = figures_dir / filename
+            # Idempotent reruns: keep an already-fetched valid image.
+            if target.exists() and target.stat().st_size > 30_000 or fetch_image(chapter.figure.image_query, target):
                 media.figures[chapter.number] = filename
             else:
-                logger.warning(
-                    "web image fetch failed; using fallback figure",
-                    extra={"extra_data": {"chapter": chapter.number}},
-                )
+                failed[chapter.number] = chapter.figure.image_query
         if chapter.chart is not None:
             filename = f"agent_chart_ch{chapter.number:02d}.pdf"
             chart_renderer(chapter.chart, figures_dir, filename=filename)
             media.charts[chapter.number] = filename
+    if failed and llm is not None:
+        from bookgen.crew.media_gapfill import alternate_image_queries
+
+        for number, query in alternate_image_queries(llm, topic, failed).items():
+            filename = f"ch{number:02d}_web.jpg"
+            if fetch_image(query, figures_dir / filename):
+                media.figures[number] = filename
+                failed.pop(number, None)
+    for number in failed:
+        logger.warning(
+            "web image fetch failed; pool image or no image for this chapter",
+            extra={"extra_data": {"chapter": number}},
+        )
     return media
 
 
@@ -68,9 +87,18 @@ def compose_live_extras(
     fallback_table: bool,
     fallback_equation: bool,
     fallback_chart: bool,
+    plan_is_topical: bool = True,
 ) -> ChapterExtras | None:
-    """Build extras from the outline's media, falling back per missing element."""
-    base = build_chapter_extras(plan, chapter.number, hebrew_override=chapter.hebrew_summary)
+    """Build extras from the outline's media, falling back per missing element.
+
+    With ``plan_is_topical=False`` (the run topic differs from the configured
+    subject), plan-based fallbacks are disabled entirely: a Moon photo must
+    never appear in a World War II book. The LLM gap-fill is the only safety
+    net then, and a chapter may simply have no figure.
+    """
+    base = None
+    if plan_is_topical:
+        base = build_chapter_extras(plan, chapter.number, hebrew_override=chapter.hebrew_summary)
     web_figure = media.figures.get(chapter.number)
     figure_file = web_figure or (base.figure_file if base else None)
     figure_caption = (
@@ -82,7 +110,7 @@ def compose_live_extras(
     return ChapterExtras(
         figure_file=figure_file,
         figure_caption=figure_caption,
-        hebrew_summary=base.hebrew_summary if base else chapter.hebrew_summary,
+        hebrew_summary=chapter.hebrew_summary or (base.hebrew_summary if base else None),
         include_milestones_table=fallback_table and bool(base and base.include_milestones_table),
         include_rocket_equation=fallback_equation and bool(base and base.include_rocket_equation),
         include_timeline_plot=fallback_chart and bool(base and base.include_timeline_plot),

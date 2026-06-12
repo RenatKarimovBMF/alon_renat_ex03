@@ -93,6 +93,22 @@ def test_ensure_live_media_renders_chart_and_skips_failed_fetch(tmp_path: Path) 
     assert media.charts == {2: "agent_chart_ch02.pdf"}
 
 
+def test_compose_live_extras_blocks_offtopic_pool() -> None:
+    # A Moon photo must never leak into a different-subject book.
+    plan = moon_extras_plan()
+    chapter = _chapter(3, hebrew_summary="סיכום.")
+    extras = compose_live_extras(
+        plan, chapter, LiveMedia(),
+        fallback_table=True, fallback_equation=True, fallback_chart=True,
+        plan_is_topical=False,
+    )
+    assert extras.figure_file is None and extras.figure_caption is None
+    assert not extras.include_milestones_table
+    assert not extras.include_rocket_equation
+    assert not extras.include_timeline_plot
+    assert extras.hebrew_summary == "סיכום."  # outline Hebrew still used
+
+
 def test_compose_live_extras_prefers_agent_media_with_fallbacks() -> None:
     plan = moon_extras_plan()
     chapter = _chapter(

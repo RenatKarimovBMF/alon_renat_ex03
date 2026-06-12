@@ -32,6 +32,9 @@ class BookConfig(BaseModel):
     # Optional subject-specific extras (figures, hebrew_summaries, table/equation/
     # plot chapter numbers); absent -> built-in Moon Race plan (crew/extras.py).
     extras: dict[str, Any] = Field(default_factory=dict)
+    # Set by the CLI when --topic overrides the config topic: the configured
+    # extras pool no longer matches the subject, so plan fallbacks are off.
+    topic_overridden: bool = Field(default=False, exclude=True)
 
 
 class AgentLimitRow(BaseModel):

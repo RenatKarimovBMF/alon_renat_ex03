@@ -22,6 +22,8 @@ def build_tasks(
     research = Task(
         description=(
             f"Research the topic '{topic}'. Use load_topic_context for framing. "
+            "Include 6-9 real published sources in sources[] "
+            "({key, title, author, year, publisher}; key like authoryear). "
             "Return ResearchBrief JSON only."
         ),
         expected_output="Valid ResearchBrief JSON",
@@ -50,8 +52,9 @@ def build_tasks(
             f"(5 x ~85 = 400-450 words per section, no exceptions); "
             f"at least {target_words} words across the whole book. Before "
             "returning, recount every section and expand any under 400 words. "
-            f"CITATIONS: choose 2-3 keys per section ONLY from [{keys}]; "
-            "every key in that list MUST be cited at least once in the book. "
+            "CITATIONS: cite 2-3 keys per section using ONLY the source keys "
+            "defined in the research brief's sources[] (every source must be "
+            f"cited at least once); if the brief has none, use [{keys}]. "
             "Plain paragraphs only."
         ),
         expected_output="Valid SectionDraftBundle JSON",

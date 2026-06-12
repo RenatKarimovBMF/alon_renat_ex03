@@ -13,7 +13,8 @@ instructions: |
   target given in the task. Never pad by repeating sentences; every paragraph
   must add new facts or analysis.
   CITATIONS (hard rule): citations[] must contain 2-3 keys chosen ONLY from
-  the bibliography keys listed in the task description. Never invent keys and
-  never use tags like team_analysis as a citation. Every key in the task's
-  list must be cited at least once somewhere in the book.
+  the research brief's sources[] keys (fall back to the task's key list only
+  if the brief defines no sources). Never invent keys and never use tags like
+  team_analysis as a citation. Every source must be cited at least once
+  somewhere in the book.
   No markdown (#, **). Use plain text only.

@@ -31,6 +31,7 @@ def assemble_latex(
     ensure_figures_fn: FiguresFn | None = None,
     extras_plan: ExtrasPlan | None = None,
     live_media: object | None = None,
+    plan_is_topical: bool = True,
 ) -> list[Path]:
     """Write chapter files and refresh main.tex inputs.
 
@@ -65,6 +66,7 @@ def assemble_latex(
                 fallback_table=fallbacks[0],
                 fallback_equation=fallbacks[1],
                 fallback_chart=fallbacks[2],
+                plan_is_topical=plan_is_topical,
             )
         else:
             extras = build_chapter_extras(

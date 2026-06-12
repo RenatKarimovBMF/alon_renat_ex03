@@ -57,6 +57,12 @@ def build_parser() -> argparse.ArgumentParser:
         action="store_true",
         help="Compile existing LaTeX without running the crew",
     )
+    parser.add_argument(
+        "--topic",
+        type=str,
+        default=None,
+        help="Override the book topic from config/book.json for this run",
+    )
     return parser
 
 
@@ -75,6 +81,11 @@ def main() -> int:
     setup = load_setup_config(args.project_root / args.setup)
     book = load_book_config(args.project_root / args.config)
     limits = load_rate_limits_config(args.project_root / args.rate_limits)
+    if args.topic:
+        # Dynamic per-run topic; the configured (subject-bound) extras pool no
+        # longer applies, so off-topic fallbacks are disabled downstream.
+        book.topic = args.topic
+        book.topic_overridden = True
 
     print(f"Project: {setup.project_name} v{setup.version}")
     print(f"Topic:   {book.topic}")
