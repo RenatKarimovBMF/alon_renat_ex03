@@ -15,3 +15,5 @@ $env:PYTHONPATH = "src"
 $env:MPLBACKEND = "Agg"
 .\.venv\Scripts\python.exe -m bookgen.main --compile-only
 ```
+
+**Submit to GitHub:** this file (`book.pdf`) is tracked in git so graders can open it without running the pipeline.

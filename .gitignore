@@ -16,9 +16,10 @@ htmlcov/
 *.key
 credentials.json
 
-# LaTeX build artifacts (keep build/README.md for graders)
+# LaTeX build artifacts (keep build/README.md + book.pdf for graders)
 latex/build/*
 !latex/build/README.md
+!latex/build/book.pdf
 latex/main.pdf
 latex/**/*.aux
 latex/**/*.log
