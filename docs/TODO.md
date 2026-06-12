@@ -69,7 +69,7 @@ Status key: `[ ]` pending · `[~]` in progress · `[x]` done · `[-]` cancelled
 | S4-01 | End-to-end demo run (2 chapters) | Both | [x] |
 | S4-02 | Full 15-page production run | Both | [x] |
 | S4-03 | Cost log + README cost table | Renat | [x] |
-| S4-04 | PDF screenshots + TOC in README | Alon | [ ] (capture real PNGs into `assets/screenshots/`) |
+| S4-04 | PDF screenshots + TOC in README | Alon | [x] (toc/sample-page from PDF, pipeline run) |
 | S4-05 | User commit + push Stage 4 | Both | [ ] |
 
 ---
@@ -78,7 +78,7 @@ Status key: `[ ]` pending · `[~]` in progress · `[x]` done · `[-]` cancelled
 
 | ID | Task | Owner | Status |
 |----|------|-------|--------|
-| S5-01 | Coverage ≥85%, Ruff clean | Both | [x] (~88%, ruff clean) |
+| S5-01 | Coverage ≥85%, Ruff clean | Both | [x] (90%, ruff clean) |
 | S5-02 | All source files ≤150 lines | Both | [x] |
 | S5-03 | Moodle `anrbj666-ex03.pdf` | Both | [ ] |
 | S5-04 | GitHub shared with `rmisegal@gmail.com` | Both | [ ] |
@@ -96,7 +96,7 @@ Status key: `[ ]` pending · `[~]` in progress · `[x]` done · `[-]` cancelled
 | S6-04 | Diversify citations so all bib entries are used | Both | [x] |
 | S6-05 | Chapter-summary page-break layout | Both | [x] |
 | S6-06 | TikZ "How This Book Was Made" appendix + Team Analysis | Both | [x] |
-| S6-07 | Delete 17 stale chapter `.tex` files | Both | [x] |
+| S6-07 | Delete stale chapter `.tex` files (only the 6 used remain) | Both | [x] |
 | S6-08 | Ruff ruleset (W,N,C4,SIM, ignore E501) + 0 violations | Both | [x] |
 | S6-09 | `shared/version.py` + startup version validation; bump to 1.00 | Both | [x] |
 | S6-10 | Split `compiler.py` and `moon_content.py` (≤150 lines) | Both | [x] |
@@ -108,5 +108,5 @@ Status key: `[ ]` pending · `[~]` in progress · `[x]` done · `[-]` cancelled
 | S6-16 | Topic-aware research prompt + context tool | Both | [x] |
 | S6-17 | Words-per-page calibration notebook | Both | [x] |
 | S6-18 | Commit run evidence (sample session, COST, PDF) | Both | [x] |
-| S6-19 | Capture screenshots into `assets/screenshots/` | Both | [ ] |
+| S6-19 | Capture screenshots into `assets/screenshots/` | Both | [x] |
 | S6-20 | One `--live` run for a real cost table (optional, needs API key) | Both | [ ] |
