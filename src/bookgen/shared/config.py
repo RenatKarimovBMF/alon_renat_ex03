@@ -76,7 +76,8 @@ def load_rate_limits_config(path: Path) -> GatekeeperConfig:
         total = sum(agent_limits.values())
     # Derive inter-call spacing from requests-per-minute so rate-limited calls
     # WAIT (queue) rather than fail; an explicit min_interval_ms wins if set.
-    rpm = parsed.services.get("default", {}).get("requests_per_minute", 0)
+    service = parsed.services.get("default", {})
+    rpm = service.get("requests_per_minute", 0)
     min_interval = parsed.min_interval_ms or (round(60_000 / rpm) if rpm > 0 else 0)
     return GatekeeperConfig(
         enabled=parsed.enabled,
@@ -84,4 +85,6 @@ def load_rate_limits_config(path: Path) -> GatekeeperConfig:
         agent_limits=agent_limits,
         min_interval_ms=min_interval,
         log_denials=parsed.log_denials,
+        retry_after_seconds=service.get("retry_after_seconds", 0),
+        max_retries=service.get("max_retries", 0),
     )

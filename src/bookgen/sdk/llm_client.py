@@ -4,13 +4,16 @@ from __future__ import annotations
 
 import json
 import logging
+import time
 from collections.abc import Callable
 from dataclasses import dataclass
 from pathlib import Path
 
+import httpx
+
 from bookgen.sdk.http_providers import AnthropicProvider, GeminiProvider, OpenAiProvider, env_key
 from bookgen.sdk.pricing import estimate_usd
-from bookgen.sdk.providers import LlmProvider, MockProvider
+from bookgen.sdk.providers import LlmProvider, MockProvider, ProviderResponse
 from bookgen.shared.gatekeeper import ApiGatekeeper
 
 logger = logging.getLogger("bookgen.sdk.llm")
@@ -53,7 +56,7 @@ class LlmClient:
         """Execute one LLM call for an agent."""
         self._gatekeeper.check(agent_key)
         provider = self._provider or self._build_runtime_provider()
-        raw = provider.complete(system, user)
+        raw = self._complete_with_retry(provider, system, user)
         self._gatekeeper.record(agent_key)
         estimated = estimate_usd(raw.model, raw.input_tokens, raw.output_tokens)
         response = LlmResponse(
@@ -66,6 +69,33 @@ class LlmClient:
         )
         self._emit_log(agent_key, response, temperature)
         return response
+
+    def _complete_with_retry(
+        self, provider: LlmProvider, system: str, user: str
+    ) -> ProviderResponse:
+        """Call the provider, retrying transient 429/5xx errors per config.
+
+        Wires up ``retry_after_seconds`` and ``max_retries`` from
+        ``rate_limits.json`` (Guidelines: gatekeeper retries on transient
+        failures); permanent errors (4xx other than 429) are not retried.
+        """
+        attempts = max(0, self._gatekeeper.max_retries) + 1
+        delay = self._gatekeeper.retry_after_seconds
+        for attempt in range(attempts):
+            try:
+                return provider.complete(system, user)
+            except httpx.HTTPStatusError as exc:
+                status = exc.response.status_code
+                transient = status == 429 or status >= 500
+                if not transient or attempt == attempts - 1:
+                    raise
+                logger.warning(
+                    "llm_retry",
+                    extra={"extra_data": {"status": status, "attempt": attempt + 1}},
+                )
+                if delay > 0:
+                    time.sleep(delay)
+        raise RuntimeError("unreachable retry state")  # pragma: no cover
 
     def _build_runtime_provider(self) -> LlmProvider:
         if env_key("ANTHROPIC_API_KEY"):
