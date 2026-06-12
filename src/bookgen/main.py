@@ -5,6 +5,8 @@ from __future__ import annotations
 import argparse
 from pathlib import Path
 
+from dotenv import load_dotenv
+
 from bookgen.crew.runner import PipelineMode
 from bookgen.reporting.page_metrics import count_pdf_pages
 from bookgen.sdk.sdk import BookGenSdk
@@ -67,6 +69,7 @@ def _resolve_mode(args: argparse.Namespace) -> PipelineMode:
 
 def main() -> int:
     """Run the CLI."""
+    load_dotenv()  # populate API keys from .env for --live runs (no-op if absent)
     args = build_parser().parse_args()
     setup = load_setup_config(args.project_root / args.setup)
     book = load_book_config(args.project_root / args.config)
