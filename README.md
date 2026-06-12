@@ -173,9 +173,20 @@ Every LLM call is logged to `logs/crew_run_<id>.jsonl` and summarized in
 
 ## Screenshots
 
-Submission evidence lives in [`assets/screenshots/`](assets/screenshots/):
-`toc.png` (table of contents), `sample-page.png` (a chapter page with citations),
-and `pipeline.png` (terminal output of a run). See the folder README for what to capture.
+Submission evidence lives in [`assets/screenshots/`](assets/screenshots/).
+
+**Table of contents** (rendered from `latex/build/book.pdf`):
+
+![Book table of contents](assets/screenshots/toc.png)
+
+**A chapter page** — distinct prose, blue linked citations, a table, and a right-to-left
+Hebrew summary block (BiDi):
+
+![Sample chapter page](assets/screenshots/sample-page.png)
+
+**Production pipeline run** (`uv run python -m bookgen.main`, offline fixtures, $0):
+
+![Pipeline run](assets/screenshots/pipeline.png)
 
 ---
 
@@ -189,10 +200,10 @@ and `pipeline.png` (terminal output of a run). See the folder README for what to
 
 ## Submission checklist
 
+- [x] `latex/` committed (sources + `figures/` + `build/book.pdf`)
+- [x] `docs/PRD.md`, `PLAN.md`, `TODO.md`, `PROMPTS.md`, root `README.md`
+- [x] Screenshots added under `assets/screenshots/`
 - [ ] GitHub shared with `rmisegal@gmail.com` (or public)
-- [ ] `latex/` committed (sources + `figures/` + `build/book.pdf`)
-- [ ] `docs/PRD.md`, `PLAN.md`, `TODO.md`, `PROMPTS.md`, root `README.md`
-- [ ] Screenshots added under `assets/screenshots/`
 - [ ] Moodle PDF `anrbj666-ex03.pdf` from the Word template (separate from `book.pdf`)
 - [ ] Self-grade submitted on Moodle
 ```
