@@ -4,9 +4,9 @@ from __future__ import annotations
 
 import json
 import logging
+from collections.abc import Callable
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Callable
 
 from bookgen.sdk.http_providers import AnthropicProvider, GeminiProvider, OpenAiProvider, env_key
 from bookgen.sdk.pricing import estimate_usd

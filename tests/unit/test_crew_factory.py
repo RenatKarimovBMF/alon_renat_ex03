@@ -1,4 +1,7 @@
 """Tests for CrewAI crew construction."""
+# CrewAI must be import-skipped before importing modules that depend on it,
+# so imports intentionally follow the guard below.
+# ruff: noqa: E402
 
 import sys
 

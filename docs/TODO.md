@@ -1,8 +1,8 @@
 # Project TODO — CrewAI LaTeX Book Generator
 
 **Authors:** Renat Karimov, Alon Engel  
-**Version:** 0.10 (planning draft)  
-**Last updated:** 2026-06-09
+**Version:** 1.00  
+**Last updated:** 2026-06-12
 
 Status key: `[ ]` pending · `[~]` in progress · `[x]` done · `[-]` cancelled
 
@@ -69,7 +69,7 @@ Status key: `[ ]` pending · `[~]` in progress · `[x]` done · `[-]` cancelled
 | S4-01 | End-to-end demo run (2 chapters) | Both | [x] |
 | S4-02 | Full 15-page production run | Both | [x] |
 | S4-03 | Cost log + README cost table | Renat | [x] |
-| S4-04 | PDF screenshots + TOC in README | Alon | [x] |
+| S4-04 | PDF screenshots + TOC in README | Alon | [ ] (capture real PNGs into `assets/screenshots/`) |
 | S4-05 | User commit + push Stage 4 | Both | [ ] |
 
 ---
@@ -78,8 +78,35 @@ Status key: `[ ]` pending · `[~]` in progress · `[x]` done · `[-]` cancelled
 
 | ID | Task | Owner | Status |
 |----|------|-------|--------|
-| S5-01 | Coverage ≥85%, Ruff clean | Both | [ ] |
-| S5-02 | All source files ≤150 lines | Both | [ ] |
+| S5-01 | Coverage ≥85%, Ruff clean | Both | [x] (~88%, ruff clean) |
+| S5-02 | All source files ≤150 lines | Both | [x] |
 | S5-03 | Moodle `anrbj666-ex03.pdf` | Both | [ ] |
 | S5-04 | GitHub shared with `rmisegal@gmail.com` | Both | [ ] |
 | S5-05 | Self-grade submitted | Both | [ ] |
+
+---
+
+## Stage 6 — Review feedback fixes
+
+| ID | Task | Owner | Status |
+|----|------|-------|--------|
+| S6-01 | Cover: instructor → Dr. Yoram Segal | Both | [x] |
+| S6-02 | Fix Hebrew typos; per-chapter summaries | Both | [x] |
+| S6-03 | Distinct per-section prose (no repetition); cite once/section | Both | [x] |
+| S6-04 | Diversify citations so all bib entries are used | Both | [x] |
+| S6-05 | Chapter-summary page-break layout | Both | [x] |
+| S6-06 | TikZ "How This Book Was Made" appendix + Team Analysis | Both | [x] |
+| S6-07 | Delete 17 stale chapter `.tex` files | Both | [x] |
+| S6-08 | Ruff ruleset (W,N,C4,SIM, ignore E501) + 0 violations | Both | [x] |
+| S6-09 | `shared/version.py` + startup version validation; bump to 1.00 | Both | [x] |
+| S6-10 | Split `compiler.py` and `moon_content.py` (≤150 lines) | Both | [x] |
+| S6-11 | Offline/injectable figures; HTTP providers via MockTransport | Both | [x] |
+| S6-12 | Coverage 85%+ (cheap unit tests) | Both | [x] |
+| S6-13 | README: uv, mermaid (incl. OOP), generic paths, screenshots | Both | [x] |
+| S6-14 | `docs/PROMPTS.md` prompt-engineering log | Both | [x] |
+| S6-15 | Gatekeeper rate-limit wait from config + ADR-005 | Both | [x] |
+| S6-16 | Topic-aware research prompt + context tool | Both | [x] |
+| S6-17 | Words-per-page calibration notebook | Both | [x] |
+| S6-18 | Commit run evidence (sample session, COST, PDF) | Both | [x] |
+| S6-19 | Capture screenshots into `assets/screenshots/` | Both | [ ] |
+| S6-20 | One `--live` run for a real cost table (optional, needs API key) | Both | [ ] |

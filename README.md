@@ -1,11 +1,10 @@
-![The Moon Race: USSR vs US](assets/moon-race-hero.png)
-
 # CrewAI LaTeX Book Generator
 
-**Intelligent Agents — Exercise 03** · Haifa University  
+**Intelligent Agents — Exercise 03** · University of Haifa
 **Renat Karimov** & **Alon Engel** · Group code `anrbj666`
+**Course instructor:** Dr. Yoram Segal
 
-CrewAI multi-agent pipeline that produces a **~15-page LaTeX book** for Exercise 03.
+A CrewAI multi-agent pipeline that produces a **~15-page LaTeX book** and compiles it to PDF.
 
 **Book topic:** *The Moon Race: USSR vs US* — from Sputnik and Gagarin through Apollo 11 to the legacy of superpower competition in space.
 
@@ -13,145 +12,120 @@ CrewAI multi-agent pipeline that produces a **~15-page LaTeX book** for Exercise
 
 ## What this project does
 
-1. **CrewAI agents** (research → outline → chapters → review → build) produce structured JSON artifacts.
-2. Python **assembles LaTeX** chapter files deterministically (no hallucinated `.tex`).
-3. **MiKTeX / TeX Live** compiles the book to **`latex/build/book.pdf`** (~15 pages).
+1. A **CrewAI crew** (research → outline → chapters → review → build) maps each agent to a job title in a publishing house.
+2. Python **assembles LaTeX** chapter files deterministically from structured (Pydantic) data — no hallucinated `.tex`.
+3. **latexmk / pdflatex + bibtex** compiles the book to **`latex/build/book.pdf`** (~15 pages, multiple passes so the TOC and citations resolve).
 
-The default run uses **offline production fixtures** ($0, no API keys). Use `--live` when you want the crew to write a custom topic via LLM.
-
----
-
-## How to run (Windows PowerShell)
-
-Open PowerShell in the project folder:
-
-```powershell
-cd "C:\Users\Ренат\Desktop\Haifa Un\6 is Final\Ai\crewai-latex-book-ex03"
-```
-
-### 1. One-time setup per terminal session
-
-```powershell
-# Use the source code from this repo (not an old installed copy)
-$env:PYTHONPATH = "src"
-
-# Headless matplotlib for the timeline chart
-$env:MPLBACKEND = "Agg"
-
-# MiKTeX binaries (adjust if TeX Live is installed elsewhere)
-$env:Path = "$env:LOCALAPPDATA\Programs\MiKTeX\miktex\bin\x64;" + $env:Path
-```
-
-### 2. Generate the book + PDF (recommended)
-
-```powershell
-.\.venv\Scripts\python.exe -m bookgen.main
-```
-
-This will:
-
-- write chapter `.tex` files under `latex/chapters/`
-- download NASA chapter images into `latex/figures/` (fallback: `assets/chapter-figures/`)
-- compile LaTeX with **pdflatex + bibtex** (multiple passes for TOC and citations)
-
-### 3. Open the PDF
-
-**The only output PDF is:**
-
-```
-latex/build/book.pdf
-```
-
-Open it with:
-
-```powershell
-start latex\build\book.pdf
-```
-
-> **There is no `main.pdf`.** The pipeline never writes that name. If you see `main.pdf` under `latex/` or `latex/build/`, it is from an old manual compile — delete it and use `book.pdf` instead.
-
-> **Close `latex/build/book.pdf` in your PDF viewer before recompiling**, or the build will fail with a “close the file” message.
-
-### Other useful commands
-
-| Command | When to use |
-|---------|-------------|
-| `.\.venv\Scripts\python.exe -m bookgen.main --dry-run` | Check config only |
-| `.\.venv\Scripts\python.exe -m bookgen.main --demo` | Quick 2-chapter smoke test |
-| `.\.venv\Scripts\python.exe -m bookgen.main --compile-only` | Recompile after hand-editing `.tex` files |
-| `.\.venv\Scripts\python.exe -m bookgen.main --live` | Live CrewAI crew (API keys, costs money) |
+The default run uses **offline production fixtures** ($0, no API keys, bundled NASA images). Use `--live` when you want the crew to write the content via an LLM.
 
 ---
 
-## Where files go
+## Architecture
 
-| Path | Contents |
-|------|----------|
-| **`latex/build/book.pdf`** | **Final compiled book (~15 pages)** |
-| `latex/chapters/*.tex` | Generated chapter content |
-| `latex/figures/*.jpg` | Downloaded NASA images (one per chapter) |
-| `latex/figures/mission_timeline.pdf` | Python/matplotlib chart (chapter 4) |
-| `latex/references.bib` | Bibliography source |
-| `data/sessions/<id>/` | JSON artifacts per run |
-| `docs/COST.md` | API cost log |
+### System context (C4 level 1)
 
-**Moodle submission PDF** (`anrbj666-ex03.pdf` from the Word template) is created separately by your team — not by this pipeline.
+```mermaid
+flowchart TB
+    Student[Student / Grader] --> CLI[bookgen.main]
+    CLI --> SDK[BookGen SDK]
+    SDK --> Crew[CrewAI Crew]
+    SDK --> Latex[LaTeX toolchain]
+    Crew --> GK[API Gatekeeper] --> LLM[LLM provider]
+    Latex --> TeX[latexmk / pdflatex + bibtex]
+    Crew -->|JSON + .tex| Latex
+```
+
+### Agent pipeline (sequential crew)
+
+```mermaid
+flowchart LR
+    T1[Research Director] --> T2[Outline Architect] --> T3[Chapter Writer]
+    T3 --> T4[LaTeX Assembly] --> T5[Review & Page Check] --> T6[Compile PDF]
+```
+
+### Object-oriented layering (SDK is the single entry point)
+
+```mermaid
+classDiagram
+    class BookGenSdk {
+        +run_pipeline(setup, mode) PipelineResult
+        +compile_pdf() BuildReport
+    }
+    class LlmClient {
+        +complete(agent_key, system, user) LlmResponse
+    }
+    class ApiGatekeeper {
+        +check(agent_key)
+        +record(agent_key)
+        +get_queue_status() QueueStatus
+    }
+    class GatekeeperLLM
+    BookGenSdk --> LlmClient
+    LlmClient --> ApiGatekeeper
+    GatekeeperLLM --> LlmClient
+    BookGenSdk ..> ApiGatekeeper
+```
+
+All business logic is reachable through `BookGenSdk`; CLI, crew, and tools delegate to it. Every LLM call is routed through `ApiGatekeeper` (rate-limit waiting + budget cost-guard + JSONL cost logging). The diagrams above are also reproduced inside the book itself (Appendix A, drawn with **TikZ**).
 
 ---
 
-## Prerequisites
+## Installation
+
+Requirements:
 
 | Tool | Purpose |
 |------|---------|
 | **Python 3.11–3.13** | CrewAI does not support 3.14 |
-| **MiKTeX or TeX Live** | Compile LaTeX to PDF |
-| **`.venv`** (already in repo) | Project dependencies |
-| **Internet** (first run) | Download NASA chapter images |
-| **API keys** (optional) | Only for `--live` mode |
+| **uv** | Package manager + task runner (required by the guidelines) |
+| **MiKTeX or TeX Live** | Compile LaTeX to PDF (`latexmk`/`pdflatex` + `bibtex` on `PATH`) |
 
-First compile may take several minutes while MiKTeX downloads LaTeX packages (babel/hebrew, etc.).
+```bash
+# from the repository root
+uv sync                      # create the environment and install dependencies
+cp .env-example .env         # only needed for --live runs (add an API key)
+```
 
----
-
-## Book contents (production run)
-
-1. Cold War Context and the Space Race Begins  
-2. Soviet Early Lead: Sputnik and Vostok  
-3. American Response: Mercury, Gemini, Apollo  
-4. Key Missions and Turning Points  
-5. Propaganda, Politics, and Public Opinion  
-6. Legacy: Who Won and What Remains  
-
-Each chapter includes:
-
-- English sections with **citations** from `latex/references.bib`
-- One **NASA image** (`latex/figures/`)
-- A **Hebrew summary** in a separate RTL block at chapter end
-- Plus (once in the book): milestones **table**, rocket **equation**, Python **timeline plot**
+> The virtual environment is created by `uv` and is **not** committed (`.gitignore`).
+> The first LaTeX build may take a few minutes while MiKTeX auto-installs packages
+> (babel/hebrew, tikz, etc.).
 
 ---
 
-## API usage & cost
+## Usage
 
-See [docs/COST.md](docs/COST.md) (auto-updated after each run).
+```bash
+uv run python -m bookgen.main              # generate chapters + figures, then compile
+uv run python -m bookgen.main --dry-run    # validate configs only (no build)
+uv run python -m bookgen.main --demo       # quick 2-chapter smoke test
+uv run python -m bookgen.main --compile-only   # recompile existing .tex (after editing)
+uv run python -m bookgen.main --live       # crew writes content via an LLM (needs API key, costs money)
+```
 
-| Run mode | Typical cost |
-|----------|--------------|
-| `--demo` | $0.00 |
-| default production | $0.00 (~6750 words, Moon Race fixtures) |
-| `--live` | Depends on model; logged in `logs/crew_run_*.jsonl` |
+The output PDF is always **`latex/build/book.pdf`**.
+
+> Close `latex/build/book.pdf` in your PDF viewer before recompiling, or the build
+> reports "close the file" (Windows locks the open PDF). The build still produces a
+> fresh copy under the build folder.
+
+### Compiler choice
+
+The pipeline calls **`latexmk`** when available and otherwise falls back to
+**`pdflatex` + `bibtex`** (both ship with MiKTeX/TeX Live). LuaLaTeX/XeLaTeX also
+work for the Hebrew blocks; the toolchain is configurable in `config/book.json`.
 
 ---
 
-## Screenshots
+## Configuration
 
-Add PNGs under `assets/screenshots/` for submission evidence:
+| File | Key settings |
+|------|--------------|
+| `config/setup.json` | `version`, project name, log/session dirs |
+| `config/book.json` | `topic`, `target_pages` (15), `page_tolerance` (2), `words_per_page` (110, calibrated — see `notebooks/`) |
+| `config/rate_limits.json` | `version`, per-agent budgets, `requests_per_minute` (→ inter-call wait) |
+| `config/prompts/*.yaml` | Agent role / goal / backstory / instructions |
 
-- Table of contents (`toc.png`)
-- Sample content page (`sample-page.png`)
-- Terminal pipeline output (`pipeline.png`)
-
-See [assets/screenshots/README.md](assets/screenshots/README.md).
+All config files declare `"version": "1.00"`, validated at startup against `src/bookgen/shared/version.py`.
 
 ---
 
@@ -159,45 +133,66 @@ See [assets/screenshots/README.md](assets/screenshots/README.md).
 
 ```
 crewai-latex-book-ex03/
-├── assets/                 # Hero image, chapter-figure fallbacks, screenshots
-├── config/prompts/         # CrewAI agent YAML prompts
-├── docs/                   # PRD, PLAN, TODO, COST.md
-├── latex/                  # LaTeX sources
-│   ├── build/book.pdf      # ← compiled output (only book PDF)
-│   ├── build/README.md     # points graders to book.pdf
-│   ├── chapters/
-│   └── figures/
-├── src/bookgen/            # Python package (crew, sdk, reporting)
-├── data/sessions/          # JSON artifacts per run (gitignored)
-├── logs/                   # crew_run_*.jsonl (gitignored)
-└── tests/
+├── assets/chapter-figures/  # bundled NASA images (offline-first)
+├── assets/screenshots/      # PDF + pipeline screenshots (submission evidence)
+├── config/                  # setup/book/rate_limits + prompt YAMLs
+├── docs/                    # PRD, PLAN, TODO, PROMPTS, COST, mechanism PRDs
+├── latex/                   # LaTeX project (main, preamble, chapters, appendix, bib)
+│   └── build/book.pdf       # compiled output
+├── notebooks/               # words-per-page calibration analysis
+├── src/bookgen/             # Python package (sdk, crew, latex, reporting, shared)
+└── tests/                   # unit + integration tests
 ```
 
 ---
 
-## CrewAI architecture
+## Quality
 
-Five agents · sequential crew (3 LLM tasks in live mode):
+| Check | Command | Status |
+|-------|---------|--------|
+| Lint | `uv run ruff check .` | 0 violations (E,F,W,I,N,UP,B,C4,SIM) |
+| Tests + coverage | `uv run pytest --cov=src/bookgen` | ≥85% (currently ~88%) |
+| File size | — | every source file ≤150 code lines |
 
-`Research Director → Outline Architect → Chapter Writer → [assemble] → Review → Compile`
+Tests are fully offline: HTTP providers use `httpx.MockTransport`, image fetching is
+injected, and the pipeline runs in fixtures mode with the compile step swapped out.
 
-Gatekeeper wraps every LLM call. Prompts live in `config/prompts/`.
+---
+
+## API usage & cost
+
+Every LLM call is logged to `logs/crew_run_<id>.jsonl` and summarized in
+[`docs/COST.md`](docs/COST.md) (auto-written each run).
+
+| Run mode | Typical cost |
+|----------|--------------|
+| `--demo` / default production | **$0.00** (offline fixtures) |
+| `--live` | Depends on model; real token table written to `docs/COST.md` |
+
+---
+
+## Screenshots
+
+Submission evidence lives in [`assets/screenshots/`](assets/screenshots/):
+`toc.png` (table of contents), `sample-page.png` (a chapter page with citations),
+and `pipeline.png` (terminal output of a run). See the folder README for what to capture.
 
 ---
 
 ## Documentation
 
-- [PRD](docs/PRD.md)
-- [PLAN](docs/PLAN.md)
-- [TODO](docs/TODO.md)
-- [COST](docs/COST.md)
+- [PRD](docs/PRD.md) · [PLAN](docs/PLAN.md) (C4 + ADRs) · [TODO](docs/TODO.md)
+- [PROMPTS](docs/PROMPTS.md) (prompt-engineering log) · [COST](docs/COST.md)
+- Mechanism PRDs: [crew](docs/PRD_crew_orchestrator.md), [latex](docs/PRD_latex_pipeline.md), [gatekeeper](docs/PRD_gatekeeper.md), [llm sdk](docs/PRD_llm_sdk.md)
 
 ---
 
 ## Submission checklist
 
-- [ ] GitHub shared with `rmisegal@gmail.com`
-- [ ] `latex/` folder committed (including `latex/figures/` images)
-- [ ] `docs/PRD.md`, `PLAN.md`, `TODO.md`, root `README.md`
-- [ ] Moodle PDF: `anrbj666-ex03.pdf` from Word template (separate from `latex/build/book.pdf`)
-- [ ] Self-grade on Moodle
+- [ ] GitHub shared with `rmisegal@gmail.com` (or public)
+- [ ] `latex/` committed (sources + `figures/` + `build/book.pdf`)
+- [ ] `docs/PRD.md`, `PLAN.md`, `TODO.md`, `PROMPTS.md`, root `README.md`
+- [ ] Screenshots added under `assets/screenshots/`
+- [ ] Moodle PDF `anrbj666-ex03.pdf` from the Word template (separate from `book.pdf`)
+- [ ] Self-grade submitted on Moodle
+```

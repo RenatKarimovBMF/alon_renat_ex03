@@ -2,15 +2,13 @@
 
 from __future__ import annotations
 
-import json
 import re
 from typing import Any
 
-from pydantic import BaseModel, PrivateAttr
-from typing_extensions import override
-
 from crewai.llms.base_llm import BaseLLM
 from crewai.utilities.types import LLMMessage
+from pydantic import BaseModel, PrivateAttr
+from typing_extensions import override
 
 from bookgen.sdk.llm_client import LlmClient
 

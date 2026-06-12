@@ -31,7 +31,13 @@ class QueueStatus:
 
 
 class ApiGatekeeper:
-    """Limits LLM/API calls per agent and globally."""
+    """Central gate for LLM/API calls.
+
+    Policy (see ADR-005): a per-minute rate limit is honored by *waiting*
+    (calls are spaced via ``min_interval_ms``, i.e. queued, never dropped),
+    while the per-agent and global request budgets are a hard *cost guard*
+    that rejects calls once a run would exceed its allowance.
+    """
 
     def __init__(self, config: GatekeeperConfig) -> None:
         self._config = config
@@ -50,7 +56,12 @@ class ApiGatekeeper:
         return self._denial_count
 
     def check(self, agent_key: str) -> None:
-        """Raise BudgetExceededError if this call is not allowed."""
+        """Admit one call: wait for the rate window, reject only if over budget.
+
+        Raises ``BudgetExceededError`` when the per-agent or global budget is
+        exhausted (cost guard); otherwise blocks until the configured minimum
+        interval has elapsed so callers are queued, not dropped.
+        """
         with self._lock:
             reason = self._denial_reason(agent_key)
             if reason is not None:

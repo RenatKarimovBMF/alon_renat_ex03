@@ -1,3 +1,5 @@
 """Exercise 03 — CrewAI LaTeX book generator."""
 
-__version__ = "0.10.0"
+from bookgen.shared.version import VERSION
+
+__version__ = VERSION

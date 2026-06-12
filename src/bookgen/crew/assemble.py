@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from collections.abc import Callable
 from pathlib import Path
 
 from bookgen.crew.moon_content import CHAPTER_FIGURES, HEBREW_SUMMARIES
@@ -9,6 +10,8 @@ from bookgen.latex.figures import ensure_figures
 from bookgen.latex.metadata import update_metadata
 from bookgen.latex.writer import ChapterExtras, update_main_inputs, write_chapter_file
 from bookgen.models import BookOutline, ReviewReport, SectionDraft, SectionDraftBundle
+
+FiguresFn = Callable[[Path], object]
 
 
 def group_sections(sections: list[SectionDraft]) -> dict[int, list[SectionDraft]]:
@@ -38,9 +41,15 @@ def assemble_latex(
     main_tex: Path,
     outline: BookOutline,
     bundle: SectionDraftBundle,
+    *,
+    ensure_figures_fn: FiguresFn = ensure_figures,
 ) -> list[Path]:
-    """Write chapter files and refresh main.tex inputs."""
-    ensure_figures(latex_root)
+    """Write chapter files and refresh main.tex inputs.
+
+    ``ensure_figures_fn`` is injectable so unit tests can run offline without
+    downloading images or invoking matplotlib.
+    """
+    ensure_figures_fn(latex_root)
     chapter_paths: list[Path] = []
     grouped = group_sections(bundle.sections)
     for chapter in outline.chapters:

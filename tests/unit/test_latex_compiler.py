@@ -1,6 +1,7 @@
 """Tests for LaTeX compiler helpers."""
 
-from bookgen.latex.compiler import compile_latex, parse_log_errors
+from bookgen.latex.build_logs import parse_log_errors
+from bookgen.latex.compiler import compile_latex
 
 
 def test_parse_log_errors_extracts_latex_error() -> None:

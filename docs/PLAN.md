@@ -1,9 +1,10 @@
 # Implementation Plan — CrewAI LaTeX Book Generator
 
 **Project:** Exercise 03 — Intelligent Agents  
-**Version:** 0.10 (planning draft)  
+**Course instructor:** Dr. Yoram Segal  
+**Version:** 1.00  
 **Authors:** Renat Karimov, Alon Engel  
-**Last updated:** 2026-06-09
+**Last updated:** 2026-06-12
 
 ---
 
@@ -356,6 +357,24 @@ sequenceDiagram
 ### ADR-004 — Reuse Ex02 Gatekeeper + SDK patterns
 - **Decision:** Port `ApiGatekeeper` and provider facade from Ex02 codebase.
 - **Reason:** Proven compliance with Guidelines V3; grader familiarity.
+
+### ADR-005 — Rate limit = wait/queue; budget = hard cost guard
+- **Decision:** Two distinct mechanisms in the gatekeeper. (1) The per-minute
+  rate limit (`requests_per_minute`) is honored by *waiting*: it is converted to
+  an inter-call interval (`min_interval_ms = 60000 / rpm`) so requests are spaced
+  (queued) and never dropped. (2) The per-agent and global request **budgets**
+  (`agent_limits`, `max_total_requests`) are a hard cap that raises
+  `BudgetExceededError`.
+- **Reason:** Guidelines V3 §5.3 require that rate-limited requests be queued
+  rather than rejected — implemented as spacing. The budgets are an intentional
+  *cost guard* for a homework pipeline (an LLM loop must not silently spend
+  unbounded tokens), which is a different concern from throughput shaping.
+- **Trade-off:** A genuine multi-threaded FIFO with backpressure would be more
+  faithful to a production system; for this single-process batch pipeline,
+  interval-based spacing plus a budget cap gives the same observable behavior
+  (no drops under rate pressure, bounded cost) with far less complexity.
+- **Consequence:** `get_queue_status()` exposes counters for observability; a
+  future version could add an explicit FIFO queue and depth metric.
 
 ---
 

@@ -31,8 +31,10 @@ latex/**/*.fls
 latex/**/*.fdb_latexmk
 latex/**/*.synctex.gz
 
-# Session outputs
-data/sessions/
+# Session outputs — keep one sample run committed as submission evidence
+data/sessions/*
+!data/sessions/sample/
+!data/sessions/sample/**
 logs/
 
 # OS / IDE

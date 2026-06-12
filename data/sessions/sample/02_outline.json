@@ -1,0 +1,79 @@
+{
+  "title": "The Moon Race: USSR vs US",
+  "target_total_pages": 15,
+  "chapters": [
+    {
+      "number": 1,
+      "title": "Cold War Context and the Space Race Begins",
+      "page_budget": 2.5,
+      "learning_objectives": [
+        "Understand cold war context and the space race begins"
+      ],
+      "section_titles": [
+        "Superpower rivalry after 1945",
+        "Rockets, missiles, and prestige"
+      ]
+    },
+    {
+      "number": 2,
+      "title": "Soviet Early Lead: Sputnik and Vostok",
+      "page_budget": 2.5,
+      "learning_objectives": [
+        "Understand soviet early lead: sputnik and vostok"
+      ],
+      "section_titles": [
+        "Sputnik and the shock in America",
+        "First human in space: Yuri Gagarin"
+      ]
+    },
+    {
+      "number": 3,
+      "title": "American Response: Mercury, Gemini, Apollo",
+      "page_budget": 2.5,
+      "learning_objectives": [
+        "Understand american response: mercury, gemini, apollo"
+      ],
+      "section_titles": [
+        "NASA and the crash program",
+        "From Earth orbit to the lunar landing goal"
+      ]
+    },
+    {
+      "number": 4,
+      "title": "Key Missions and Turning Points",
+      "page_budget": 2.5,
+      "learning_objectives": [
+        "Understand key missions and turning points"
+      ],
+      "section_titles": [
+        "Robotic Luna, Ranger, and Surveyor",
+        "Apollo 11 and lunar samples"
+      ]
+    },
+    {
+      "number": 5,
+      "title": "Propaganda, Politics, and Public Opinion",
+      "page_budget": 2.5,
+      "learning_objectives": [
+        "Understand propaganda, politics, and public opinion"
+      ],
+      "section_titles": [
+        "Media and ideological messaging",
+        "Cost, risk, and congressional support"
+      ]
+    },
+    {
+      "number": 6,
+      "title": "Legacy: Who Won and What Remains",
+      "page_budget": 2.5,
+      "learning_objectives": [
+        "Understand legacy: who won and what remains"
+      ],
+      "section_titles": [
+        "End of Apollo and later cooperation",
+        "Lessons for science and exploration"
+      ]
+    }
+  ],
+  "version": "1.0"
+}

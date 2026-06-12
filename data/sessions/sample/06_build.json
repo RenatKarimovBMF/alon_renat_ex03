@@ -1,0 +1,8 @@
+{
+  "success": true,
+  "pdf_path": "latex/build/book.pdf",
+  "attempts": 4,
+  "errors": [],
+  "log_path": "latex/build/_book_build.log",
+  "version": "1.0"
+}

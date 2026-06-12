@@ -2,8 +2,8 @@
   "version": "1.00",
   "topic": "The Moon Race: USSR vs US",
   "target_pages": 15,
-  "page_tolerance": 1,
-  "words_per_page": 450,
+  "page_tolerance": 2,
+  "words_per_page": 110,
   "demo_mode": {
     "enabled": false,
     "chapters": 2,

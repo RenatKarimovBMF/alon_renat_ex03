@@ -31,6 +31,9 @@ def test_assemble_latex_writes_chapters(tmp_path: Path) -> None:
         "\\documentclass{article}\n\\begin{document}\n\\bibliographystyle{plain}\n\\end{document}\n",
         encoding="utf-8",
     )
-    paths = assemble_latex(latex_root, main_tex, outline, bundle)
+    # Inject an offline figures stub: no network, no matplotlib.
+    paths = assemble_latex(
+        latex_root, main_tex, outline, bundle, ensure_figures_fn=lambda _root: []
+    )
     assert paths
     assert paths[0].exists()

@@ -11,7 +11,7 @@ def build_tasks(agents: dict[str, object], *, topic: str, target_pages: int) -> 
     """Create sequential tasks wired to pydantic outputs."""
     research = Task(
         description=(
-            f"Research the topic '{topic}'. Use load_course_context. "
+            f"Research the topic '{topic}'. Use load_topic_context for framing. "
             "Return ResearchBrief JSON only."
         ),
         expected_output="Valid ResearchBrief JSON",

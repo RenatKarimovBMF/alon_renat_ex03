@@ -5,7 +5,7 @@ from __future__ import annotations
 import uuid
 from collections.abc import Callable
 from dataclasses import dataclass
-from enum import Enum
+from enum import StrEnum
 from pathlib import Path
 
 from pydantic import BaseModel
@@ -30,7 +30,7 @@ from bookgen.shared.gatekeeper import ApiGatekeeper
 from bookgen.shared.json_io import save_json
 
 
-class PipelineMode(str, Enum):
+class PipelineMode(StrEnum):
     DEMO = "demo"
     PRODUCTION = "production"
     LIVE = "live"

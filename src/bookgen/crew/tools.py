@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import json
-from pathlib import Path
 
 from crewai.tools import tool
 
@@ -22,16 +21,19 @@ def build_tools(ctx: PipelineContext) -> dict[str, object]:
         ctx.artifacts[name] = path
         return str(path)
 
-    @tool("load_course_context")
-    def load_course_context() -> str:
-        """Return short course context snippets for research tasks."""
-        snippets = [
-            "LangChain fits linear chains; LangGraph adds stateful orchestration.",
-            "CrewAI models role-based agent teams with sequential tasks.",
-            "Production agents need planner, memory, tools, and observability layers.",
-            "MCP connects agents to tools; A2A connects agents to agents.",
+    @tool("load_topic_context")
+    def load_topic_context() -> str:
+        """Return research framing for the configured book topic."""
+        topic = ctx.book.topic
+        target = ctx.book.target_pages
+        lines = [
+            f"Book topic: {topic}.",
+            f"Target length: about {target} pages of readable, well-structured prose.",
+            "Produce findings specific to this topic, each with a credible source tag",
+            "(external or team_analysis), and frame open questions the book should answer.",
+            "Do not summarize the course tooling; research the topic itself.",
         ]
-        return "\n".join(f"- {line}" for line in snippets)
+        return "\n".join(f"- {line}" for line in lines)
 
     @tool("estimate_pages")
     def estimate_pages(text: str) -> str:
@@ -52,7 +54,7 @@ def build_tools(ctx: PipelineContext) -> dict[str, object]:
 
     return {
         "write_session_artifact": write_session_artifact,
-        "load_course_context": load_course_context,
+        "load_topic_context": load_topic_context,
         "estimate_pages": estimate_pages,
         "latex_compile": latex_compile,
     }

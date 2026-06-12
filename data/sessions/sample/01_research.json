@@ -1,0 +1,51 @@
+{
+  "topic": "The Moon Race: USSR vs US",
+  "thesis": "The Moon Race was a Cold War contest of engineering, propaganda, and national will in which the Soviet Union led early milestones while the United States achieved the decisive lunar landing.",
+  "findings": [
+    {
+      "claim": "The Moon Race grew out of Cold War military rocketry",
+      "evidence_summary": "Intercontinental missiles made orbital flight technically feasible",
+      "source_tag": "external"
+    },
+    {
+      "claim": "The USSR scored the first satellite and first human orbit",
+      "evidence_summary": "Sputnik and Gagarin demonstrated early Soviet momentum",
+      "source_tag": "external"
+    },
+    {
+      "claim": "Kennedy's 1961 pledge reframed US goals toward the Moon",
+      "evidence_summary": "Apollo became a concentrated national engineering project",
+      "source_tag": "external"
+    },
+    {
+      "claim": "Robotic precursors reduced risk before crewed landings",
+      "evidence_summary": "Luna, Ranger, and Surveyor mapped hazards and surfaces",
+      "source_tag": "external"
+    },
+    {
+      "claim": "Apollo 11 fulfilled the US lunar landing before a Soviet equivalent",
+      "evidence_summary": "Armstrong and Aldrin walked the Moon in July 1969",
+      "source_tag": "external"
+    },
+    {
+      "claim": "Both sides used space achievements for propaganda",
+      "evidence_summary": "Success was sold as proof of system superiority",
+      "source_tag": "external"
+    },
+    {
+      "claim": "Crash programs demanded unprecedented coordination and budget",
+      "evidence_summary": "Thousands of contractors and civil servants worked under deadlines",
+      "source_tag": "team_analysis"
+    },
+    {
+      "claim": "The race ended in cooperation as much as competition",
+      "evidence_summary": "Apollo-Soyuz and later ISS linked former rivals",
+      "source_tag": "external"
+    }
+  ],
+  "open_questions": [
+    "Could the USSR have landed cosmonauts if funding priorities had differed?",
+    "How much of Apollo's success depended on political deadline pressure?"
+  ],
+  "version": "1.0"
+}

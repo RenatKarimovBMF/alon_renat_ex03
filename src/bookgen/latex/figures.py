@@ -1,16 +1,23 @@
-"""Download chapter images and generate the Python mission timeline plot."""
+"""Resolve chapter images and generate the Python mission-timeline plot.
+
+Resolution order is bundled-first: a committed copy in
+``assets/chapter-figures/`` is used before any network call, so the default
+pipeline (and the test suite) runs fully offline. The remote NASA URLs are only
+a fallback, and the fetch function is injectable so tests never hit the network.
+"""
 
 from __future__ import annotations
 
 import shutil
+from collections.abc import Callable
 from pathlib import Path
-
-import httpx
 
 _USER_AGENT = "Mozilla/5.0 (compatible; bookgen-ex03/1.0; Haifa University educational project)"
 _MIN_IMAGE_BYTES = 80_000
 # Bump when chapter URLs/captions change so stale JPEGs are replaced.
 _FIGURE_MANIFEST_VERSION = "moon-race-figures-v2"
+
+FetchFn = Callable[[list[str], Path], bool]
 
 
 def _sync_manifest(figures_dir: Path) -> None:
@@ -34,53 +41,62 @@ def _is_valid_image(path: Path) -> bool:
     return header[:2] == b"\xff\xd8" or header == b"\x89PNG"
 
 
-def _download_image(client: httpx.Client, urls: list[str], target: Path) -> bool:
-    for url in urls:
-        try:
-            response = client.get(url)
-            if response.status_code == 200 and len(response.content) >= _MIN_IMAGE_BYTES:
-                target.write_bytes(response.content)
-                return True
-        except httpx.HTTPError:
-            continue
+def _http_fetch(urls: list[str], target: Path) -> bool:
+    """Default fetcher: try each URL in turn (only used when bundled is missing)."""
+    import httpx
+
+    headers = {"User-Agent": _USER_AGENT}
+    try:
+        with httpx.Client(follow_redirects=True, timeout=60.0, headers=headers) as client:
+            for url in urls:
+                try:
+                    response = client.get(url)
+                except httpx.HTTPError:
+                    continue
+                if response.status_code == 200 and len(response.content) >= _MIN_IMAGE_BYTES:
+                    target.write_bytes(response.content)
+                    return True
+    except httpx.HTTPError:
+        return False
     return False
 
 
-def ensure_figures(latex_root: Path) -> list[Path]:
-    """Download remote chapter images and build the matplotlib timeline chart."""
+def ensure_figures(
+    latex_root: Path,
+    *,
+    fetch: FetchFn | None = None,
+    bundled_dir: Path | None = None,
+    make_plot: bool = True,
+) -> list[Path]:
+    """Ensure every chapter image exists (bundled-first) and build the plot."""
     from bookgen.crew.moon_content import CHAPTER_FIGURES
 
+    fetch = fetch or _http_fetch
     figures_dir = latex_root / "figures"
     figures_dir.mkdir(parents=True, exist_ok=True)
     _sync_manifest(figures_dir)
-    bundled = _bundled_dir(latex_root)
+    bundled = bundled_dir or _bundled_dir(latex_root)
     saved: list[Path] = []
-    headers = {"User-Agent": _USER_AGENT}
 
-    with httpx.Client(follow_redirects=True, timeout=60.0, headers=headers) as client:
-        for filename, urls, caption in CHAPTER_FIGURES:
-            target = figures_dir / filename
-            if _is_valid_image(target):
-                saved.append(target)
-                continue
+    for filename, urls, caption in CHAPTER_FIGURES:
+        target = figures_dir / filename
+        if _is_valid_image(target):
+            saved.append(target)
+            continue
+        bundled_file = bundled / filename
+        if _is_valid_image(bundled_file):
+            shutil.copy2(bundled_file, target)
+            saved.append(target)
+            continue
+        if target.exists():
+            target.unlink()
+        if fetch(urls, target) and _is_valid_image(target):
+            saved.append(target)
+            continue
+        raise RuntimeError(f"Could not resolve chapter figure {filename!r} ({caption})")
 
-            if target.exists():
-                target.unlink()
-
-            if _download_image(client, urls, target):
-                saved.append(target)
-                continue
-
-            bundled_file = bundled / filename
-            if _is_valid_image(bundled_file):
-                shutil.copy2(bundled_file, target)
-                saved.append(target)
-                continue
-
-            msg = f"Could not download chapter figure {filename!r} ({caption})"
-            raise RuntimeError(msg)
-
-    saved.append(_write_timeline_plot(figures_dir))
+    if make_plot:
+        saved.append(_write_timeline_plot(figures_dir))
     return saved
 
 

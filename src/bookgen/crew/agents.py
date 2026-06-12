@@ -37,7 +37,7 @@ def build_agents(ctx: PipelineContext, llm_client: LlmClient) -> dict[str, Agent
         "research_director": _agent(
             prompts["research_director"],
             llm,
-            [tool_map["load_course_context"], tool_map["write_session_artifact"]],
+            [tool_map["load_topic_context"], tool_map["write_session_artifact"]],
         ),
         "outline_architect": _agent(
             prompts["outline_architect"],

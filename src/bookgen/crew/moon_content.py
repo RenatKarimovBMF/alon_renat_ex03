@@ -1,6 +1,14 @@
-"""Chapter plan and prose templates for the Moon Race production book."""
+"""Chapter plan and research data for the Moon Race production book.
+
+Figures, Hebrew summaries, and section prose live in dedicated modules
+(``moon_figures``, ``moon_prose``) and are re-exported here so existing
+imports keep working while every content file stays under the 150-line limit.
+"""
 
 from __future__ import annotations
+
+from bookgen.crew.moon_figures import CHAPTER_FIGURES, HEBREW_SUMMARIES
+from bookgen.crew.moon_prose import section_citations, section_paragraphs
 
 CHAPTERS: list[tuple[str, list[str]]] = [
     (
@@ -29,6 +37,7 @@ CHAPTERS: list[tuple[str, list[str]]] = [
     ),
 ]
 
+# All bibliography keys, used for fallbacks and validation that each is cited.
 CITATIONS = ["siddiqi2010", "logsdon2010", "nasa2019", "harford1997", "cadbury2006"]
 
 FINDINGS: list[tuple[str, str, str]] = [
@@ -85,110 +94,14 @@ OPEN_QUESTIONS = [
     "How much of Apollo's success depended on political deadline pressure?",
 ]
 
-# NASA image URLs (public domain). Each chapter tries URLs in order, then assets/chapter-figures/.
-# Captions are verified against NASA metadata (images-api.nasa.gov).
-CHAPTER_FIGURES: list[tuple[str, list[str], str]] = [
-    (
-        "ch01_cold_war.jpg",
-        [
-            "https://images-assets.nasa.gov/image/6900846/6900846~orig.jpg",
-            "https://images-assets.nasa.gov/image/624109main_1969-05-20-2_full/624109main_1969-05-20-2_full~orig.jpg",
-            "https://images-assets.nasa.gov/image/6900560/6900560~orig.jpg",
-        ],
-        "Apollo 11 Saturn V on Launch Pad 39A before the Moon landing mission.",
-    ),
-    (
-        "ch02_sputnik.jpg",
-        [
-            "https://images-assets.nasa.gov/image/9248168/9248168~orig.jpg",
-        ],
-        "Sputnik era — the Soviet Union launched the first artificial satellite in 1957.",
-    ),
-    (
-        "ch03_apollo.jpg",
-        [
-            "https://images-assets.nasa.gov/image/as11-40-5874/as11-40-5874~orig.jpg",
-        ],
-        "Buzz Aldrin on the Moon during Apollo 11.",
-    ),
-    (
-        "ch04_lunar_surface.jpg",
-        [
-            "https://images-assets.nasa.gov/image/as11-40-5927/as11-40-5927~orig.jpg",
-            "https://images-assets.nasa.gov/image/as11-44-6551/as11-44-6551~orig.jpg",
-        ],
-        "Apollo 11 Lunar Module Eagle on the Moon surface.",
-    ),
-    (
-        "ch05_earthrise.jpg",
-        [
-            "https://images-assets.nasa.gov/image/as08-14-2383/as08-14-2383~orig.jpg",
-        ],
-        "Earthrise from Apollo 8 — icon of public opinion and the space race.",
-    ),
-    (
-        "ch06_iss.jpg",
-        [
-            "https://images-assets.nasa.gov/image/s75-29432/s75-29432~orig.jpg",
-            "https://images-assets.nasa.gov/image/ast-05-263/ast-05-263~orig.jpg",
-        ],
-        "Apollo–Soyuz handshake in space — beginning of post-race cooperation.",
-    ),
+__all__ = [
+    "CHAPTERS",
+    "CHAPTER_FIGURES",
+    "CITATIONS",
+    "FINDINGS",
+    "HEBREW_SUMMARIES",
+    "OPEN_QUESTIONS",
+    "THESIS",
+    "section_citations",
+    "section_paragraphs",
 ]
-
-# Hebrew summaries — each chapter ends in its own RTL block (no mixed lines).
-HEBREW_SUMMARIES: list[str] = [
-    (
-        "פרק זה מציג את רקע המלחמה הקרה ואת תחילת מרוץ החלל. "
-        "שני העל-יוצקים הפכו טילים בליסטיים להישגים שמיועדים לתעמולה ולפרסטיז'."
-    ),
-    (
-        "פרק זה עוסק ביתרון הסובייטי המוקדם עם השקת לוויין ראשון "
-        "והטסת האדם הראשון לחלל. הישגים אלו הזעזעו את ארצות הברית והאיצו את תגובתה."
-    ),
-    (
-        "פרק זה מתאר את תוכניות החלל האמריקאיות לכיבוש מסלול סביב כדור הארץ "
-        "ולנחיתה על הירח. ארצות הברית ריכזה משאבים לאומיים כדי להגיע ליעד לפני היריבה."
-    ),
-    (
-        "פרק זה סוקר משימות מפתח: גשושיות, מיפוי ונחיתה ראשונה של בני אדם על הירח. "
-        "משימות אלו הפחיתו סיכון והביאו לדגימות מהירח."
-    ),
-    (
-        "פרק זה בוחן תעמולה, פוליטיקה ודעת קהל. "
-        "שני הצדדים הציגו הצלחות חלל כהוכחה לעליונות מערכתית."
-    ),
-    (
-        "פרק זה מסכם את המורשת: סיום תוכניות הנחיתה ושיתוף פעולה בינלאומי. "
-        "המרוץ הסתיים בייצור ידע ובשיתוף מדעי לאחר שנים של תחרות."
-    ),
-]
-
-
-def paragraph_templates(chapter_title: str, section_title: str) -> list[str]:
-    """Return rotating Moon Race paragraphs for a section."""
-    return [
-        (
-            f"In {chapter_title}, {section_title} shows how the superpowers turned "
-            "ballistic missile research into a public contest for orbital and lunar "
-            "firsts. Leaders on both sides treated each launch as proof of industrial "
-            "capacity, scientific maturity, and ideological confidence."
-        ),
-        (
-            f"The section {section_title} highlights engineers such as Sergei Korolev "
-            "and Wernher von Braun, whose teams adapted military rockets for exploration. "
-            "Reliability, telemetry, and life-support constraints turned each mission "
-            "into a chain of irreversible decisions under extreme time pressure."
-        ),
-        (
-            f"For {section_title}, historians compare Soviet secrecy with NASA's televised "
-            "milestones. Public audiences learned mission jargon, followed countdowns, and "
-            "debated whether moonshots justified their cost while terrestrial crises continued."
-        ),
-        (
-            f"Additional detail on {section_title}: archives now reveal how failures "
-            "were hidden, retried, or reframed. The Moon Race was never a smooth arc; "
-            "it was a sequence of gambles where a single explosion could shift budgets "
-            "and national narratives overnight."
-        ),
-    ]

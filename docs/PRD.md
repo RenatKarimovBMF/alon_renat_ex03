@@ -1,10 +1,11 @@
 # Product Requirements Document — CrewAI LaTeX Book Generator
 
 **Project:** Exercise 03 — Intelligent Agents (Haifa University)  
-**Version:** 0.10 (planning draft)  
+**Course instructor:** Dr. Yoram Segal  
+**Version:** 1.00  
 **Authors:** Renat Karimov, Alon Engel  
-**Group code:** `anrbj666` *(confirm with team)*  
-**Last updated:** 2026-06-09
+**Group code:** `anrbj666`  
+**Last updated:** 2026-06-12
 
 ---
 
