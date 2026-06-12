@@ -137,7 +137,34 @@ verification (render → read) caught what text extraction could not.
 
 ---
 
-## 9. Calibrating words-per-page
+## 9. Agent-created media: content and placement by the crew
+
+**Goal:** images, the table, the equation, and the chart must be *created/chosen
+by the agents and taken from the web*, not pre-baked by the team — including
+where each lands in the book.
+
+**Prompt (summary):**
+> "Extend BookOutline: every chapter gets figure {image_query, caption}
+> (a public-web image search); exactly one chapter of your choice gets table
+> {caption, columns, rows}, one gets equation {intro, latex, explanation}
+> (display-math body only), one gets chart {title, y_label, points} with real
+> numeric data. You decide content AND placement."
+
+**Engineering around it:** pydantic validators reject ragged tables, unsafe
+TeX (`\input`, `\write`, …), and `$`-wrapped math so CrewAI's converter
+retries; Python fetches images from Wikimedia Commons/NASA (keyless),
+renders the chart with matplotlib, and keeps the configured plan as a
+per-element safety net for failed fetches.
+
+**Result / lesson:** the agent placed table→ch2, equation→ch4, chart→ch6 (the
+fixtures plan used 1/3/4 — proof the placement is genuinely the agent's).
+4 of 6 web images fetched on the first try; first-hit image relevance is the
+remaining weak spot (a "Sputnik 1" query can return a museum fragment), which
+the caption still describes correctly.
+
+---
+
+## 10. Calibrating words-per-page
 
 **Goal:** the review heuristic assumed 450 words/page, but a figure-rich book is
 much sparser.

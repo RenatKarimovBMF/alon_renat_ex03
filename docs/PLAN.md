@@ -392,19 +392,30 @@ sequenceDiagram
   `stage_latex_workspace()` copies static sources; heavy duplicates
   (`figures/`, aux files) are gitignored inside examples.
 
-### ADR-007 — Required PDF elements are injected deterministically, not prompted
-- **Decision:** agents produce prose, Hebrew chapter summaries, and citation
-  keys only; Python injects the exercise-mandated elements (chapter figure,
-  milestones table, rocket equation, matplotlib chart) per chapter via the
-  config-driven extras plan (`crew/extras.py`, `extras` block in `book.json`).
-  Latin/digit runs inside RTL Hebrew are wrapped in TeX--XeT `\beginL…\endL`
-  islands at render time.
-- **Reason:** the grading is technical (elements present, links resolve, BiDi
-  correct); an LLM can forget instructions, code cannot. The BiDi islands fix
-  digits printing reversed (1961 → 1691) without disturbing RTL word order.
-- **Consequence:** swapping the subject means editing config (figures,
-  summaries), not prompts; a 7-chapter live outline leaves chapter 7 without a
-  figure (the ≥1-image requirement still holds).
+### ADR-007 — Live media is agent-created and web-fetched; fixtures stay curated
+- **Decision:** in live runs the **outline agent specifies all media content
+  and placement**: a web image search query + caption for every chapter, and
+  exactly one chapter each (of its choosing) for the data table, the display
+  equation, and the chart data (`models/media.py`, validated specs). Python
+  then *executes*: images are fetched from the public web at run time
+  (Wikimedia Commons → NASA Images, keyless; `latex/image_search.py`), the
+  chart is rendered from the agent's data with matplotlib
+  (`latex/chart.py`), and the table/equation are rendered with escaping and a
+  TeX deny-list (`latex/media_render.py`). Nothing content-related is
+  hand-made by the team except the static cover (authors, instructor).
+  The offline fixtures mode keeps the curated plan (graders run with no
+  network or keys), and per element it remains a **safety net**: a failed web
+  fetch or a missing spec falls back to the configured block so the compiled
+  book always satisfies the exercise requirements.
+- **Reason:** the assignment's spirit is that the crew writes the book; the
+  pipeline must not pre-bake content. Validators on the specs make CrewAI
+  retry malformed output, and the deny-list blocks TeX injection. Latin/digit
+  runs inside RTL Hebrew are wrapped in TeX--XeT `\beginL…\endL` islands at
+  render time (1961 would otherwise print as 1691).
+- **Consequence:** image relevance equals first-search-hit quality (a query
+  can return a tangential photo); the safety net keeps requirements met when
+  the web or the agent under-delivers. Verified live: agent placed
+  table→ch2, equation→ch4, chart→ch6 — different from the fixtures' 1/3/4.
 
 ---
 

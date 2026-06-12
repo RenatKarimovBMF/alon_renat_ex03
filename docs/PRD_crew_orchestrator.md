@@ -95,6 +95,11 @@ The Chapter Writer task is **one CrewAI task** whose Python callback loops over 
   forbidden as citations.
 - **Hebrew:** the outline task requires a 1–2 sentence `hebrew_summary` per
   chapter, rendered as the RTL block (digits kept LTR via `\beginL` islands).
+- **Agent-driven media (live):** the outline agent specifies every chapter's
+  web image (search query + caption) and chooses which chapter carries the
+  data table, display equation, and chart data; Python fetches images from
+  the public web (Wikimedia/NASA, keyless) and renders everything
+  deterministically, with the configured plan as a per-element safety net
+  (ADR-007).
 - **Live isolation:** live runs execute in `examples/<topic>-<stamp>/`
-  workspaces (ADR-006); required PDF elements are injected deterministically
-  from the extras plan, not prompted (ADR-007).
+  workspaces (ADR-006).

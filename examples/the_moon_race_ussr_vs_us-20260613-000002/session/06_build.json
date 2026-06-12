@@ -1,0 +1,13 @@
+{
+  "success": false,
+  "pdf_path": null,
+  "attempts": 4,
+  "errors": [
+    "Package pdftex.def Error: File `figures/ch01_web.jpg' not found: using draft",
+    "Package pdftex.def Error: File `figures/ch02_web.jpg' not found: using draft",
+    "Package pdftex.def Error: File `figures/ch04_web.jpg' not found: using draft",
+    "Package pdftex.def Error: File `figures/ch05_web.jpg' not found: using draft"
+  ],
+  "log_path": "C:\\Users\\Alon\\Desktop\\alon_renat_ex03\\examples\\the_moon_race_ussr_vs_us-20260613-000002\\latex\\build\\_book_build.log",
+  "version": "1.0"
+}

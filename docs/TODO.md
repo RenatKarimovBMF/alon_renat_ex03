@@ -130,4 +130,18 @@ Status key: `[ ]` pending · `[~]` in progress · `[x]` done · `[-]` cancelled
 | S7-10 | Fix RTL BiDi: digits/Latin runs in Hebrew rendered reversed (1961→1691); wrap in `\beginL…\endL` | Both | [x] |
 | S7-11 | `GatekeeperLLM.supports_function_calling` for CrewAI converter fallback | Both | [x] |
 | S7-12 | Strict per-paragraph word contract in writer prompt (5×80–95) after two undershoots | Both | [x] |
-| S7-13 | Delete superseded/broken example folders; keep one verified Opus example | Both | [x] |
+| S7-13 | Delete broken example folders; keep verified Opus examples (curated-injection + agent-media) | Both | [x] |
+
+---
+
+## Stage 8 — Agent-created media (live runs)
+
+| ID | Task | Owner | Status |
+|----|------|-------|--------|
+| S8-01 | Media schemas with safety validators (figure/table/equation/chart) on ChapterPlan | Both | [x] |
+| S8-02 | Keyless web image search (Wikimedia Commons → NASA Images) with injectable client | Both | [x] |
+| S8-03 | Generic renderers: booktabs table, sanitized display equation, matplotlib chart from agent data | Both | [x] |
+| S8-04 | Outline agent decides media content AND placement; per-element safety-net fallback | Both | [x] |
+| S8-05 | Fix figure-cache purge deleting fetched web images (`_sync_manifest` scoped to bundled names) | Both | [x] |
+| S8-06 | Live Opus run with agent media: 22 sheets, 18 subject pages, table→ch2 eq→ch4 chart→ch6, $0.6508 | Both | [x] |
+| S8-07 | Keep both examples in `examples/`: agent-media run + curated-injection run | Both | [x] |

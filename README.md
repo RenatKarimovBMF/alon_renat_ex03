@@ -176,7 +176,7 @@ Every LLM call is logged to `logs/crew_run_<id>.jsonl` and summarized in
 | Run mode | Measured cost (see [`docs/COST_live.md`](docs/COST_live.md)) |
 |----------|--------------|
 | `--demo` / default production | **$0.00** (offline fixtures) |
-| `--live`, Claude Opus 4.8 | **$0.5019** — 20-sheet book, 16 subject pages, all sources cited, in `examples/` |
+| `--live`, Claude Opus 4.8 | **$0.6508** — 22-sheet book, 18 subject pages, agent-chosen web images/table/equation/chart, in `examples/` |
 | `--live`, Gemini Flash Lite (free tier) | **$0.00** actual (≈$0.02 paid-tier equivalent) |
 
 ---
@@ -205,7 +205,9 @@ Hebrew summary block (BiDi):
 - [PRD](docs/PRD.md) · [PLAN](docs/PLAN.md) (C4 + ADR-001…007) · [TODO](docs/TODO.md)
 - [PROMPTS](docs/PROMPTS.md) (prompt-engineering log) · [COST](docs/COST.md) (auto-generated) · [COST_live](docs/COST_live.md) (real live-run evidence incl. failed tests)
 - Mechanism PRDs: [crew](docs/PRD_crew_orchestrator.md), [latex](docs/PRD_latex_pipeline.md), [gatekeeper](docs/PRD_gatekeeper.md), [llm sdk](docs/PRD_llm_sdk.md)
-- **Live-run example:** [`examples/the_moon_race_ussr_vs_us-20260612-233248/`](examples/the_moon_race_ussr_vs_us-20260612-233248/) — Claude Opus 4.8, 20-sheet book with 16 subject pages, all sources cited, $0.5019 (own `book.pdf`, chapters, session JSON, log, cost report)
+- **Live-run examples** (each self-contained: `book.pdf`, chapters, session JSON, log, cost report):
+  - [`examples/the_moon_race_ussr_vs_us-20260613-000002/`](examples/the_moon_race_ussr_vs_us-20260613-000002/) — **agent-created media** (ADR-007): Claude Opus 4.8, 22 sheets / **18 subject pages**, $0.6508. Images fetched from the public web from the agent's own search queries, the chart rendered from the agent's own data, and the agent chose the table/equation/chart placement (ch2/ch4/ch6)
+  - [`examples/the_moon_race_ussr_vs_us-20260612-233248/`](examples/the_moon_race_ussr_vs_us-20260612-233248/) — **curated-injection mode**: Claude Opus 4.8, 20 sheets / **16 subject pages**, $0.5019. Crew-written prose and Hebrew with the configured media plan (same mechanism the offline fixtures use)
 
 ---
 

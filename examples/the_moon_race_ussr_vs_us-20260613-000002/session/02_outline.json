@@ -1,0 +1,201 @@
+{
+  "title": "The Moon Race: USSR vs US",
+  "target_total_pages": 15,
+  "chapters": [
+    {
+      "number": 1,
+      "title": "Sputnik and the Birth of the Space Race",
+      "page_budget": 3.0,
+      "learning_objectives": [
+        "Explain how Sputnik 1 triggered the Space Race",
+        "Describe the founding of NASA as an institutional response"
+      ],
+      "section_titles": [
+        "Sputnik 1 and the Technology Gap",
+        "The Creation of NASA in 1958"
+      ],
+      "hebrew_summary": "שיגור לוויין ספוטניק 1 באוקטובר 1957 זיעזע את ארצות הברית והצית את תחילת מירוץ החלל. כתגובה הוקמה סוכנות נאסא בשנת 1958 כדי לרכז את המאמץ האמריקאי בחלל.",
+      "figure": {
+        "image_query": "Sputnik 1 satellite 1957",
+        "caption": "Sputnik 1, a 58-cm aluminum sphere launched on October 4, 1957, became the first artificial Earth satellite and shocked the American public."
+      },
+      "table": null,
+      "equation": null,
+      "chart": null
+    },
+    {
+      "number": 2,
+      "title": "Soviet Firsts and the Early Lead",
+      "page_budget": 3.0,
+      "learning_objectives": [
+        "Identify the major Soviet space firsts of the early 1960s",
+        "Assess how symbolic milestones shaped the Cold War narrative"
+      ],
+      "section_titles": [
+        "Yuri Gagarin and the First Human in Space",
+        "Symbolic Victories and Their Limits"
+      ],
+      "hebrew_summary": "ברית המועצות צברה שורה של הישגים ראשונים בחלל, ובהם טיסתו של יורי גגרין כאדם הראשון בחלל באפריל 1961. הישגים סמליים אלו עיצבו את התעמולה אך לא תורגמו לנחיתה מאוישת על הירח.",
+      "figure": {
+        "image_query": "Yuri Gagarin Vostok 1 1961",
+        "caption": "Yuri Gagarin became the first human in space aboard Vostok 1 on April 12, 1961, completing a single orbit of Earth."
+      },
+      "table": {
+        "caption": "Selected Soviet space firsts of the early Space Race",
+        "columns": [
+          "Mission",
+          "Year",
+          "First Achieved"
+        ],
+        "rows": [
+          [
+            "Sputnik 1",
+            "1957",
+            "First artificial Earth satellite"
+          ],
+          [
+            "Luna 2",
+            "1959",
+            "First probe to impact the Moon"
+          ],
+          [
+            "Luna 3",
+            "1959",
+            "First images of the lunar far side"
+          ],
+          [
+            "Vostok 1",
+            "1961",
+            "First human in space"
+          ],
+          [
+            "Vostok 6",
+            "1963",
+            "First woman in space"
+          ],
+          [
+            "Voskhod 2",
+            "1965",
+            "First spacewalk"
+          ]
+        ]
+      },
+      "equation": null,
+      "chart": null
+    },
+    {
+      "number": 3,
+      "title": "Kennedy's Commitment and the Apollo Mandate",
+      "page_budget": 2.0,
+      "learning_objectives": [
+        "Explain Kennedy's 1961 lunar landing commitment",
+        "Describe the political mandate and funding behind Apollo"
+      ],
+      "section_titles": [
+        "The May 25, 1961 Address to Congress",
+        "Mobilizing a National Priority"
+      ],
+      "hebrew_summary": "הנשיא קנדי התחייב במאי 1961 להנחית אדם על הירח ולהשיבו בבטחה לפני תום העשור. ההצהרה סיפקה מנדט פוליטי ומימון עצום לתוכנית אפולו.",
+      "figure": {
+        "image_query": "John F Kennedy moon speech Congress 1961",
+        "caption": "President John F. Kennedy committed the United States to a crewed lunar landing in his May 25, 1961 address to Congress."
+      },
+      "table": null,
+      "equation": null,
+      "chart": null
+    },
+    {
+      "number": 4,
+      "title": "Engineering the Giants: Saturn V versus N1",
+      "page_budget": 3.0,
+      "learning_objectives": [
+        "Compare the Saturn V and N1 heavy-lift rockets",
+        "Apply the rocket equation to lunar mission design"
+      ],
+      "section_titles": [
+        "The Saturn V and Integrated Systems Engineering",
+        "The N1 Failures and Divided Leadership"
+      ],
+      "hebrew_summary": "ההצלחה האמריקאית נשענה על משגר סאטורן 5 המהימן ועל הנדסת מערכות משולבת. לעומת זאת משגר ה-N1 הסובייטי כשל בכל ארבעת ניסיונות השיגור שלו על רקע מנהיגות מפוצלת.",
+      "figure": {
+        "image_query": "Saturn V rocket launch Apollo 1969",
+        "caption": "The Saturn V heavy-lift rocket carried the Apollo missions, while the Soviet N1 failed in all four of its test launches between 1969 and 1972."
+      },
+      "table": null,
+      "equation": {
+        "intro": "The Tsiolkovsky rocket equation governs how much velocity change a rocket can achieve given its propellant and engine efficiency, central to designing a lunar launcher.",
+        "latex": "\\Delta v = v_e \\ln\\left(\\frac{m_0}{m_f}\\right)",
+        "explanation": "Delta-v is the achievable velocity change, v_e the exhaust velocity, and m_0 and m_f the initial and final masses; higher mass ratios and exhaust velocities yield greater performance."
+      },
+      "chart": null
+    },
+    {
+      "number": 5,
+      "title": "Apollo 11 and the Decisive Landing",
+      "page_budget": 2.0,
+      "learning_objectives": [
+        "Recount the Apollo 11 mission and first Moon landing",
+        "Explain why American funding and organization proved decisive"
+      ],
+      "section_titles": [
+        "Eagle in the Sea of Tranquility",
+        "Funding, Organization, and Victory"
+      ],
+      "hebrew_summary": "ב-20 ביולי 1969 נחתה אפולו 11 על הירח וניל ארמסטרונג ובאז אלדרין צעדו על פני הירח. הניצחון נשען על מימון עצום ועל ניהול מרוכז שהסובייטים לא יכלו להשתוות אליו.",
+      "figure": {
+        "image_query": "Buzz Aldrin Apollo 11 Moon 1969",
+        "caption": "Apollo 11 achieved the first crewed Moon landing on July 20, 1969, broadcast to a global audience of hundreds of millions."
+      },
+      "table": null,
+      "equation": null,
+      "chart": null
+    },
+    {
+      "number": 6,
+      "title": "Legacy of the Moon Race",
+      "page_budget": 2.0,
+      "learning_objectives": [
+        "Evaluate the Moon race as a Cold War proxy contest",
+        "Assess the scientific and geopolitical legacies after 1972"
+      ],
+      "section_titles": [
+        "Propaganda, Prestige, and Ideology",
+        "Robotic Exploration and Lasting Legacies"
+      ],
+      "hebrew_summary": "מירוץ הירח תיפקד כזירת מלחמה קרה של יוקרה ואידיאולוגיה בין שתי המעצמות. לצד המירוץ המאויש קידמו שתי המדינות גם חקירה רובוטית שהותירה מורשת מדעית וגאופוליטית מתמשכת.",
+      "figure": {
+        "image_query": "Luna 3 far side of the Moon 1959",
+        "caption": "Soviet and American robotic missions, such as Luna 3's first images of the lunar far side in 1959, advanced lunar science alongside the crewed race."
+      },
+      "table": null,
+      "equation": null,
+      "chart": {
+        "title": "Diameter of Selected Early Soviet and US Satellites and Probes",
+        "y_label": "Mass (kg)",
+        "points": [
+          {
+            "label": "Sputnik 1 (1957)",
+            "value": 83.6
+          },
+          {
+            "label": "Explorer 1 (1958)",
+            "value": 13.9
+          },
+          {
+            "label": "Luna 2 (1959)",
+            "value": 390.0
+          },
+          {
+            "label": "Vostok 1 (1961)",
+            "value": 4725.0
+          },
+          {
+            "label": "Apollo 11 CSM (1969)",
+            "value": 28800.0
+          }
+        ]
+      }
+    }
+  ],
+  "version": "1.0"
+}
